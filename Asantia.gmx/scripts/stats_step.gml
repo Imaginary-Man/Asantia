@@ -31,6 +31,8 @@ global.f_mspeed=global.mspeed+(global.i_mspeed+global.b_mspeed)
 global.f_ad=global.ad+(global.i_ad+global.b_ad)
 global.f_ap=global.ap+(global.i_ap+global.b_ap)
 global.f_attackrange=(global.i_attackrange+global.b_attackrange)
+global.f_armor=(global.i_armor+global.b_armor)
+global.f_resist=(global.i_resist+global.b_resist)
 
 //level up
 if global.xp>=global.mxp

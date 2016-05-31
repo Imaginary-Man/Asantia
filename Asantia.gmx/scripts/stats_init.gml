@@ -5,7 +5,7 @@ global.sp=10
 global.msp=10
 global.xp=0
 global.mxp=3
-global.level=124
+global.level=1
 global.jump=5.2
 global.mspeed=1
 global.attackspeed=1
@@ -47,6 +47,8 @@ global.i_mspeed=0
 global.i_ad=0
 global.i_ap=0
 global.i_attackrange=120
+global.i_armor=0
+global.i_resist=0
 
 ///buffs
 global.b_mhp=0
@@ -69,6 +71,8 @@ global.b_mspeed=0
 global.b_ad=0
 global.b_ap=0
 global.b_attackrange=0
+global.b_armor=0
+global.b_resist=0
 
 ///final
 global.f_mhp=0
@@ -91,6 +95,8 @@ global.f_mspeed=0
 global.f_ad=0
 global.f_ad=0
 global.f_attackrange=0
+global.f_armor=0
+global.f_resist=0
 
 //crit
 global.critical=0

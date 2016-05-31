@@ -37,7 +37,7 @@ global.ui_alpha=1//1
 global.ui_hpvalue=true//true
 global.ui_spvalue=true//true
 global.ui_border=true//true
-global.border_size=8 //8
+global.border_size=7 //8
 
 
 ///other

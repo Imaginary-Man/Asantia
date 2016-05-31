@@ -28,10 +28,16 @@
             <string>///UI init
 d_width=display_get_width()
 d_height=display_get_height()
+movewith=0
+
+//ui
 
 
-//ui_buttons
-ui_options_select=0
+
+//ui_windows
+show_inventory=false
+show_stats=false
+
 
 //mouse on GUI
 </string>
@@ -54,7 +60,7 @@ ui_options_select=0
         <arguments>
           <argument>
             <kind>5</kind>
-            <sprite>spr_mouse_3</sprite>
+            <sprite>spr_none</sprite>
           </argument>
           <argument>
             <kind>4</kind>
@@ -104,8 +110,8 @@ visible=true
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///
-ui_select(d_width-(global.ui_size*15),d_height-(global.ui_size*10),ui_options_select)
+            <string>///movewith
+movewith=obj_helmet.movewith
 </string>
           </argument>
         </arguments>
@@ -185,10 +191,10 @@ ui_select(d_width-(global.ui_size*15),d_height-(global.ui_size*10),ui_options_se
 //UI border
 if global.ui_border=true
 {
- draw_set_color(make_color_rgb(127,66,31))
+ draw_set_color(make_color_rgb(142,93,28))
  draw_rectangle(0,display_get_height()-(global.border_size*global.ui_size),display_get_width(),display_get_height(),0)
  draw_rectangle(0,(global.border_size*global.ui_size),display_get_width(),0,0)
- draw_set_color(make_color_rgb(85,44,20))
+ draw_set_color(make_color_rgb(128,128,128))
  draw_rectangle(0,display_get_height()-(global.border_size*global.ui_size),display_get_width(),display_get_height(),1)
  draw_rectangle(0,(global.border_size*global.ui_size),display_get_width(),0,1)
 }
@@ -252,6 +258,110 @@ draw_sprite_ext(ui_clans_icon,ui_select_image_index(d_width-(global.ui_size*55),
 draw_sprite_ext(ui_social_icon,ui_select_image_index(d_width-(global.ui_size*75),d_height-(global.ui_size*10)),d_width-(global.ui_size*75),d_height-(global.ui_size*10),global.ui_size,global.ui_size,0,c_white,1)
 draw_sprite_ext(ui_player_icon,ui_select_image_index(d_width-(global.ui_size*95),d_height-(global.ui_size*10)),d_width-(global.ui_size*95),d_height-(global.ui_size*10),global.ui_size,global.ui_size,0,c_white,1)
 draw_sprite_ext(ui_inventory_icon,ui_select_image_index(d_width-(global.ui_size*115),d_height-(global.ui_size*10)),d_width-(global.ui_size*115),d_height-(global.ui_size*10),global.ui_size,global.ui_size,0,c_white,1)
+
+
+///UI windows
+
+
+///stats
+if show_stats=true
+{
+ draw_sprite_ext(ui_stats,0,(global.ui_size*70),d_height-(d_height/2),global.ui_size,global.ui_size,0,c_white,1)
+ draw_sprite_ext(ui_stats_xp_bar,100*(global.xp/global.mxp),(global.ui_size*70),d_height-(d_height/2),global.ui_size,global.ui_size,0,c_white,1)
+ draw_set_color(c_black)
+ draw_set_alpha(0.2)
+ draw_ellipse((global.ui_size*70)-((12*global.ui_size)+movewith),d_height-((d_height/2)+global.ui_size*40)-global.ui_size*3,(global.ui_size*70)+((12*global.ui_size)+movewith),d_height-((d_height/2)+global.ui_size*40)+global.ui_size*3,0)
+ draw_set_alpha(1)
+ draw_sprite_ext(obj_player.sprite_index,obj_player.image_index,global.ui_size*70,d_height-((d_height/2)+global.ui_size*46),global.ui_size,global.ui_size,0,global.playercolor,global.playeralpha)
+ draw_sprite_ext(spr_eyes,global.player_eyes,global.ui_size*70,d_height-((d_height/2)+global.ui_size*46)+movewith*global.ui_size,global.ui_size,global.ui_size,0,c_white,1)
+ draw_sprite_ext(obj_helmet.sprite_index,obj_helmet.image_index,global.ui_size*70,d_height-((d_height/2)+global.ui_size*46)+movewith*global.ui_size,global.ui_size,global.ui_size,0,c_white,1)
+ 
+ ///stats numbers
+ draw_set_color(c_black)
+ draw_set_font(ui_stats_font)
+ draw_set_valign(fa_top)
+ draw_set_halign(fa_left)
+ draw_text_transformed((global.ui_size*28),d_height-(d_height/2)-27*global.ui_size,"Str",global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*28),d_height-(d_height/2)-19.5*global.ui_size,"Agi",global.ui_size/3,global.ui_size/3,0) 
+ draw_text_transformed((global.ui_size*28),d_height-(d_height/2)-12*global.ui_size,"Sta",global.ui_size/3,global.ui_size/3,0) 
+ draw_text_transformed((global.ui_size*28),d_height-(d_height/2)-4.5*global.ui_size,"Dex",global.ui_size/3,global.ui_size/3,0) 
+ draw_text_transformed((global.ui_size*28),d_height-(d_height/2)+3*global.ui_size,"Char",global.ui_size/3,global.ui_size/3,0) 
+ draw_text_transformed((global.ui_size*28),d_height-(d_height/2)+10.5*global.ui_size,"Int",global.ui_size/3,global.ui_size/3,0) 
+ draw_text_transformed((global.ui_size*28),d_height-(d_height/2)+18*global.ui_size,"Wis",global.ui_size/3,global.ui_size/3,0) 
+ draw_text_transformed((global.ui_size*28),d_height-(d_height/2)+25.5*global.ui_size,"Will",global.ui_size/3,global.ui_size/3,0) 
+ // 
+ draw_text_transformed((global.ui_size*28),d_height-(d_height/2)+36*global.ui_size,"AD",global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*28),d_height-(d_height/2)+43.5*global.ui_size,"AP",global.ui_size/3,global.ui_size/3,0) 
+ //
+ draw_set_color(c_white)
+ draw_text_transformed((global.ui_size*44),d_height-(d_height/2)-27*global.ui_size,global.str,global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*44),d_height-(d_height/2)-19.5*global.ui_size,global.agi,global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*44),d_height-(d_height/2)-12*global.ui_size,global.sta,global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*44),d_height-(d_height/2)-4.5*global.ui_size,global.dex,global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*44),d_height-(d_height/2)+3*global.ui_size,global.char,global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*44),d_height-(d_height/2)+10.5*global.ui_size,global.int,global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*44),d_height-(d_height/2)+18*global.ui_size,global.wis,global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*44),d_height-(d_height/2)+25.5*global.ui_size,global.will,global.ui_size/3,global.ui_size/3,0)
+ //
+ draw_text_transformed((global.ui_size*39),d_height-(d_height/2)+36*global.ui_size,round(global.f_ad),global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*39),d_height-(d_height/2)+43.5*global.ui_size,round(global.f_ap),global.ui_size/3,global.ui_size/3,0)
+ //
+ draw_set_color(c_black)
+ 
+ 
+ ///select stats
+ draw_set_alpha(0.8)
+ draw_set_color(c_black)
+ draw_set_valign(fa_top)
+ draw_set_halign(fa_left) 
+ //strengt
+ if ui_select_stats((global.ui_size*28),d_height-(d_height/2)-27*global.ui_size,15*global.ui_size)
+ {
+  draw_roundrect(window_mouse_get_x(),window_mouse_get_y(),window_mouse_get_x()+117*global.ui_size,window_mouse_get_y()-7*global.ui_size,0)
+  draw_text_transformed_colour(window_mouse_get_x()+global.ui_size,window_mouse_get_y()-7.5*global.ui_size,"Strengt increases physical damage output",global.ui_size/3,global.ui_size/3,0,c_white,c_white,c_white,c_white,1)
+ }
+ //agility
+ if ui_select_stats((global.ui_size*28),d_height-(d_height/2)-19.5*global.ui_size,15*global.ui_size)
+ {
+  draw_roundrect(window_mouse_get_x(),window_mouse_get_y(),window_mouse_get_x()+106*global.ui_size,window_mouse_get_y()-7*global.ui_size,0)
+  draw_text_transformed_colour(window_mouse_get_x()+global.ui_size,window_mouse_get_y()-7.5*global.ui_size,"Agility boosts total basic attack speed",global.ui_size/3,global.ui_size/3,0,c_white,c_white,c_white,c_white,1)
+ } 
+ //stamina
+ if ui_select_stats((global.ui_size*28),d_height-(d_height/2)-12*global.ui_size,15*global.ui_size)
+ {
+  draw_roundrect(window_mouse_get_x(),window_mouse_get_y(),window_mouse_get_x()+79*global.ui_size,window_mouse_get_y()-7*global.ui_size,0)
+  draw_text_transformed_colour(window_mouse_get_x()+global.ui_size,window_mouse_get_y()-7.5*global.ui_size,"Stamina boosts total Health",global.ui_size/3,global.ui_size/3,0,c_white,c_white,c_white,c_white,1)
+ } 
+ //dexterity
+ if ui_select_stats((global.ui_size*28),d_height-(d_height/2)-4.5*global.ui_size,15*global.ui_size)
+ {
+  draw_roundrect(window_mouse_get_x(),window_mouse_get_y(),window_mouse_get_x()+107*global.ui_size,window_mouse_get_y()-7*global.ui_size,0)
+  draw_text_transformed_colour(window_mouse_get_x()+global.ui_size,window_mouse_get_y()-7.5*global.ui_size,"Dexterity increases critical hit chances",global.ui_size/3,global.ui_size/3,0,c_white,c_white,c_white,c_white,1)
+ }  
+ //charisma
+ if ui_select_stats((global.ui_size*28),d_height-(d_height/2)+3*global.ui_size,15*global.ui_size)
+ {
+  draw_roundrect(window_mouse_get_x(),window_mouse_get_y(),window_mouse_get_x()+101*global.ui_size,window_mouse_get_y()-7*global.ui_size,0)
+  draw_text_transformed_colour(window_mouse_get_x()+global.ui_size,window_mouse_get_y()-7.5*global.ui_size,"Charisma decreases skill cooldowns",global.ui_size/3,global.ui_size/3,0,c_white,c_white,c_white,c_white,1)
+ }  
+ 
+ 
+ 
+ 
+ //
+ draw_set_alpha(1) 
+}
+
+
+
+
+//inventory
+if show_inventory=true
+{
+ draw_sprite_ext(ui_inventory,0,d_width-(global.ui_size*70),d_height-(d_height/2),global.ui_size,global.ui_size,0,c_white,1)
+}
+
+
 
 
 
@@ -339,14 +449,47 @@ if obj_options.menu=true
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///test
-if global.debug=true
+            <string>///UI_click
+
+//options
+if ui_select_click(d_width-(global.ui_size*15),d_height-(global.ui_size*10),6)//options
 {
- draw_rectangle(d_width-(global.ui_size*15)-6*global.ui_size,
-                d_height-(global.ui_size*10)-6*global.ui_size,
-                d_width-(global.ui_size*15)+6*global.ui_size,
-                d_height-(global.ui_size*10)+6*global.ui_size,1)
- draw_circle(window_mouse_get_x(),window_mouse_get_y(),6,1)
+ obj_options.menu=true 
+}
+
+
+//mail
+if ui_select_click(d_width-(global.ui_size*35),d_height-(global.ui_size*10),6)//mail
+{
+ //
+}
+
+//stats
+if ui_select_click(d_width-(global.ui_size*95),d_height-(global.ui_size*10),6)//stats
+{
+ show_stats=!show_stats
+}
+
+if show_stats=true//stats esc button
+{
+ if ui_select_click(global.ui_size*102,d_height-((d_height/2)+global.ui_size*80),4)
+ {
+  show_stats=false
+ }
+}
+
+//inventory
+if ui_select_click(d_width-(global.ui_size*115),d_height-(global.ui_size*10),6)//inventory
+{
+ show_inventory=!show_inventory
+}
+
+if show_inventory=true //inv esc button
+{
+ if ui_select_click(d_width-(global.ui_size*38),d_height-((d_height/2)+global.ui_size*80),4)
+ {
+  show_inventory=false
+ }
 }
 </string>
           </argument>
@@ -368,24 +511,46 @@ if global.debug=true
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///UI_click
-if ui_select_click(d_width-(global.ui_size*15),d_height-(global.ui_size*10))///options
+            <string>///debug
+if global.debug=true
 {
- obj_options.menu=true 
+ draw_rectangle((global.ui_size*28),
+                 d_height-(d_height/2)-27*global.ui_size,
+                 (global.ui_size*58),
+                 d_height-(d_height/2)-19*global.ui_size,
+                 1)
+                
+ draw_circle(window_mouse_get_x(),window_mouse_get_y(),6,1)
+ 
+ draw_set_valign(fa_top)
+ draw_set_halign(fa_left)
+ draw_set_color(c_white)
+ draw_text_transformed(0,0,window_mouse_get_x(),global.ui_size,global.ui_size,0)
+ draw_text_transformed(0,20*global.ui_size,window_mouse_get_y(),global.ui_size,global.ui_size,0)
+ draw_set_color(c_black)
 }
-
-if ui_select_click(d_width-(global.ui_size*35),d_height-(global.ui_size*10))///mail
-{
- //
-}
-
-
-
-
-ui_select_click(d_width-(global.ui_size*115),d_height-(global.ui_size*10))///inventory
-{
- //
-}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///mouse
+draw_sprite_ext(spr_mouse_2,0,window_mouse_get_x(),window_mouse_get_y(),global.ui_size,global.ui_size,0,c_white,1)
 </string>
           </argument>
         </arguments>

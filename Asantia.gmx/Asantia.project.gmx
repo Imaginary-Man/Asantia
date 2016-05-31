@@ -86,7 +86,6 @@
       <sprite>sprites\ui_inventory_icon</sprite>
       <sprite>sprites\ui_level</sprite>
       <sprite>sprites\ui_mp_bar</sprite>
-      <sprite>sprites\ui_normal</sprite>
       <sprite>sprites\ui_normal_1</sprite>
       <sprite>sprites\ui_normal_1_exp</sprite>
       <sprite>sprites\ui_normal_1_health</sprite>
@@ -97,6 +96,9 @@
       <sprite>sprites\ui_social_icon</sprite>
       <sprite>sprites\spr_mouse</sprite>
       <sprite>sprites\spr_mouse_2</sprite>
+      <sprite>sprites\ui_inventory</sprite>
+      <sprite>sprites\ui_stats</sprite>
+      <sprite>sprites\ui_stats_xp_bar</sprite>
       <sprite>sprites\spr_mouse_3</sprite>
     </sprites>
     <sprites name="font">
@@ -123,6 +125,7 @@
       <script>scripts\plus_exp.gml</script>
       <script>scripts\draw_bar.gml</script>
       <script>scripts\ui_select.gml</script>
+      <script>scripts\ui_select_stats.gml</script>
       <script>scripts\ui_select_click.gml</script>
       <script>scripts\ui_select_image_index.gml</script>
     </scripts>
@@ -148,6 +151,9 @@
     <script>scripts\User_Content.gml</script>
     <script>scripts\shadow_init.gml</script>
   </scripts>
+  <fonts name="fonts">
+    <font>fonts\ui_stats_font</font>
+  </fonts>
   <objects name="objects">
     <object>objects\obj_player</object>
     <object>objects\obj_helmet</object>
