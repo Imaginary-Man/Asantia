@@ -276,7 +276,7 @@ if show_stats=true
  draw_sprite_ext(spr_eyes,global.player_eyes,global.ui_size*70,d_height-((d_height/2)+global.ui_size*46)+movewith*global.ui_size,global.ui_size,global.ui_size,0,c_white,1)
  draw_sprite_ext(obj_helmet.sprite_index,obj_helmet.image_index,global.ui_size*70,d_height-((d_height/2)+global.ui_size*46)+movewith*global.ui_size,global.ui_size,global.ui_size,0,c_white,1)
  
- ///stats numbers
+ //////////stats numbers
  draw_set_color(c_black)
  draw_set_font(ui_stats_font)
  draw_set_valign(fa_top)
@@ -309,7 +309,7 @@ if show_stats=true
  draw_set_color(c_black)
  
  
- ///select stats
+ ////////select stats
  draw_set_alpha(0.8)
  draw_set_color(c_black)
  draw_set_valign(fa_top)
@@ -341,12 +341,41 @@ if show_stats=true
  //charisma
  if ui_select_stats((global.ui_size*28),d_height-(d_height/2)+3*global.ui_size,15*global.ui_size)
  {
-  draw_roundrect(window_mouse_get_x(),window_mouse_get_y(),window_mouse_get_x()+101*global.ui_size,window_mouse_get_y()-7*global.ui_size,0)
-  draw_text_transformed_colour(window_mouse_get_x()+global.ui_size,window_mouse_get_y()-7.5*global.ui_size,"Charisma decreases skill cooldowns",global.ui_size/3,global.ui_size/3,0,c_white,c_white,c_white,c_white,1)
+  draw_roundrect(window_mouse_get_x(),window_mouse_get_y(),window_mouse_get_x()+108*global.ui_size,window_mouse_get_y()-7*global.ui_size,0)
+  draw_text_transformed_colour(window_mouse_get_x()+global.ui_size,window_mouse_get_y()-7.5*global.ui_size,"Charisma decreases ability cooldowns",global.ui_size/3,global.ui_size/3,0,c_white,c_white,c_white,c_white,1)
  }  
+ //Intellect
+ if ui_select_stats((global.ui_size*28),d_height-(d_height/2)+10.5*global.ui_size,15*global.ui_size)
+ {
+  draw_roundrect(window_mouse_get_x(),window_mouse_get_y(),window_mouse_get_x()+115*global.ui_size,window_mouse_get_y()-7*global.ui_size,0)
+  draw_text_transformed_colour(window_mouse_get_x()+global.ui_size,window_mouse_get_y()-7.5*global.ui_size,"Intellect increases ability damage output",global.ui_size/3,global.ui_size/3,0,c_white,c_white,c_white,c_white,1)
+ }  
+ //wisdom
+ if ui_select_stats((global.ui_size*28),d_height-(d_height/2)+18*global.ui_size,15*global.ui_size)
+ {
+  draw_roundrect(window_mouse_get_x(),window_mouse_get_y(),window_mouse_get_x()+77*global.ui_size,window_mouse_get_y()-7*global.ui_size,0)
+  draw_text_transformed_colour(window_mouse_get_x()+global.ui_size,window_mouse_get_y()-7.5*global.ui_size,"Wisdom boosts total Mana",global.ui_size/3,global.ui_size/3,0,c_white,c_white,c_white,c_white,1)
+ } 
+ //will
+ if ui_select_stats((global.ui_size*28),d_height-(d_height/2)+25.5*global.ui_size,15*global.ui_size)
+ {
+  draw_roundrect(window_mouse_get_x(),window_mouse_get_y(),window_mouse_get_x()+69*global.ui_size,window_mouse_get_y()-7*global.ui_size,0)
+  draw_text_transformed_colour(window_mouse_get_x()+global.ui_size,window_mouse_get_y()-7.5*global.ui_size,"Will decreases cast time",global.ui_size/3,global.ui_size/3,0,c_white,c_white,c_white,c_white,1)
+ } 
  
- 
- 
+ //
+  //AD
+ if ui_select_stats((global.ui_size*28),d_height-(d_height/2)+36*global.ui_size,9*global.ui_size)
+ {
+  draw_roundrect(window_mouse_get_x(),window_mouse_get_y(),window_mouse_get_x()+112*global.ui_size,window_mouse_get_y()-7*global.ui_size,0)
+  draw_text_transformed_colour(window_mouse_get_x()+global.ui_size,window_mouse_get_y()-7.5*global.ui_size,"Attack Damage is total physical damage",global.ui_size/3,global.ui_size/3,0,c_white,c_white,c_white,c_white,1)
+ } 
+  //AP
+ if ui_select_stats((global.ui_size*28),d_height-(d_height/2)+43.5*global.ui_size,9*global.ui_size)
+ {
+  draw_roundrect(window_mouse_get_x(),window_mouse_get_y(),window_mouse_get_x()+102*global.ui_size,window_mouse_get_y()-7*global.ui_size,0)
+  draw_text_transformed_colour(window_mouse_get_x()+global.ui_size,window_mouse_get_y()-7.5*global.ui_size,"Ability Power is total ability damage",global.ui_size/3,global.ui_size/3,0,c_white,c_white,c_white,c_white,1)
+ }   
  
  //
  draw_set_alpha(1) 
