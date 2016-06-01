@@ -178,46 +178,6 @@ set_random=true
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///walk back to start if to far
-if distance_to_point(start_x,start_y)&gt;sight_radius
-{
- state=4
- if reset=false
- {
-  writer(x,y-sprite_height,"RESET",c_white,global.normalfont,0.7)
-  reset=true
- }
-}
-
-///make sure not to have a walk destination out of the room
-if random_x&gt;room_width  {random_x=random_range(x-walkrange,x+walkrange)}
-if random_x&lt;0           {random_x=random_range(x-walkrange,x+walkrange)}
-if random_y&lt;0           {random_y=random_range(y-walkrange,y+walkrange)}
-if random_y&gt;room_height {random_y=random_range(y-walkrange,y+walkrange)}
-
-
-   
-   
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>///states
 switch (state)
 {
@@ -356,6 +316,56 @@ switch (state)
  }
 }
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///walk back to start if to far
+if distance_to_point(start_x,start_y)&gt;sight_radius/3 and (state=0 or state=1)
+{
+ state=4
+ if reset=false
+ {
+  //writer(x,y-sprite_height,"RESET",c_white,global.normalfont,0.7)
+  reset=true
+ }
+}
+
+if distance_to_point(start_x,start_y)&gt;sight_radius and state=2
+{
+ state=4
+ if reset=false
+ {
+  writer(x,y-sprite_height,"RESET",c_white,global.normalfont,0.7)
+  reset=true
+ }
+}
+
+///make sure not to have a walk destination out of the room
+if random_x&gt;room_width  {random_x=random_range(x-walkrange,x+walkrange)}
+if random_x&lt;0           {random_x=random_range(x-walkrange,x+walkrange)}
+if random_y&lt;0           {random_y=random_range(y-walkrange,y+walkrange)}
+if random_y&gt;room_height {random_y=random_range(y-walkrange,y+walkrange)}
+
+
+   
+   
 </string>
           </argument>
         </arguments>
@@ -517,7 +527,7 @@ if global.debug=true
  draw_set_valign(fa_center)
  draw_line(x,y,random_x,random_y)
  draw_ellipse(random_x-3,random_y-1,random_x+3,random_y+1,1)
- draw_set_color(c_red)
+ if state=0 or state=1 {draw_set_color(c_lime)} else {draw_set_color(c_red)}
  draw_line(x,y,start_x,start_y)
  draw_ellipse(start_x-3,start_y-1,start_x+3,start_y+1,1)
  draw_set_color(c_white)

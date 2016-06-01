@@ -39,7 +39,7 @@ with (critter_frog)
 //oak_tree
 with (obj_oak_tree)
 {
- draw_ellipse(x-20,y-4,x+20,y+10,0)
+ draw_ellipse(x-20,y-6,x+20,y+6,0)
 }
 
 ///enemies

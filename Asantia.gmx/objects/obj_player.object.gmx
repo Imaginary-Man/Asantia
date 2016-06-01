@@ -60,20 +60,33 @@ scale=1
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///moving
+            <string>///states &amp; other
 distance=point_distance(x,y,target_x,target_y-7)
 //
-if state=0 and attacking=false
+switch(state)
 {
- mp_potential_step(target_x,target_y-7,min(global.f_mspeed,distance),false)
-}
-if state=0 and attacking=true and instance_exists(n)
-{
- if point_distance(x,y+7,n.x,n.y)&gt;global.f_attackrange
- mp_potential_step(target_x,target_y-7,min(global.f_mspeed,distance),false)
+ case 0://normal state
+ {
+  if attacking=false
+  {
+   mp_potential_step(target_x,target_y-7,min(global.f_mspeed,distance),false)
+  }
+   else
+  {
+   if instance_exists(n)
+   {
+    if point_distance(x,y+7,n.x,n.y)&gt;global.f_attackrange
+    mp_potential_step(target_x,target_y-7,min(global.f_mspeed,distance),false)
+   }
+  }
+ }
 }
 
 
+//depth
+depth=(y+7)*-1
+
+//follow target
 if follow=true and instance_exists(n)
 {
  target_x=n.x
@@ -123,28 +136,6 @@ if state=0
 {
  image_speed=0.05
 }
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///depth
-depth=(y+7)*-1
 </string>
           </argument>
         </arguments>
@@ -238,16 +229,21 @@ if collision_circle(mouse_x,mouse_y,10,parent_interact,0,1)
  if n.type="enemy"
  {
   i.color=c_red
+  i.image_xscale=2
+  i.image_yscale=2
   attacking=true
  }
  if n.type="tree"
  {
   i.color=c_lime
+  i.image_xscale=2
+  i.image_yscale=2
   attacking=false
  }
  if n.type="dead"
  {
   i.color=c_white
+  attacking=false
  }
 }
 else
