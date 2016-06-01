@@ -29,6 +29,8 @@
 global.debug=false
 global.zoomfactor=3//3
 global.camspeed=5//5
+global.mouse_lock=true
+global.mouse_size=2
 key_init()
 
 ///UI options
@@ -37,13 +39,43 @@ global.ui_alpha=1//1
 global.ui_hpvalue=true//true
 global.ui_spvalue=true//true
 global.ui_border=true//true
-global.border_size=8 //8
+global.border_size=7 //8
 
 
 ///other
 menu=false
 
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///mouse lock
+if global.mouse_lock=true
+{
+ if display_mouse_get_x()&lt;0 {display_mouse_set(0,display_mouse_get_y())}
+ if display_mouse_get_x()&gt;display_get_width() {display_mouse_set(display_get_width(),display_mouse_get_y())} 
+ if display_mouse_get_y()&lt;0 {display_mouse_set(display_mouse_get_x(),0)}
+ if display_mouse_get_y()&gt;display_get_height() {display_mouse_set(display_mouse_get_x(),display_get_height())}
+}
 </string>
           </argument>
         </arguments>

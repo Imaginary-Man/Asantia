@@ -129,6 +129,7 @@ if crit=1
             <string>///draw
 draw_set_halign(fa_center)
 draw_set_valign(fa_center)
+draw_set_font(global.normalfont)
 draw_text_transformed_colour(x,y,round(text),1+(crit/2),1+(crit/2),0,color,color,color,color,image_alpha)
 </string>
           </argument>
