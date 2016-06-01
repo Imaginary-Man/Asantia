@@ -219,7 +219,10 @@ if instance_place(x,y,all)
           <argument>
             <kind>1</kind>
             <string>///move
-n=instance_nearest(mouse_x,mouse_y,parent_interact)
+if instance_nearest(mouse_x,mouse_y,parent_interact).type="enemy"
+{
+ n=instance_nearest(mouse_x,mouse_y,parent_interact)
+}
 //
 if keyboard_check(global.key_attack)
 {
@@ -235,6 +238,8 @@ if keyboard_check(global.key_attack)
 }
  else
 {
+ //
+ n=instance_nearest(mouse_x,mouse_y,parent_interact)
  if collision_circle(mouse_x,mouse_y,10,parent_interact,0,1)
  {
   i=instance_create(mouse_x,mouse_y,obj_move_click)
@@ -261,14 +266,17 @@ if keyboard_check(global.key_attack)
  }
  else
  {
-  attacking=false
-  follow=false
-  target_x=mouse_x
-  target_y=mouse_y
-  with (instance_create(mouse_x,mouse_y,obj_move_click))
+  if point_distance(x,y+7,mouse_x,mouse_y)&gt;=10
   {
-   color=c_white
-   follow=id
+   attacking=false
+   follow=false
+   target_x=mouse_x
+   target_y=mouse_y
+   with (instance_create(mouse_x,mouse_y,obj_move_click))
+   {
+    color=c_white
+    follow=id
+   }
   }
  }
 } 
