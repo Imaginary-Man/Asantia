@@ -36,7 +36,7 @@ mspeed=0.5
 level=3
 xp=2
 agressive=false
-walkrange=50
+walkrange=30
 ///sprites
 spr_die=mob_trufflin_die
 spr_idle=mob_trufflin_idle
@@ -337,12 +337,12 @@ switch (state)
           <argument>
             <kind>1</kind>
             <string>///walk back to start if to far
-if distance_to_point(start_x,start_y)&gt;sight_radius/3 and (state=0 or state=1)
+if distance_to_point(start_x,start_y)&gt;=50 and (state=0 or state=1)
 {
- state=4
  if reset=false
  {
-  //writer(x,y-sprite_height,"RESET",c_white,global.normalfont,0.7)
+  random_x=start_x
+  random_y=start_y
   reset=true
  }
 }

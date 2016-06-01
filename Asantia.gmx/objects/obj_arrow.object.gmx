@@ -66,7 +66,7 @@ if instance_exists(n)
   move_towards_point(n.x,n.y-7,6)
  }
 
- if collision_circle(x,y,10,n,0,1)
+ if collision_circle(x,y,10,n,0,1) and n.type="enemy"
  {
   n.attacked=true
   n.agro=obj_player

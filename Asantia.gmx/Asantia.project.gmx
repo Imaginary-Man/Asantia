@@ -13,7 +13,8 @@
       <sprite>sprites\spr_eyes</sprite>
     </sprites>
     <sprites name="movement">
-      <sprite>sprites\spr_move_click</sprite>
+      <sprite>sprites\spr_move_click_1</sprite>
+      <sprite>sprites\spr_move_click_2</sprite>
     </sprites>
     <sprites name="trees">
       <sprite>sprites\spr_tree_1</sprite>

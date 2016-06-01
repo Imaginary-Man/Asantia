@@ -1,4 +1,7 @@
-///cam
+//gameplay
+global.key_attack=vk_lshift
+
+//cam
 global.cam_zoomout=vk_subtract
 global.cam_zoomin=vk_add
 global.cam_up=ord("W")
