@@ -29,6 +29,11 @@
 d_width=display_get_width()
 d_height=display_get_height()
 movewith=0
+dragitem=0
+dragsprite=0
+drag=false
+oldslot=0
+oldslotid=0
 //ui_windows
 show_inventory=false
 show_stats=false
@@ -142,8 +147,6 @@ movewith=obj_helmet.movewith
           </argument>
         </arguments>
       </action>
-    </event>
-    <event eventtype="5" enumb="35">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -160,8 +163,37 @@ movewith=obj_helmet.movewith
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///test item
-item_add(0,1)
+            <string>///inventory
+inv_step()
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///equip
+if i_mainhand!=0
+{
+ obj_weapon_parent.sprite_index=i_mainhand.sprite_ingame
+}
+ else
+{
+ obj_weapon_parent.sprite_index=spr_none
+}
 </string>
           </argument>
         </arguments>
@@ -636,6 +668,64 @@ if show_stats=true
 if show_inventory=true
 {
  draw_sprite_ext(ui_inventory,0,d_width-(global.ui_size*70),d_height-(d_height/2),global.ui_size,global.ui_size,0,c_white,1)
+ for(i=0; i&lt;slots; i+=1)
+ {
+  if slot[i]=1
+  { 
+   draw_sprite_ext(item_rarity,slotid[i].rarity,slotx[i],sloty[i],global.ui_size,global.ui_size,0,c_white,1)
+   draw_sprite_ext(slotid[i].sprite_index,-1,slotx[i],sloty[i],global.ui_size,global.ui_size,0,c_white,1)
+   if ui_select_inv(slotx[i],sloty[i])
+   {
+    draw_set_alpha(0.5)
+    //draw_circle(window_mouse_get_x(),window_mouse_get_y(),50,0)
+    draw_set_alpha(1)
+   }  
+  }
+ }
+ ///
+ if i_mainhand!=0
+ {
+  draw_sprite_ext(item_rarity,i_mainhand.rarity,i_mainhandx,i_mainhandy,global.ui_size,global.ui_size,0,c_white,1)
+  draw_sprite_ext(i_mainhand.sprite_index,-1,i_mainhandx,i_mainhandy,global.ui_size,global.ui_size,0,c_white,1)
+ }
+  if i_offhand!=0
+ {
+  draw_sprite_ext(item_rarity,i_offhand.rarity,i_offhandx,i_offhandy,global.ui_size,global.ui_size,0,c_white,1)   
+  draw_sprite_ext(i_offhand.sprite_index,-1,i_offhandx,i_offhandy,global.ui_size,global.ui_size,0,c_white,1)
+ }
+ 
+  if i_necklace!=0
+ {
+  draw_sprite_ext(item_rarity,i_necklace.rarity,i_necklacex,i_necklacey,global.ui_size,global.ui_size,0,c_white,1)   
+  draw_sprite_ext(i_necklace.sprite_index,-1,i_necklacex,i_necklacey,global.ui_size,global.ui_size,0,c_white,1)
+ } 
+ 
+  if i_helm!=0
+ {
+  draw_sprite_ext(item_rarity,i_helm.rarity,i_helmx,i_helmy,global.ui_size,global.ui_size,0,c_white,1)   
+  draw_sprite_ext(i_helm.sprite_index,-1,i_helmx,i_helmy,global.ui_size,global.ui_size,0,c_white,1)
+ } 
+ 
+ for(j=0; j&lt;=3; j+=1)
+ {
+  if i_gem[j]!=0
+  {
+   draw_sprite_ext(item_rarity,i_gem[j].rarity,i_gemx[j],i_gemy[j],global.ui_size,global.ui_size,0,c_white,1)   
+   draw_sprite_ext(i_gem[j].sprite_index,-1,i_gemx[j],i_gemy[j],global.ui_size,global.ui_size,0,c_white,1)
+  }
+ }
+ 
+ for(o=0; o&lt;=1; o+=1)
+ {
+  if i_ring[o]!=0
+  {
+   draw_sprite_ext(item_rarity,i_ring[o].rarity,i_ringx[o],i_ringy[o],global.ui_size,global.ui_size,0,c_white,1)   
+   draw_sprite_ext(i_ring[o].sprite_index,-1,i_ringx[o],i_ringy[o],global.ui_size,global.ui_size,0,c_white,1)
+  }
+ } 
+ ui_equip()
+ ui_unequip()
+ ui_inv_drag()
 }
 </string>
           </argument>
@@ -690,7 +780,7 @@ if obj_options.menu=true
 //options
 if ui_select_click(d_width-(global.ui_size*15),d_height-(global.ui_size*10),6)//options
 {
- obj_options.menu=true 
+ obj_options.menu=!obj_options.menu
 }
 
 
@@ -751,20 +841,11 @@ if show_inventory=true //inv esc button
 if global.debug=true
 {
  draw_rectangle( d_width-(global.ui_size*112),
-                 d_height-(d_height/2)-27*global.ui_size,
+                 d_height-(d_height/2)-48*global.ui_size,
                  d_width-(global.ui_size*96),
-                 d_height-(d_height/2)-11*global.ui_size,
+                 d_height-(d_height/2)-32*global.ui_size,
                  1)
- draw_rectangle( d_width-(global.ui_size*95),
-                 d_height-(d_height/2)-27*global.ui_size,
-                 d_width-(global.ui_size*79),
-                 d_height-(d_height/2)-11*global.ui_size,
-                 1)
- draw_rectangle( d_width-(global.ui_size*112),
-                 d_height-(d_height/2)-9*global.ui_size,
-                 d_width-(global.ui_size*96),
-                 d_height-(d_height/2)+7*global.ui_size,
-                 1)                 
+
                                  
  draw_circle(window_mouse_get_x(),window_mouse_get_y(),6,1)
  
@@ -796,6 +877,12 @@ if global.debug=true
           <argument>
             <kind>1</kind>
             <string>///mouse
+if drag=true
+{
+ draw_sprite_ext(item_rarity,dragrarity,window_mouse_get_x()-12*global.ui_size,window_mouse_get_y()-12*global.ui_size,global.ui_size,global.ui_size,0,c_white,1)
+ draw_sprite_ext(dragsprite,-1,window_mouse_get_x()-12*global.ui_size,window_mouse_get_y()-12*global.ui_size,global.ui_size,global.ui_size,0,c_white,1)
+}
+
 draw_sprite_ext(spr_mouse_2,0,window_mouse_get_x(),window_mouse_get_y(),global.mouse_size,global.mouse_size,0,c_white,1)
 
 </string>
@@ -821,6 +908,30 @@ draw_sprite_ext(spr_mouse_2,0,window_mouse_get_x(),window_mouse_get_y(),global.m
           <argument>
             <kind>1</kind>
             <string>///test
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="36">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///test item
+item_add(0,1,round(random(12)))
 </string>
           </argument>
         </arguments>

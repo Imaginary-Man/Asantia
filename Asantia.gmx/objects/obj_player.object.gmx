@@ -222,64 +222,77 @@ if instance_place(x,y,all)
             <string>///move
 
 //
-if keyboard_check(global.key_attack)
+if obj_gui.show_inventory=false
 {
- n=instance_nearest(mouse_x,mouse_y,parent_enemy)
- //
- if point_distance(mouse_x,mouse_y,n.x,n.y)&lt;=50
+ if keyboard_check(global.key_attack)
  {
-  i=instance_create(mouse_x,mouse_y,obj_move_click)
-  follow=true
-  i.follow=n
-  i.color=c_red
-  i.sprite_index=spr_move_click_2
-  attacking=true
- }
-}
- else
-{
- //
- n=instance_nearest(mouse_x,mouse_y,parent_interact)
- if collision_circle(mouse_x,mouse_y,10,parent_interact,0,1)
- {
-  i=instance_create(mouse_x,mouse_y,obj_move_click)
-  follow=true
-  i.follow=n
+  n=instance_nearest(mouse_x,mouse_y,parent_enemy)
   //
-  if n.type="enemy"
+  if point_distance(mouse_x,mouse_y,n.x,n.y)&lt;=50 and obj_weapon_parent.sprite_index!=spr_none
   {
+   i=instance_create(mouse_x,mouse_y,obj_move_click)
+   follow=true
+   i.follow=n
    i.color=c_red
    i.sprite_index=spr_move_click_2
    attacking=true
   }
-  if n.type="tree"
-  {
-   i.color=c_lime
-   i.sprite_index=spr_move_click_2
-   attacking=false
-  }
-  if n.type="dead"
-  {
-   i.color=c_white
-   attacking=false
-  }
  }
- else
+  else
  {
-  if point_distance(x,y+7,mouse_x,mouse_y)&gt;=10
+  //
+  n=instance_nearest(mouse_x,mouse_y,parent_interact)
+  if collision_circle(mouse_x,mouse_y,10,parent_interact,0,1)
   {
-   attacking=false
-   follow=false
-   target_x=mouse_x
-   target_y=mouse_y
-   with (instance_create(mouse_x,mouse_y,obj_move_click))
+   i=instance_create(mouse_x,mouse_y,obj_move_click)
+   i.follow=n
+   follow=true
+   //
+   if n.type="enemy"
    {
-    color=c_white
-    follow=id
+    if obj_weapon_parent.sprite_index!=spr_none
+    {
+     i.color=c_red
+     i.sprite_index=spr_move_click_2
+     attacking=true
+    }
+    else
+      {
+       i.color=c_white
+       attacking=false
+       follow=false
+      } 
+   }
+   if n.type="tree"
+   {
+    i.color=c_lime
+    i.sprite_index=spr_move_click_2
+    attacking=false
+   }
+   if n.type="dead"
+   {
+    i.color=c_white
+    attacking=false
+    follow=false
    }
   }
- }
-} 
+  else
+  {
+   if point_distance(x,y+7,mouse_x,mouse_y)&gt;=10
+   {
+    attacking=false
+    follow=false
+    target_x=mouse_x
+    target_y=mouse_y
+    with (instance_create(mouse_x,mouse_y,obj_move_click))
+    {
+     color=c_white
+     follow=id
+    }
+   }
+  }
+ } 
+}
 
 
 </string>

@@ -137,6 +137,7 @@
     </sprites>
     <sprites name="items">
       <sprite>sprites\item_example</sprite>
+      <sprite>sprites\item_rarity</sprite>
       <sprite>sprites\item_gs_waterweed</sprite>
     </sprites>
   </sprites>
@@ -152,10 +153,6 @@
       <script>scripts\writer.gml</script>
       <script>scripts\plus_exp.gml</script>
       <script>scripts\draw_bar.gml</script>
-      <script>scripts\ui_select.gml</script>
-      <script>scripts\ui_select_stats.gml</script>
-      <script>scripts\ui_select_click.gml</script>
-      <script>scripts\ui_select_image_index.gml</script>
     </scripts>
     <scripts name="options">
       <script>scripts\key_init.gml</script>
@@ -180,8 +177,18 @@
     <script>scripts\shadow_init.gml</script>
     <scripts name="inventory">
       <script>scripts\inv_create.gml</script>
+      <script>scripts\inv_step.gml</script>
       <script>scripts\item_init.gml</script>
       <script>scripts\item_add.gml</script>
+    </scripts>
+    <scripts name="UI">
+      <script>scripts\ui_select_stats.gml</script>
+      <script>scripts\ui_select_click.gml</script>
+      <script>scripts\ui_select_inv.gml</script>
+      <script>scripts\ui_inv_drag.gml</script>
+      <script>scripts\ui_unequip.gml</script>
+      <script>scripts\ui_equip.gml</script>
+      <script>scripts\ui_select_image_index.gml</script>
     </scripts>
   </scripts>
   <fonts name="fonts">

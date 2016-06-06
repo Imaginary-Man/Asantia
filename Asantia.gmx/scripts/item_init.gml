@@ -17,10 +17,11 @@
   spr_sword  
 
 5=rarity
-  "crude/common/uncommon/rare/unique/grand/heroic/legendary/mythical/divine/godlike"
+     0/1/2/3/4/5/6/7/8/9/10/11
+  "crude/common/uncommon/rare/unique/grand/heroic/legendary/mythical/demonic/divine/godlike"
     
 6=type
-  "mainhand/offhand/helm/necklace/ring/gem/quest/consume/material/other"
+  "mainhand/offhand/bothhand/helm/necklace/ring/gem/quest/consume/material/other"
 
 */
 
@@ -33,4 +34,5 @@ global.item[0,1]="Used by Ozainos warriors for manny generations."
 global.item[0,2]=1
 global.item[0,3]=item_gs_waterweed
 global.item[0,4]=gs_waterweed
-global.item[0,5]="rare"
+global.item[0,5]=4
+global.item[0,6]="bothhand"
