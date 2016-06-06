@@ -1,10 +1,10 @@
 ///math on player only stat
 global.mhp=(global.sta*5)
 global.msp=(global.wis*6)
-global.cooldown=100-(global.char/5)
+global.cooldown=100-(global.char/15)
 global.attackspeed=1+(global.agi/400)
 global.critchance=(global.dex/10)
-global.casttime=100-(global.will/5)
+global.casttime=100-(global.will/12)
 global.ad=(global.str/2)
 global.ap=(global.int/3)
 
@@ -33,6 +33,8 @@ global.f_ap=global.ap+(global.i_ap+global.b_ap)
 global.f_attackrange=(global.i_attackrange+global.b_attackrange)
 global.f_armor=(global.i_armor+global.b_armor)
 global.f_resist=(global.i_resist+global.b_resist)
+global.f_lifesteal=(global.i_lifesteal+global.b_lifesteal)
+global.f_spellvamp=(global.i_spellvamp+global.b_spellvamp)
 
 //level up
 if global.xp>=global.mxp
@@ -54,8 +56,26 @@ if global.xp>=global.mxp
  global.will+=1
 }
 
+///limit
+if global.hp>global.f_mhp
+{
+ global.hp=global.f_mhp
+}
 
+if global.sp>global.f_msp
+{
+ global.sp=global.f_msp
+}
 
+if global.hp<0
+{
+ global.hp=0
+}
+
+if global.sp<0
+{
+ global.sp=0
+}
 
 
 

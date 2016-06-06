@@ -34,8 +34,30 @@
       </sprites>
     </sprites>
     <sprites name="Helmet">
+      <sprite>sprites\helm_example</sprite>
+      <sprite>sprites\sprite96</sprite>
       <sprite>sprites\helm_firecage</sprite>
       <sprite>sprites\helm_waterweed</sprite>
+      <sprite>sprites\helm_user5_6</sprite>
+      <sprite>sprites\helm_user5_5</sprite>
+      <sprite>sprites\helm_user5_4</sprite>
+      <sprite>sprites\helm_user5_3</sprite>
+      <sprite>sprites\helm_user5_2</sprite>
+      <sprite>sprites\helm_user5_1</sprite>
+      <sprite>sprites\helm_user4_1</sprite>
+      <sprite>sprites\helm_user3_1</sprite>
+      <sprite>sprites\helm_user2_1</sprite>
+      <sprite>sprites\helm_user1_1</sprite>
+      <sprite>sprites\helm_woodsteel_1</sprite>
+      <sprite>sprites\helm_purplehaze_1</sprite>
+      <sprite>sprites\helm_knight_1</sprite>
+      <sprite>sprites\helm_laser_1</sprite>
+      <sprite>sprites\helm_virus_1</sprite>
+      <sprite>sprites\helm_encript_1</sprite>
+      <sprite>sprites\helm_zabuza_1</sprite>
+      <sprite>sprites\helm_gravity_1</sprite>
+      <sprite>sprites\spr_hair_3_helm</sprite>
+      <sprite>sprites\spr_hair_2_helm</sprite>
     </sprites>
     <sprites name="decoration">
       <sprite>sprites\deco_esylia_leaves</sprite>
@@ -113,6 +135,10 @@
       <sprite>sprites\spr_naknak</sprite>
       <sprite>sprites\spr_none</sprite>
     </sprites>
+    <sprites name="items">
+      <sprite>sprites\item_example</sprite>
+      <sprite>sprites\item_gs_waterweed</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -122,6 +148,7 @@
       <script>scripts\fade_in.gml</script>
       <script>scripts\fade_out.gml</script>
       <script>scripts\counter.gml</script>
+      <script>scripts\counter_heal.gml</script>
       <script>scripts\writer.gml</script>
       <script>scripts\plus_exp.gml</script>
       <script>scripts\draw_bar.gml</script>
@@ -136,21 +163,26 @@
     <scripts name="animation">
       <script>scripts\steps.gml</script>
       <scripts name="greatsword">
-        <script>scripts\scr_greatsword_slash.gml</script>
+        <script>scripts\scr_greatsword_basic_attack.gml</script>
       </scripts>
       <scripts name="bow">
         <script>scripts\scr_bow_basic_shot.gml</script>
       </scripts>
     </scripts>
     <scripts name="player">
-      <script>scripts\stats_step.gml</script>
       <script>scripts\stats_init.gml</script>
+      <script>scripts\stats_step.gml</script>
       <script>scripts\ad_calculate.gml</script>
       <script>scripts\crit_calculate.gml</script>
       <script>scripts\player_appearance.gml</script>
     </scripts>
     <script>scripts\User_Content.gml</script>
     <script>scripts\shadow_init.gml</script>
+    <scripts name="inventory">
+      <script>scripts\inv_create.gml</script>
+      <script>scripts\item_init.gml</script>
+      <script>scripts\item_add.gml</script>
+    </scripts>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ui_stats_font</font>
@@ -159,6 +191,7 @@
     <object>objects\obj_player</object>
     <object>objects\obj_helmet</object>
     <object>objects\obj_counter</object>
+    <object>objects\obj_counter_heal</object>
     <object>objects\obj_writer</object>
     <object>objects\obj_exp</object>
     <object>objects\obj_move_click</object>
@@ -190,7 +223,10 @@
     </objects>
     <objects name="parents">
       <object>objects\obj_weapon_parent</object>
+      <object>objects\obj_melee_parent</object>
+      <object>objects\obj_ranged_parent</object>
       <object>objects\parent_interact</object>
+      <object>objects\parent_enemy</object>
       <object>objects\parent_text</object>
     </objects>
     <objects name="mobs">
@@ -199,6 +235,7 @@
     <objects name="critter">
       <object>objects\critter_frog</object>
     </objects>
+    <object>objects\ITEM</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>

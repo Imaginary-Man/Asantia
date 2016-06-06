@@ -3,6 +3,7 @@ maxstep=30
 //body lynx
 if step=0
 {
+ n=obj_player.n
  shot=false
  obj_player.state=1
  state=1
@@ -26,7 +27,8 @@ if step>0
 if step>20 and shot=false
 {
  alarm[9]=60/global.f_attackspeed
- instance_create(x,y,obj_arrow)
+ i=instance_create(x,y,obj_arrow)
+ i.n=n
  shot=true
  drawn=0
 }

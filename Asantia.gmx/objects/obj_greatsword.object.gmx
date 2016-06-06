@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>obj_weapon_parent</parentName>
+  <parentName>obj_melee_parent</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -122,7 +122,7 @@ switch (state)
   {
    alarm[11]=-1
    depth=obj_player.depth-2
-   scr_greatsword_slash()
+   scr_greatsword_basic_attack()
    steps()
   }
   if obj_player.attacking=false
@@ -147,12 +147,12 @@ switch (state)
  case 3://sheated
  {
   alarm[11]=-1
-  depth=obj_player.depth+2
-  y=obj_player.y-6
+  depth=obj_player.depth+3
+  y=obj_player.y-3
   x=obj_player.x+(17*obj_player.image_xscale)
   image_angle=10*obj_player.image_xscale
   image_xscale=obj_player.image_xscale
-  image_yscale=1
+  image_yscale=-1
   break;
  }
 }

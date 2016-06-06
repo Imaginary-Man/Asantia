@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>obj_weapon_parent</parentName>
+  <parentName>obj_ranged_parent</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -150,7 +150,7 @@ switch (state)
  case 3://sheated
  {
   alarm[11]=-1
-  depth=obj_player.depth+2
+  depth=obj_player.depth+3
   y=obj_player.y-2
   x=obj_player.x
   image_angle=270*obj_player.image_xscale

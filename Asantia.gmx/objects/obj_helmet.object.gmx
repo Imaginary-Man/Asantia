@@ -82,6 +82,29 @@ depth=obj_player.depth-1
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///sync with player
+visible=obj_player.visible
+jump=obj_player.jump
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="8" enumb="0">
       <action>
@@ -101,8 +124,8 @@ depth=obj_player.depth-1
           <argument>
             <kind>1</kind>
             <string>///draw helmet on player
-draw_sprite_ext(spr_eyes,global.player_eyes,obj_player.x,obj_player.y+movewith,obj_player.image_xscale,obj_player.image_yscale,obj_player.image_angle,c_white,1)
-draw_sprite_ext(helmet_equipped,-1,obj_player.x,obj_player.y+movewith,obj_player.image_xscale,obj_player.image_yscale,obj_player.image_angle,c_white,1)
+draw_sprite_ext(spr_eyes,global.player_eyes,obj_player.x,obj_player.y+movewith-jump,obj_player.image_xscale,obj_player.image_yscale,obj_player.image_angle,c_white,1)
+draw_sprite_ext(helmet_equipped,-1,obj_player.x,obj_player.y+movewith-jump,obj_player.image_xscale,obj_player.image_yscale,obj_player.image_angle,c_white,1)
 </string>
           </argument>
         </arguments>

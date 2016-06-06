@@ -9,3 +9,7 @@ global.cam_down=ord("S")
 global.cam_left=ord("A")
 global.cam_right=ord("D")
 global.cam_center=vk_space
+
+//ui
+global.key_inventory=ord("I")
+global.key_stats=ord("P")

@@ -46,9 +46,11 @@ global.i_jump=0
 global.i_mspeed=0
 global.i_ad=0
 global.i_ap=0
-global.i_attackrange=120
+global.i_attackrange=30
 global.i_armor=0
 global.i_resist=0
+global.i_lifesteal=0.1
+global.i_spellvamp=0
 
 ///buffs
 global.b_mhp=0
@@ -73,6 +75,8 @@ global.b_ap=0
 global.b_attackrange=0
 global.b_armor=0
 global.b_resist=0
+global.b_lifesteal=0
+global.b_spellvamp=0
 
 ///final
 global.f_mhp=0
@@ -97,6 +101,8 @@ global.f_ad=0
 global.f_attackrange=0
 global.f_armor=0
 global.f_resist=0
+global.f_lifesteal=0
+global.f_spellvamp=0
 
 //crit
 global.critical=0

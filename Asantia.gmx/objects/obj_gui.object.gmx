@@ -29,17 +29,12 @@
 d_width=display_get_width()
 d_height=display_get_height()
 movewith=0
-
-//ui
-
-
-
 //ui_windows
 show_inventory=false
 show_stats=false
-
-
-//mouse on GUI
+//inventory
+inv_create()
+item_init()
 </string>
           </argument>
         </arguments>
@@ -110,8 +105,63 @@ visible=true
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///UI keys
+if keyboard_check_pressed(global.key_inventory)
+{
+ show_inventory=!show_inventory
+}
+
+if keyboard_check_pressed(global.key_stats)
+{
+ show_stats=!show_stats
+}
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///movewith
 movewith=obj_helmet.movewith
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="5" enumb="35">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///test item
+item_add(0,1)
 </string>
           </argument>
         </arguments>
@@ -194,7 +244,7 @@ if global.ui_border=true
  draw_set_color(make_color_rgb(142,93,28))
  draw_rectangle(0,display_get_height()-(global.border_size*global.ui_size),display_get_width(),display_get_height(),0)
  draw_rectangle(0,(global.border_size*global.ui_size),display_get_width(),0,0)
- draw_set_color(make_color_rgb(128,128,128))
+ draw_set_color(make_color_rgb(120,80,20))
  draw_rectangle(0,display_get_height()-(global.border_size*global.ui_size),display_get_width(),display_get_height(),1)
  draw_rectangle(0,(global.border_size*global.ui_size),display_get_width(),0,1)
 }
@@ -224,9 +274,9 @@ if global.ui_hpvalue=true
  draw_text_transformed((display_get_width()/2)-(70*global.ui_size),display_get_height()-15*global.ui_size,"/",global.ui_size,global.ui_size,0)
  draw_set_color(make_color_rgb(255,50,50))
  draw_set_halign(fa_right)
- draw_text_transformed((display_get_width()/2)-(75*global.ui_size),display_get_height()-15*global.ui_size,global.hp,global.ui_size,global.ui_size,0)
+ draw_text_transformed((display_get_width()/2)-(75*global.ui_size),display_get_height()-15*global.ui_size,round(global.hp),global.ui_size,global.ui_size,0)
  draw_set_halign(fa_left)
- draw_text_transformed((display_get_width()/2)-(65*global.ui_size),display_get_height()-15*global.ui_size,global.f_mhp,global.ui_size,global.ui_size,0)
+ draw_text_transformed((display_get_width()/2)-(65*global.ui_size),display_get_height()-15*global.ui_size,round(global.f_mhp),global.ui_size,global.ui_size,0)
 }
 //sp
 if global.ui_spvalue=true
@@ -237,9 +287,9 @@ if global.ui_spvalue=true
  draw_text_transformed((display_get_width()/2)+(70*global.ui_size),display_get_height()-15*global.ui_size,"/",global.ui_size,global.ui_size,0)
  draw_set_color(make_color_rgb(72,188,255))
  draw_set_halign(fa_left)
- draw_text_transformed((display_get_width()/2)+(75*global.ui_size),display_get_height()-15*global.ui_size,global.f_msp,global.ui_size,global.ui_size,0)
+ draw_text_transformed((display_get_width()/2)+(75*global.ui_size),display_get_height()-15*global.ui_size,round(global.f_msp),global.ui_size,global.ui_size,0)
  draw_set_halign(fa_right)
- draw_text_transformed((display_get_width()/2)+(65*global.ui_size),display_get_height()-15*global.ui_size,global.sp,global.ui_size,global.ui_size,0)
+ draw_text_transformed((display_get_width()/2)+(65*global.ui_size),display_get_height()-15*global.ui_size,round(global.sp),global.ui_size,global.ui_size,0)
 }
 
 ///FPS
@@ -402,6 +452,15 @@ if show_stats=true
  draw_text_transformed((global.ui_size*42),d_height-(d_height/2)+65*global.ui_size,global.f_mspeed,global.ui_size/3,global.ui_size/3,0)
  draw_set_halign(fa_left)
  //////
+ draw_text_transformed((global.ui_size*88),d_height-(d_height/2)-27*global.ui_size,global.f_armor,global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*88),d_height-(d_height/2)-19.5*global.ui_size,global.f_resist,global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*88),d_height-(d_height/2)-12*global.ui_size,global.f_attackrange,global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*88),d_height-(d_height/2)-4.5*global.ui_size,global.f_attackspeed,global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*88),d_height-(d_height/2)+3*global.ui_size,global.f_critchance,global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*88),d_height-(d_height/2)+10.5*global.ui_size,global.f_critmultiplier,global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*88),d_height-(d_height/2)+18*global.ui_size,global.f_cooldown,global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*88),d_height-(d_height/2)+25.5*global.ui_size,global.f_casttime,global.ui_size/3,global.ui_size/3,0)
+ // 
  
  draw_set_color(c_black)
  
@@ -438,7 +497,7 @@ if show_stats=true
   //charisma
  if ui_select_stats((global.ui_size*28),d_height-(d_height/2)+3*global.ui_size,15*global.ui_size)
  {
-  draw_roundrect(window_mouse_get_x(),window_mouse_get_y(),window_mouse_get_x()+108*global.ui_size,window_mouse_get_y()-7*global.ui_size,0)
+  draw_roundrect(window_mouse_get_x(),window_mouse_get_y(),window_mouse_get_x()+107*global.ui_size,window_mouse_get_y()-7*global.ui_size,0)
   draw_text_transformed_colour(window_mouse_get_x()+global.ui_size,window_mouse_get_y()-7.5*global.ui_size,"Charisma decreases ability cooldowns",global.ui_size/3,global.ui_size/3,0,c_white,c_white,c_white,c_white,1)
  }  
   //Intellect
@@ -484,7 +543,7 @@ if show_stats=true
   //armor
  if ui_select_stats((global.ui_size*64),d_height-(d_height/2)-27*global.ui_size,22*global.ui_size)
  {
-  draw_roundrect(window_mouse_get_x(),window_mouse_get_y(),window_mouse_get_x()+122*global.ui_size,window_mouse_get_y()-7*global.ui_size,0)
+  draw_roundrect(window_mouse_get_x(),window_mouse_get_y(),window_mouse_get_x()+123*global.ui_size,window_mouse_get_y()-7*global.ui_size,0)
   draw_text_transformed_colour(window_mouse_get_x()+global.ui_size,window_mouse_get_y()-7.5*global.ui_size,"Armor decreases incoming physical damage",global.ui_size/3,global.ui_size/3,0,c_white,c_white,c_white,c_white,1) 
  }  
   //resist
@@ -517,8 +576,18 @@ if show_stats=true
   draw_roundrect(window_mouse_get_x(),window_mouse_get_y(),window_mouse_get_x()+153*global.ui_size,window_mouse_get_y()-7*global.ui_size,0)
   draw_text_transformed_colour(window_mouse_get_x()+global.ui_size,window_mouse_get_y()-7.5*global.ui_size,"Critical Multiplier is the total multiplier of a critical hit",global.ui_size/3,global.ui_size/3,0,c_white,c_white,c_white,c_white,1) 
  } 
- 
- 
+  //cooldown reduction
+ if ui_select_stats((global.ui_size*64),d_height-(d_height/2)+18*global.ui_size,22*global.ui_size)
+ {
+  draw_roundrect(window_mouse_get_x(),window_mouse_get_y(),window_mouse_get_x()+149*global.ui_size,window_mouse_get_y()-7*global.ui_size,0)
+  draw_text_transformed_colour(window_mouse_get_x()+global.ui_size,window_mouse_get_y()-7.5*global.ui_size,"Cooldown Reduction decreases cooldown of abilities",global.ui_size/3,global.ui_size/3,0,c_white,c_white,c_white,c_white,1) 
+ }  
+  //casttime
+ if ui_select_stats((global.ui_size*64),d_height-(d_height/2)+25.5*global.ui_size,22*global.ui_size)
+ {
+  draw_roundrect(window_mouse_get_x(),window_mouse_get_y(),window_mouse_get_x()+190*global.ui_size,window_mouse_get_y()-7*global.ui_size,0)
+  draw_text_transformed_colour(window_mouse_get_x()+global.ui_size,window_mouse_get_y()-7.5*global.ui_size,"Cast Time decreases set amount of time needed for casting abilities",global.ui_size/3,global.ui_size/3,0,c_white,c_white,c_white,c_white,1) 
+ }  
  
  
  
@@ -681,12 +750,22 @@ if show_inventory=true //inv esc button
             <string>///debug
 if global.debug=true
 {
- draw_rectangle((global.ui_size*28),
+ draw_rectangle( d_width-(global.ui_size*112),
                  d_height-(d_height/2)-27*global.ui_size,
-                 (global.ui_size*58),
-                 d_height-(d_height/2)-19*global.ui_size,
+                 d_width-(global.ui_size*96),
+                 d_height-(d_height/2)-11*global.ui_size,
                  1)
-                
+ draw_rectangle( d_width-(global.ui_size*95),
+                 d_height-(d_height/2)-27*global.ui_size,
+                 d_width-(global.ui_size*79),
+                 d_height-(d_height/2)-11*global.ui_size,
+                 1)
+ draw_rectangle( d_width-(global.ui_size*112),
+                 d_height-(d_height/2)-9*global.ui_size,
+                 d_width-(global.ui_size*96),
+                 d_height-(d_height/2)+7*global.ui_size,
+                 1)                 
+                                 
  draw_circle(window_mouse_get_x(),window_mouse_get_y(),6,1)
  
  draw_set_valign(fa_top)
