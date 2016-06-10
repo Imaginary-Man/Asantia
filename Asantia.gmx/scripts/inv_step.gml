@@ -8,8 +8,8 @@ i_gemy[0]=d_height-(d_height/2)-66*global.ui_size
 i_gemx[1]=d_width-(global.ui_size*95)
 i_gemy[1]=d_height-(d_height/2)-66*global.ui_size
 
-i_helmetx=d_width-(global.ui_size*78)
-i_helmety=d_height-(d_height/2)-66*global.ui_size
+i_helmx=d_width-(global.ui_size*78)
+i_helmy=d_height-(d_height/2)-66*global.ui_size
 
 i_gemx[2]=d_width-(global.ui_size*61)
 i_gemy[2]=d_height-(d_height/2)-66*global.ui_size
@@ -26,7 +26,7 @@ i_mainhandx=d_width-(global.ui_size*95)
 i_mainhandy=d_height-(d_height/2)-48*global.ui_size
 
 i_necklacex=d_width-(global.ui_size*78)
-i_necklacet=d_height-(d_height/2)-48*global.ui_size
+i_necklacey=d_height-(d_height/2)-48*global.ui_size
 
 i_offhandx=d_width-(global.ui_size*61)
 i_offhandy=d_height-(d_height/2)-48*global.ui_size

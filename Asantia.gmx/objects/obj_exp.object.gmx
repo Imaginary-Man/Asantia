@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>///start
+depth=y-100000
 vspeed=random_range(-0.3,-0.5)
 alarm[0]=25
 </string>

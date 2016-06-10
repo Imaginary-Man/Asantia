@@ -117,6 +117,7 @@ switch (state)
   y=obj_player.y+(5+obj_helmet.movewith)
   x=obj_player.x+9*obj_player.image_xscale
   if alarm[11]=-1{alarm[11]=500}
+  if obj_player.gather=true {state=3}
   break;
  }
  case 1://attacking
@@ -217,18 +218,21 @@ if image_xscale&gt;0
             <string>///draw_bow
 draw_self()
 draw_set_color(c_white)
-if state=1 and alarm[9]=-1
+if sprite_index!=spr_none
 {
- draw_line(x-(6*image_xscale)-l,y+line1_y,x-(6*image_xscale)-l+(drawn*-image_xscale),y)
- draw_line(x-(6*image_xscale)-l,y+line2_y,x-(6*image_xscale)-l+(drawn*-image_xscale),y)
-}
-if state=0 and alarm[9]=-1 and image_angle!=0
-{
- draw_line(x+(7*image_xscale),y-13,x-(16*image_xscale),y-1)
-}
-if state=3
-{
- draw_line(x-12,y-7,x+12,y-7)
+ if state=1 and alarm[9]=-1
+ {
+  draw_line(x-(6*image_xscale)-l,y+line1_y,x-(6*image_xscale)-l+(drawn*-image_xscale),y)
+  draw_line(x-(6*image_xscale)-l,y+line2_y,x-(6*image_xscale)-l+(drawn*-image_xscale),y)
+ }
+ if state=0 and alarm[9]=-1 and image_angle!=0
+ {
+  draw_line(x+(7*image_xscale),y-13,x-(16*image_xscale),y-1)
+ }
+ if state=3
+ {
+  draw_line(x-12,y-7,x+12,y-7)
+ }
 }
 //
 draw_set_color(c_black)

@@ -17,8 +17,8 @@
     <TextureGroup0>0</TextureGroup0>
   </TextureGroups>
   <For3D>0</For3D>
-  <width>22</width>
-  <height>30</height>
+  <width>21</width>
+  <height>29</height>
   <frames>
     <frame index="0">images\mob_trufflin_idle_0.png</frame>
     <frame index="1">images\mob_trufflin_idle_1.png</frame>

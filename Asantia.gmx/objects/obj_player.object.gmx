@@ -36,9 +36,12 @@ target_x=x
 target_y=y
 scale=1
 jump=0
+gather=0
 //f_mspeed=0
 
 
+
+///tool
 </string>
           </argument>
         </arguments>
@@ -80,6 +83,10 @@ switch(state)
     mp_potential_step(target_x,target_y-7,min(global.f_mspeed,distance),false)
    }
   }
+ }
+ case 20://gathering
+ {
+  image_speed=0.01
  }
 }
 
@@ -157,9 +164,10 @@ if state=0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///attacking
+            <string>///interacting
 if instance_exists(n)
 {
+ //attacking
  if n.type="enemy" and attacking=true
  {
   if point_distance(x,y+7,n.x,n.y)&lt;global.f_attackrange
@@ -171,6 +179,21 @@ if instance_exists(n)
    }
   }
  }
+ //woodcutting
+ if n.type="tree" and gather=true and n.cut=false
+ {
+  if point_distance(x,y+7,n.x,n.y)&lt;=8
+  {
+   if state=0 and y+7&gt;n.y
+   {
+    state=20
+    g=instance_create(x,y,obj_tool)
+    g.gather="woodcutting"
+    g.n=n
+    g.depth=depth-1
+   }
+  }
+ } 
 }
 </string>
           </argument>
@@ -222,7 +245,7 @@ if instance_place(x,y,all)
             <string>///move
 
 //
-if obj_gui.show_inventory=false
+if global.walk=true
 {
  if keyboard_check(global.key_attack)
  {
@@ -236,13 +259,14 @@ if obj_gui.show_inventory=false
    i.color=c_red
    i.sprite_index=spr_move_click_2
    attacking=true
+   gather=false
   }
  }
   else
  {
   //
   n=instance_nearest(mouse_x,mouse_y,parent_interact)
-  if collision_circle(mouse_x,mouse_y,10,parent_interact,0,1)
+  if collision_circle(mouse_x,mouse_y,10,n,0,1)
   {
    i=instance_create(mouse_x,mouse_y,obj_move_click)
    i.follow=n
@@ -255,24 +279,28 @@ if obj_gui.show_inventory=false
      i.color=c_red
      i.sprite_index=spr_move_click_2
      attacking=true
+     gather=false
     }
     else
       {
        i.color=c_white
        attacking=false
+       gather=false
        follow=false
       } 
    }
-   if n.type="tree"
+   if n.type="tree" and n.cut=false
    {
     i.color=c_lime
     i.sprite_index=spr_move_click_2
     attacking=false
+    gather=true
    }
    if n.type="dead"
    {
     i.color=c_white
     attacking=false
+    gather=false
     follow=false
    }
   }
@@ -282,6 +310,7 @@ if obj_gui.show_inventory=false
    {
     attacking=false
     follow=false
+    gather=false
     target_x=mouse_x
     target_y=mouse_y
     with (instance_create(mouse_x,mouse_y,obj_move_click))
@@ -325,7 +354,7 @@ if global.debug=true
  draw_ellipse(target_x-4,target_y-1,target_x+4,target_y+1,1)
  draw_set_halign(fa_center)
  draw_set_valign(fa_center)
- draw_text(x,y+17,state)
+ draw_text(x,y+17,obj_weapon_parent.alarm[9])
  draw_set_alpha(0.05)
  draw_set_color(c_red)
  draw_circle(x,y,global.f_attackrange,0)

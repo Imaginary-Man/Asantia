@@ -30,6 +30,7 @@ d_width=display_get_width()
 d_height=display_get_height()
 movewith=0
 dragitem=0
+dragstack=0
 dragsprite=0
 drag=false
 oldslot=0
@@ -40,6 +41,16 @@ show_stats=false
 //inventory
 inv_create()
 item_init()
+init_mainhand()
+init_offhand()
+init_helm()
+init_necklace()
+init_ring_zero()
+init_ring_one()
+init_gem_zero()
+init_gem_one()
+init_gem_two()
+init_gem_three()
 </string>
           </argument>
         </arguments>
@@ -65,6 +76,43 @@ item_init()
           <argument>
             <kind>4</kind>
             <string>0</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///test items
+item_add(0,1,round(random_range(0,11)))
+item_add(7,1,round(random_range(0,11)))
+item_add(8,1,round(random_range(0,11)))
+item_add(4,1,round(random_range(0,11)))
+item_add(2,1,round(random_range(0,11)))
+item_add(1,1,round(random_range(0,11)))
+
+item_add(3,1,round(random_range(0,11)))
+item_add(3,1,round(random_range(0,11)))
+item_add(3,1,round(random_range(0,11)))
+item_add(3,1,round(random_range(0,11)))
+
+item_add(5,1,round(random_range(0,11)))
+
+item_add(6,1,round(random_range(0,10)))
+item_add(6,1,round(random_range(0,10)))
+</string>
           </argument>
         </arguments>
       </action>
@@ -186,14 +234,8 @@ inv_step()
           <argument>
             <kind>1</kind>
             <string>///equip
-if i_mainhand!=0
-{
- obj_weapon_parent.sprite_index=i_mainhand.sprite_ingame
-}
- else
-{
- obj_weapon_parent.sprite_index=spr_none
-}
+itembonus_step()
+
 </string>
           </argument>
         </arguments>
@@ -303,12 +345,12 @@ if global.ui_hpvalue=true
  draw_set_font(global.normalfont)
  draw_set_color(c_white)
  draw_set_halign(fa_center)
- draw_text_transformed((display_get_width()/2)-(70*global.ui_size),display_get_height()-15*global.ui_size,"/",global.ui_size,global.ui_size,0)
+ draw_text_transformed((display_get_width()/2)-(70*global.ui_size),display_get_height()-18*global.ui_size,"/",global.ui_size,global.ui_size,0)
  draw_set_color(make_color_rgb(255,50,50))
  draw_set_halign(fa_right)
- draw_text_transformed((display_get_width()/2)-(75*global.ui_size),display_get_height()-15*global.ui_size,round(global.hp),global.ui_size,global.ui_size,0)
+ draw_text_transformed((display_get_width()/2)-(75*global.ui_size),display_get_height()-18*global.ui_size,round(global.hp),global.ui_size,global.ui_size,0)
  draw_set_halign(fa_left)
- draw_text_transformed((display_get_width()/2)-(65*global.ui_size),display_get_height()-15*global.ui_size,round(global.f_mhp),global.ui_size,global.ui_size,0)
+ draw_text_transformed((display_get_width()/2)-(65*global.ui_size),display_get_height()-18*global.ui_size,round(global.f_mhp),global.ui_size,global.ui_size,0)
 }
 //sp
 if global.ui_spvalue=true
@@ -316,12 +358,12 @@ if global.ui_spvalue=true
  draw_set_font(global.normalfont)
  draw_set_color(c_white)
  draw_set_halign(fa_center)
- draw_text_transformed((display_get_width()/2)+(70*global.ui_size),display_get_height()-15*global.ui_size,"/",global.ui_size,global.ui_size,0)
+ draw_text_transformed((display_get_width()/2)+(70*global.ui_size),display_get_height()-18*global.ui_size,"/",global.ui_size,global.ui_size,0)
  draw_set_color(make_color_rgb(72,188,255))
  draw_set_halign(fa_left)
- draw_text_transformed((display_get_width()/2)+(75*global.ui_size),display_get_height()-15*global.ui_size,round(global.f_msp),global.ui_size,global.ui_size,0)
+ draw_text_transformed((display_get_width()/2)+(75*global.ui_size),display_get_height()-18*global.ui_size,round(global.f_msp),global.ui_size,global.ui_size,0)
  draw_set_halign(fa_right)
- draw_text_transformed((display_get_width()/2)+(65*global.ui_size),display_get_height()-15*global.ui_size,round(global.sp),global.ui_size,global.ui_size,0)
+ draw_text_transformed((display_get_width()/2)+(65*global.ui_size),display_get_height()-18*global.ui_size,round(global.sp),global.ui_size,global.ui_size,0)
 }
 
 ///FPS
@@ -468,14 +510,14 @@ if show_stats=true
   
  //numbers
  draw_set_color(c_white)
- draw_text_transformed((global.ui_size*44),d_height-(d_height/2)-27*global.ui_size,global.f_str,global.ui_size/3,global.ui_size/3,0)
- draw_text_transformed((global.ui_size*44),d_height-(d_height/2)-19.5*global.ui_size,global.f_agi,global.ui_size/3,global.ui_size/3,0)
- draw_text_transformed((global.ui_size*44),d_height-(d_height/2)-12*global.ui_size,global.f_sta,global.ui_size/3,global.ui_size/3,0)
- draw_text_transformed((global.ui_size*44),d_height-(d_height/2)-4.5*global.ui_size,global.f_dex,global.ui_size/3,global.ui_size/3,0)
- draw_text_transformed((global.ui_size*44),d_height-(d_height/2)+3*global.ui_size,global.f_char,global.ui_size/3,global.ui_size/3,0)
- draw_text_transformed((global.ui_size*44),d_height-(d_height/2)+10.5*global.ui_size,global.f_int,global.ui_size/3,global.ui_size/3,0)
- draw_text_transformed((global.ui_size*44),d_height-(d_height/2)+18*global.ui_size,global.f_wis,global.ui_size/3,global.ui_size/3,0)
- draw_text_transformed((global.ui_size*44),d_height-(d_height/2)+25.5*global.ui_size,global.f_will,global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*44),d_height-(d_height/2)-27*global.ui_size,round(global.f_str),global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*44),d_height-(d_height/2)-19.5*global.ui_size,round(global.f_agi),global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*44),d_height-(d_height/2)-12*global.ui_size,round(global.f_sta),global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*44),d_height-(d_height/2)-4.5*global.ui_size,round(global.f_dex),global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*44),d_height-(d_height/2)+3*global.ui_size,round(global.f_char),global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*44),d_height-(d_height/2)+10.5*global.ui_size,round(global.f_int),global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*44),d_height-(d_height/2)+18*global.ui_size,round(global.f_wis),global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*44),d_height-(d_height/2)+25.5*global.ui_size,round(global.f_will),global.ui_size/3,global.ui_size/3,0)
  //
  draw_text_transformed((global.ui_size*39),d_height-(d_height/2)+36*global.ui_size,round(global.f_ad),global.ui_size/3,global.ui_size/3,0)
  draw_text_transformed((global.ui_size*39),d_height-(d_height/2)+43.5*global.ui_size,round(global.f_ap),global.ui_size/3,global.ui_size/3,0)
@@ -484,13 +526,13 @@ if show_stats=true
  draw_text_transformed((global.ui_size*42),d_height-(d_height/2)+65*global.ui_size,global.f_mspeed,global.ui_size/3,global.ui_size/3,0)
  draw_set_halign(fa_left)
  //////
- draw_text_transformed((global.ui_size*88),d_height-(d_height/2)-27*global.ui_size,global.f_armor,global.ui_size/3,global.ui_size/3,0)
- draw_text_transformed((global.ui_size*88),d_height-(d_height/2)-19.5*global.ui_size,global.f_resist,global.ui_size/3,global.ui_size/3,0)
- draw_text_transformed((global.ui_size*88),d_height-(d_height/2)-12*global.ui_size,global.f_attackrange,global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*88),d_height-(d_height/2)-27*global.ui_size,round(global.f_armor),global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*88),d_height-(d_height/2)-19.5*global.ui_size,round(global.f_resist),global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*88),d_height-(d_height/2)-12*global.ui_size,round(global.f_attackrange),global.ui_size/3,global.ui_size/3,0)
  draw_text_transformed((global.ui_size*88),d_height-(d_height/2)-4.5*global.ui_size,global.f_attackspeed,global.ui_size/3,global.ui_size/3,0)
  draw_text_transformed((global.ui_size*88),d_height-(d_height/2)+3*global.ui_size,global.f_critchance,global.ui_size/3,global.ui_size/3,0)
  draw_text_transformed((global.ui_size*88),d_height-(d_height/2)+10.5*global.ui_size,global.f_critmultiplier,global.ui_size/3,global.ui_size/3,0)
- draw_text_transformed((global.ui_size*88),d_height-(d_height/2)+18*global.ui_size,global.f_cooldown,global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*88),d_height-(d_height/2)+18*global.ui_size,round(global.f_cooldown),global.ui_size/3,global.ui_size/3,0)
  draw_text_transformed((global.ui_size*88),d_height-(d_height/2)+25.5*global.ui_size,global.f_casttime,global.ui_size/3,global.ui_size/3,0)
  // 
  
@@ -673,12 +715,26 @@ if show_inventory=true
   if slot[i]=1
   { 
    draw_sprite_ext(item_rarity,slotid[i].rarity,slotx[i],sloty[i],global.ui_size,global.ui_size,0,c_white,1)
-   draw_sprite_ext(slotid[i].sprite_index,-1,slotx[i],sloty[i],global.ui_size,global.ui_size,0,c_white,1)
-   if ui_select_inv(slotx[i],sloty[i])
+   draw_sprite_ext(slotid[i].sprite_index,-1,slotx[i]+1,sloty[i]+1,global.ui_size,global.ui_size,0,c_black,0.5)  
+   draw_sprite_ext(slotid[i].sprite_index,-1,slotx[i],sloty[i],global.ui_size,global.ui_size,0,c_white,1)  
+   if slotid[i].stack&gt;=2
    {
-    draw_set_alpha(0.5)
-    //draw_circle(window_mouse_get_x(),window_mouse_get_y(),50,0)
-    draw_set_alpha(1)
+    draw_set_color(c_white)
+    draw_set_font(global.normalfont)
+    draw_set_halign(fa_right)
+    draw_set_valign(fa_bottom)
+    draw_text_transformed(slotx[i]+global.ui_size*16,sloty[i]+global.ui_size*18,slotid[i].stack,global.ui_size/2,global.ui_size/2,0)
+    draw_set_color(c_black)
+   }
+  }
+ }
+ for (n=0;n&lt;slots; n+=1)  
+ {
+  if slot[n]=1
+  {
+   if ui_select_inv(slotx[n],sloty[n])
+   {
+    if drag=false {ui_select_inv_info()}
    }  
   }
  }
@@ -686,23 +742,27 @@ if show_inventory=true
  if i_mainhand!=0
  {
   draw_sprite_ext(item_rarity,i_mainhand.rarity,i_mainhandx,i_mainhandy,global.ui_size,global.ui_size,0,c_white,1)
+  draw_sprite_ext(i_mainhand.sprite_index,-1,i_mainhandx+1,i_mainhandy+1,global.ui_size,global.ui_size,0,c_black,0.5) 
   draw_sprite_ext(i_mainhand.sprite_index,-1,i_mainhandx,i_mainhandy,global.ui_size,global.ui_size,0,c_white,1)
  }
   if i_offhand!=0
  {
   draw_sprite_ext(item_rarity,i_offhand.rarity,i_offhandx,i_offhandy,global.ui_size,global.ui_size,0,c_white,1)   
+  draw_sprite_ext(i_offhand.sprite_index,-1,i_offhandx+1,i_offhandy+1,global.ui_size,global.ui_size,0,c_black,0.5)
   draw_sprite_ext(i_offhand.sprite_index,-1,i_offhandx,i_offhandy,global.ui_size,global.ui_size,0,c_white,1)
  }
  
   if i_necklace!=0
  {
   draw_sprite_ext(item_rarity,i_necklace.rarity,i_necklacex,i_necklacey,global.ui_size,global.ui_size,0,c_white,1)   
+  draw_sprite_ext(i_necklace.sprite_index,-1,i_necklacex+1,i_necklacey+1,global.ui_size,global.ui_size,0,c_black,0.5)
   draw_sprite_ext(i_necklace.sprite_index,-1,i_necklacex,i_necklacey,global.ui_size,global.ui_size,0,c_white,1)
  } 
  
   if i_helm!=0
  {
   draw_sprite_ext(item_rarity,i_helm.rarity,i_helmx,i_helmy,global.ui_size,global.ui_size,0,c_white,1)   
+  draw_sprite_ext(i_helm.sprite_index,-1,i_helmx+1,i_helmy+1,global.ui_size,global.ui_size,0,c_black,0.5)
   draw_sprite_ext(i_helm.sprite_index,-1,i_helmx,i_helmy,global.ui_size,global.ui_size,0,c_white,1)
  } 
  
@@ -711,7 +771,8 @@ if show_inventory=true
   if i_gem[j]!=0
   {
    draw_sprite_ext(item_rarity,i_gem[j].rarity,i_gemx[j],i_gemy[j],global.ui_size,global.ui_size,0,c_white,1)   
-   draw_sprite_ext(i_gem[j].sprite_index,-1,i_gemx[j],i_gemy[j],global.ui_size,global.ui_size,0,c_white,1)
+   draw_sprite_ext(i_gem[j].sprite_index,-1,i_gemx[j]+1,i_gemy[j]+1,global.ui_size,global.ui_size,0,c_black,0.5)
+   draw_sprite_ext(i_gem[j].sprite_index,-1,i_gemx[j],i_gemy[j],global.ui_size,global.ui_size,0,c_white,1)  
   }
  }
  
@@ -720,11 +781,13 @@ if show_inventory=true
   if i_ring[o]!=0
   {
    draw_sprite_ext(item_rarity,i_ring[o].rarity,i_ringx[o],i_ringy[o],global.ui_size,global.ui_size,0,c_white,1)   
+   draw_sprite_ext(i_ring[o].sprite_index,-1,i_ringx[o]+1,i_ringy[o]+1,global.ui_size,global.ui_size,0,c_black,0.5)
    draw_sprite_ext(i_ring[o].sprite_index,-1,i_ringx[o],i_ringy[o],global.ui_size,global.ui_size,0,c_white,1)
   }
  } 
+ ////
  ui_equip()
- ui_unequip()
+ ui_unequip() 
  ui_inv_drag()
 }
 </string>
@@ -840,10 +903,10 @@ if show_inventory=true //inv esc button
             <string>///debug
 if global.debug=true
 {
- draw_rectangle( d_width-(global.ui_size*112),
-                 d_height-(d_height/2)-48*global.ui_size,
-                 d_width-(global.ui_size*96),
-                 d_height-(d_height/2)-32*global.ui_size,
+ draw_rectangle( d_width-(global.ui_size*119),
+                 d_height-(d_height/2)-73*global.ui_size,
+                 d_width-(global.ui_size*21),
+                 d_height-(d_height/2)+84*global.ui_size,
                  1)
 
                                  
@@ -876,15 +939,64 @@ if global.debug=true
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///mouse
+            <string>///mouse and dragging
 if drag=true
 {
  draw_sprite_ext(item_rarity,dragrarity,window_mouse_get_x()-12*global.ui_size,window_mouse_get_y()-12*global.ui_size,global.ui_size,global.ui_size,0,c_white,1)
+ draw_sprite_ext(dragsprite,-1,(window_mouse_get_x()-12*global.ui_size)+1,(window_mouse_get_y()-12*global.ui_size)+1,global.ui_size,global.ui_size,0,c_black,0.5)
  draw_sprite_ext(dragsprite,-1,window_mouse_get_x()-12*global.ui_size,window_mouse_get_y()-12*global.ui_size,global.ui_size,global.ui_size,0,c_white,1)
+ if dragstack&gt;=2
+ {
+  draw_set_color(c_white)
+  draw_set_font(global.normalfont)
+  draw_set_halign(fa_right)
+  draw_set_valign(fa_bottom)
+  draw_text_transformed(window_mouse_get_x()-12*global.ui_size+global.ui_size*16,window_mouse_get_y()-12*global.ui_size+global.ui_size*18,dragstack,global.ui_size/2,global.ui_size/2,0)
+  draw_set_color(c_black)
+ }
 }
 
 draw_sprite_ext(spr_mouse_2,0,window_mouse_get_x(),window_mouse_get_y(),global.mouse_size,global.mouse_size,0,c_white,1)
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///global.walk
+if show_inventory=true
+{
+ if window_mouse_get_x()&gt;=d_width-(global.ui_size*119)
+ and window_mouse_get_x()&lt;=d_width-(global.ui_size*21)
+ and window_mouse_get_y()&gt;=d_height-(d_height/2)-73*global.ui_size
+ and window_mouse_get_y()&lt;=d_height-(d_height/2)+84*global.ui_size
+ {
+  global.walk=false
+ }
+  else
+ {
+  global.walk=true
+ }
+}
+ else
+{
+ global.walk=true
+}
 </string>
           </argument>
         </arguments>
@@ -908,30 +1020,6 @@ draw_sprite_ext(spr_mouse_2,0,window_mouse_get_x(),window_mouse_get_y(),global.m
           <argument>
             <kind>1</kind>
             <string>///test
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="9" enumb="36">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///test item
-item_add(0,1,round(random(12)))
 </string>
           </argument>
         </arguments>

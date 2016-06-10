@@ -16,6 +16,9 @@ if drag=false
       slot[i]=1
       slotid[i]=i_mainhand
       i_mainhand=0
+      init_mainhand()
+      obj_weapon_parent.sprite_index=spr_none
+      if obj_player.state=1 {obj_player.state=0}
       break;
      }
     }
@@ -33,6 +36,7 @@ if drag=false
       slot[i]=1
       slotid[i]=i_offhand
       i_offhand=0
+      init_offhand()
       break;
      }
     }
@@ -50,6 +54,8 @@ if drag=false
       slot[i]=1
       slotid[i]=i_necklace
       i_necklace=0
+      init_necklace()
+      obj_helmet.neck=spr_none
       break;
      }
     }
@@ -67,6 +73,8 @@ if drag=false
       slot[i]=1
       slotid[i]=i_helm
       i_helm=0
+      init_helm()
+      obj_helmet.helm=spr_none
       break;
      }
     }
@@ -86,6 +94,10 @@ if drag=false
       slot[i]=1
       slotid[i]=i_gem[j]
       i_gem[j]=0
+      if j=0 init_gem_zero()
+      if j=1 init_gem_one()
+      if j=2 init_gem_two()
+      if j=3 {init_gem_three() obj_back.back=spr_none}
       break;
      }
     }  
@@ -106,6 +118,8 @@ if drag=false
       slot[i]=1
       slotid[i]=i_ring[o]
       i_ring[o]=0
+      if o=0 init_ring_zero()
+      if o=1 init_ring_one()
       break;
      }
     }  

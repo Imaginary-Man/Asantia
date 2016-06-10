@@ -1,0 +1,4 @@
+New item:
+
+1. item_init
+2. obj_gui draw_UI inventory

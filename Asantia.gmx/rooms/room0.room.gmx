@@ -267,7 +267,9 @@
     <instance objName="obj_deco_Esylia_leaves" x="551" y="465" name="inst_8E652519" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_deco_Esylia_leaves" x="559" y="480" name="inst_CDD2DFD3" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_deco_Esylia_leaves" x="553" y="471" name="inst_B34E7B49" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_greatsword" x="546" y="558" name="inst_9A47AD0C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_back" x="526" y="566" name="inst_7F66E8EA" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_offhand_parent" x="598" y="554" name="inst_DFE6617F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_weapon_parent" x="577" y="572" name="inst_D6031ADD" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

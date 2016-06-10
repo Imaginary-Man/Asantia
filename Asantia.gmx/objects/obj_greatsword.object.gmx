@@ -114,6 +114,7 @@ switch (state)
   y=obj_player.y+4
   x=obj_player.x
   if alarm[11]=-1{alarm[11]=500}
+  if obj_player.gather=true {state=3}
   break;
  }
  case 1://attacking

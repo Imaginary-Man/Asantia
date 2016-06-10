@@ -1,8 +1,8 @@
 ///player_stats
-global.hp=10
 global.mhp=10
-global.sp=10
 global.msp=10
+global.sp=global.msp
+global.hp=global.mhp
 global.xp=0
 global.mxp=3
 global.level=1
@@ -15,6 +15,8 @@ global.critmultiplier=2
 global.casttime=100
 global.ad=0
 global.ap=0
+global.hpregen=0.05
+global.spregen=0.01
 
 ///player stats
 global.agi=3//+attackspeed
@@ -46,11 +48,13 @@ global.i_jump=0
 global.i_mspeed=0
 global.i_ad=0
 global.i_ap=0
-global.i_attackrange=30
+global.i_attackrange=0
 global.i_armor=0
 global.i_resist=0
-global.i_lifesteal=0.1
+global.i_lifesteal=0
 global.i_spellvamp=0
+global.i_hpregen=0
+global.i_spregen=0
 
 ///buffs
 global.b_mhp=0
@@ -77,6 +81,8 @@ global.b_armor=0
 global.b_resist=0
 global.b_lifesteal=0
 global.b_spellvamp=0
+global.b_hpregen=0
+global.b_spregen=0
 
 ///final
 global.f_mhp=0
@@ -103,6 +109,8 @@ global.f_armor=0
 global.f_resist=0
 global.f_lifesteal=0
 global.f_spellvamp=0
+global.f_hpregen=0
+global.f_spregen=0
 
 //crit
 global.critical=0
@@ -111,5 +119,8 @@ global.actualcritchance=0
 
 //basic attack calulations
 global.dmg_basic_attack=0
+
+
+///
 
 

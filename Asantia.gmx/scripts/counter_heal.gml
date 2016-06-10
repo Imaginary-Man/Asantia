@@ -1,4 +1,4 @@
-////counter(x,y,text)
+////counter_heal(x,y,text)
 i=instance_create(argument0,argument1,obj_counter_heal)
 i.text=argument2
 i.color=c_lime

@@ -1,4 +1,6 @@
 ///obj player
+draw_set_color(c_black)
+
 if floor(obj_player.image_index)=0
 {
  draw_ellipse(obj_player.x-11,obj_player.y+3,obj_player.x+10,obj_player.y+8,0)
@@ -39,8 +41,11 @@ with (critter_frog)
 //oak_tree
 with (obj_oak_tree)
 {
- draw_ellipse(x-20,y-6,x+20,y+6,0)
+ if cut=false{draw_ellipse(x-20,y-6,x+20,y+6,0)} else {draw_ellipse(x-15,y-3,x+15,y+3,0)}
 }
+
+//Projectiles
+
 
 ///enemies
 

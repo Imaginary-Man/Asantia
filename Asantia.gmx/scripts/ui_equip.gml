@@ -14,9 +14,12 @@ if drag=false
     {
      if i_mainhand=0 and i_offhand=0 
      {
+      if obj_player.state=1 {obj_player.state=0}
       i_mainhand=slotid[i]
       slotid[i]=0
       slot[i]=0
+      equip_mainhand()
+      obj_weapon_parent.sprite_index=i_mainhand.sprite_ingame
       break;
      }
     }
@@ -25,9 +28,12 @@ if drag=false
     {
      if i_mainhand=0
      {
+      if obj_player.state=1 {obj_player.state=0}
       i_mainhand=slotid[i]
       slotid[i]=0
       slot[i]=0
+      equip_mainhand()
+      obj_weapon_parent.sprite_index=i_mainhand.sprite_ingame
       break;      
      }
     }
@@ -38,18 +44,32 @@ if drag=false
      {
       i_offhand=slotid[i]
       slotid[i]=0
-      slot[i]=0      
+      slot[i]=0  
+      //    
       break;      
      }
     }    
-        
+    
+    if slotid[i].type="helm"
+    {
+     if i_helm=0
+     {
+      i_helm=slotid[i]
+      slotid[i]=0
+      slot[i]=0
+      equip_helm()
+      obj_helmet.helm=i_helm.sprite_ingame
+      break;
+     }
+    }        
     if slotid[i].type="ring"
     {
      if i_ring[o]=0
      {
       i_ring[o]=slotid[i]
       slotid[i]=0
-      slot[i]=0      
+      slot[i]=0 
+      equip_ring()     
       break;  
      }  
     }   
@@ -60,7 +80,8 @@ if drag=false
      {
       i_gem[j]=slotid[i]
       slotid[i]=0
-      slot[i]=0      
+      slot[i]=0
+      equip_gem()      
       break;  
      }  
     }    
@@ -71,7 +92,9 @@ if drag=false
      {
       i_necklace=slotid[i]
       slotid[i]=0
-      slot[i]=0      
+      slot[i]=0  
+      equip_necklace()
+      obj_helmet.neck=i_necklace.sprite_ingame    
       break;
      }
     }       

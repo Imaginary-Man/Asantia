@@ -13,7 +13,6 @@ for(i=0; i<slots; i+=1)
 }
 
 i_ring[1]=0
-i_ring[1]=0
 i_ringx[1]=0
 i_ringy[1]=0
 i_necklace=0

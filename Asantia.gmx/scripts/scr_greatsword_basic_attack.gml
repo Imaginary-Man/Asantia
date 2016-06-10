@@ -3,6 +3,7 @@ maxstep=40
 //body lynx
 if step=0
 {
+ crit_calculate()
  n=obj_player.n
  shot=false
  obj_player.state=1
@@ -22,6 +23,7 @@ if step>0
 if step<37
 {
  image_angle=(image_xscale*-1)*(step*5)
+ blur(0.02,0.2)
 }
 
 
@@ -32,8 +34,8 @@ if step>30 and shot=false
  earlystop=false
  n.attacked=true
  n.agro=obj_player
- n.hp-=global.f_ad
- counter(n.x,n.y-n.sprite_height,global.f_ad,c_red,global.normalfont)
+ n.hp-=global.dmg_basic_attack
+ counter(n.x,n.y-n.sprite_height,global.dmg_basic_attack,c_red,global.normalfont)
  if global.f_lifesteal>0
  {
   global.hp+=global.dmg_basic_attack*global.f_lifesteal

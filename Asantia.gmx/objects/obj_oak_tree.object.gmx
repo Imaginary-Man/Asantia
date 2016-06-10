@@ -6,7 +6,7 @@
   <depth>0</depth>
   <persistent>0</persistent>
   <parentName>parent_interact</parentName>
-  <maskName>&lt;undefined&gt;</maskName>
+  <maskName>spr_tree_1_mask</maskName>
   <events>
     <event eventtype="0" enumb="0">
       <action>
@@ -26,8 +26,78 @@
           <argument>
             <kind>1</kind>
             <string>///depth
-type="tree"
+maxstack=3
+class="oak tree"
+
+
+/////
 depth=y*-1
+stack=maxstack
+cut=false
+type="tree"
+
+sprite_normal=sprite_index
+sprite_cut=asset_get_index(string(sprite_get_name(sprite_index))+"_cut") 
+sprite_top=asset_get_index(string(sprite_get_name(sprite_index))+"_top") 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///recharge
+cut=false
+sprite_index=sprite_normal
+stack=maxstack
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///cut
+if stack&lt;1
+{
+ if alarm[0]=-1
+ {
+  alarm[0]=3000
+  tree_fall(sprite_top)
+ }
+ sprite_index=sprite_cut
+ cut=true
+}
 </string>
           </argument>
         </arguments>
