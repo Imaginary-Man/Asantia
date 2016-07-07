@@ -16,6 +16,7 @@
     </sprites>
     <sprite>sprites\spr_cam</sprite>
     <sprite>sprites\spr_player</sprite>
+    <sprite>sprites\spr_player_jump</sprite>
     <sprites name="firefly">
       <sprite>sprites\spr_firefly_body</sprite>
       <sprite>sprites\sprite172</sprite>
@@ -27,6 +28,7 @@
     <sprite>sprites\spr_circle</sprite>
     <sprites name="Helmet">
       <sprite>sprites\helm_example</sprite>
+      <sprite>sprites\hair_1</sprite>
       <sprite>sprites\helm_deathleaf_2</sprite>
       <sprite>sprites\helm_deathleaf_1</sprite>
       <sprite>sprites\helm_firecage</sprite>
@@ -256,6 +258,9 @@
       <sprite>sprites\forgatten_lord</sprite>
     </sprites>
     <sprite>sprites\spr_lightning_bolt</sprite>
+    <sprites name="mind_lynx">
+      <sprite>sprites\mind_test</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -388,7 +393,19 @@
       </scripts>
     </scripts>
     <scripts name="Lynx">
-      <script>scripts\run_lynx.gml</script>
+      <script>scripts\lynx_execute.gml</script>
+      <script>scripts\mind_execute.gml</script>
+      <script>scripts\lynx_step.gml</script>
+      <scripts name="element">
+        <script>scripts\element_init.gml</script>
+        <script>scripts\element_combo.gml</script>
+      </scripts>
+      <scripts name="body">
+        <script>scripts\body_uppercut.gml</script>
+      </scripts>
+      <scripts name="mind">
+        <script>scripts\mind_netherstripes.gml</script>
+      </scripts>
     </scripts>
   </scripts>
   <fonts name="fonts">
@@ -486,6 +503,7 @@
     </objects>
     <objects name="Lynx System">
       <object>objects\LYNX</object>
+      <object>objects\MIND</object>
     </objects>
   </objects>
   <rooms name="rooms">
@@ -493,6 +511,24 @@
     <room>rooms\rm_login</room>
     <room>rooms\test_room</room>
   </rooms>
+  <constants number="16">
+    <constant name="weaponII">obj_offhand_parent</constant>
+    <constant name="weaponI">obj_weapon_parent</constant>
+    <constant name="C_DEATH">make_colour_rgb(0,50,0)</constant>
+    <constant name="C_EARTH">make_colour_rgb(75,50,0)</constant>
+    <constant name="C_ELECTRO">make_colour_rgb(255,255,0)</constant>
+    <constant name="C_FIRE">make_colour_rgb(255,0,0)</constant>
+    <constant name="C_LIFE">make_colour_rgb(255,230,200)</constant>
+    <constant name="C_WATER">make_colour_rgb(0,0,255)</constant>
+    <constant name="C_WIND">make_colour_rgb(155,255,155)</constant>
+    <constant name="DEATH">1</constant>
+    <constant name="EARTH">2</constant>
+    <constant name="ELECTRO">3</constant>
+    <constant name="FIRE">4</constant>
+    <constant name="LIFE">5</constant>
+    <constant name="WATER">6</constant>
+    <constant name="WIND">7</constant>
+  </constants>
   <help>
     <rtf>help.rtf</rtf>
   </help>

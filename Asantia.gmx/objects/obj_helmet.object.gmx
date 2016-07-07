@@ -131,6 +131,10 @@ draw_sprite_ext(neck,-1,obj_player.x,obj_player.y+movewith-jump,obj_player.image
 draw_sprite_ext(spr_eyes,global.player_eyes,obj_player.x,obj_player.y+movewith-jump,obj_player.image_xscale,obj_player.image_yscale,global.player_angle,c_white,1)
 draw_sprite_ext(helm,-1,obj_player.x,obj_player.y+movewith-jump,obj_player.image_xscale,obj_player.image_yscale,global.player_angle,c_white,1)
 
+//hair test
+/*
+draw_sprite_ext(hair_1,-1,obj_player.x,obj_player.y+movewith-jump,obj_player.image_xscale,obj_player.image_yscale,global.player_angle,c_white,1)
+
 </string>
           </argument>
         </arguments>

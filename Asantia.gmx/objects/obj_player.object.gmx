@@ -194,6 +194,16 @@ if follow=true and instance_exists(n)
  target_y=n.y
 }
 
+///jump sprite
+if jump=0
+{
+ sprite_index=spr_player
+}
+ else
+{
+ sprite_index=spr_player_jump
+}
+
 </string>
           </argument>
         </arguments>
