@@ -31,4 +31,8 @@ if step>30 and shot=false
  i.point=point_direction(i.x,i.y,n.x,n.y)
  shot=true
  drawn=0
+ //
+ gms_instance_sync_var_add("point",i.point)
+ gms_instance_sync_var_add("sprite_index",i.sprite_index)
+ gms_instance_sync(i,is_full)
 }

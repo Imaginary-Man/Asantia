@@ -26,7 +26,6 @@
           <argument>
             <kind>1</kind>
             <string>depth=1*-y
-
 image_speed=0.9
 </string>
           </argument>

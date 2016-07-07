@@ -3,38 +3,35 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
-  <datafiles number="1" name="datafiles">
-    <datafile>
-      <name>inv_help.txt</name>
-      <exists>-1</exists>
-      <size>0</size>
-      <exportAction>2</exportAction>
-      <exportDir></exportDir>
-      <overwrite>0</overwrite>
-      <freeData>-1</freeData>
-      <removeEnd>0</removeEnd>
-      <store>0</store>
-      <ConfigOptions>
-        <Config name="Default">
-          <CopyToMask>9223372036854775807</CopyToMask>
-        </Config>
-      </ConfigOptions>
-      <filename>inv_help.txt</filename>
-    </datafile>
-  </datafiles>
-  <NewExtensions/>
+  <datafiles number="1" name="datafiles"/>
+  <NewExtensions>
+    <extension index="0">extensions\GameMaker Server+(Windows)</extension>
+  </NewExtensions>
   <sounds name="sound"/>
   <sprites name="sprites">
+    <sprites name="other">
+      <sprite>sprites\spr_naknak</sprite>
+      <sprite>sprites\spr_none</sprite>
+      <sprite>sprites\spr_none_sheat</sprite>
+    </sprites>
     <sprite>sprites\spr_cam</sprite>
     <sprite>sprites\spr_player</sprite>
-    <sprite>sprites\spr_player_new</sprite>
+    <sprites name="firefly">
+      <sprite>sprites\spr_firefly_body</sprite>
+      <sprite>sprites\sprite172</sprite>
+      <sprite>sprites\f_helm_1</sprite>
+      <sprite>sprites\spr_firefly_wings</sprite>
+    </sprites>
+    <sprite>sprites\spr_player_mask</sprite>
     <sprite>sprites\spr_block</sprite>
+    <sprite>sprites\spr_circle</sprite>
     <sprites name="Helmet">
       <sprite>sprites\helm_example</sprite>
       <sprite>sprites\helm_deathleaf_2</sprite>
       <sprite>sprites\helm_deathleaf_1</sprite>
       <sprite>sprites\helm_firecage</sprite>
       <sprite>sprites\helm_waterweed</sprite>
+      <sprite>sprites\helm_executioner</sprite>
       <sprites name="old">
         <sprite>sprites\helm_user5_6</sprite>
         <sprite>sprites\helm_user5_5</sprite>
@@ -59,7 +56,7 @@
       </sprites>
     </sprites>
     <sprites name="necklace">
-      <sprite>sprites\necklace_exmaple</sprite>
+      <sprite>sprites\necklace_example</sprite>
       <sprite>sprites\nl_lapiz</sprite>
       <sprite>sprites\nl_ruby</sprite>
     </sprites>
@@ -88,10 +85,12 @@
         <sprite>sprites\gs_firecage_1</sprite>
         <sprite>sprites\gs_firecage_2</sprite>
         <sprite>sprites\gs_waterweed</sprite>
+        <sprite>sprites\gs_executioner</sprite>
       </sprites>
       <sprites name="scythe">
         <sprite>sprites\sc_deathleaf_1</sprite>
         <sprite>sprites\sc_waterweed</sprite>
+        <sprite>sprites\sc_executioner</sprite>
       </sprites>
       <sprites name="greataxe">
         <sprite>sprites\ga_firecage_1</sprite>
@@ -110,11 +109,17 @@
       </sprites>
       <sprites name="shortsword">
         <sprite>sprites\sw_waterweed</sprite>
+        <sprite>sprites\sw_firecage_1</sprite>
+        <sprite>sprites\sw_firecage_2</sprite>
       </sprites>
       <sprites name="shield">
         <sprite>sprites\sh_waterweed</sprite>
+        <sprite>sprites\sh_executioner</sprite>
       </sprites>
-      <sprite>sprites\weapon_exmaple</sprite>
+      <sprites name="lance">
+        <sprite>sprites\la_executioner</sprite>
+      </sprites>
+      <sprite>sprites\spr_weapon_example</sprite>
     </sprites>
     <sprites name="backslot">
       <sprite>sprites\back_example</sprite>
@@ -122,6 +127,7 @@
       <sprite>sprites\back_holy_wings_1</sprite>
       <sprite>sprites\back_darkness_wings_1</sprite>
       <sprite>sprites\back_death_wings_1</sprite>
+      <sprite>sprites\back_executioner</sprite>
     </sprites>
     <sprites name="decoration">
       <sprite>sprites\deco_esylia_leaves</sprite>
@@ -184,9 +190,11 @@
       <sprite>sprites\spr_mouse</sprite>
       <sprite>sprites\spr_mouse_2</sprite>
       <sprite>sprites\ui_inventory</sprite>
+      <sprite>sprites\ui_bank</sprite>
       <sprite>sprites\ui_stats</sprite>
       <sprite>sprites\ui_proffesions</sprite>
       <sprite>sprites\ui_example</sprite>
+      <sprite>sprites\sprite170</sprite>
       <sprite>sprites\ui_stats_xp_bar</sprite>
       <sprite>sprites\spr_mouse_3</sprite>
     </sprites>
@@ -194,16 +202,13 @@
       <sprite>sprites\spr_font_2</sprite>
       <sprite>sprites\spr_font</sprite>
     </sprites>
-    <sprites name="other">
-      <sprite>sprites\spr_naknak</sprite>
-      <sprite>sprites\spr_none</sprite>
-      <sprite>sprites\spr_none_sheat</sprite>
-    </sprites>
     <sprites name="items">
       <sprite>sprites\item_example</sprite>
       <sprite>sprites\item_rarity</sprite>
       <sprites name="weapons">
         <sprite>sprites\item_gs_waterweed</sprite>
+        <sprite>sprites\item_sh_waterweed</sprite>
+        <sprite>sprites\item_sw_waterweed</sprite>
         <sprite>sprites\item_ga_waterweed</sprite>
         <sprite>sprites\item_sc_waterweed</sprite>
         <sprite>sprites\item_bow_waterweed</sprite>
@@ -234,14 +239,28 @@
     <sprites name="effect">
       <sprite>sprites\spr_trail</sprite>
     </sprites>
+    <sprites name="joel unused">
+      <sprite>sprites\helm_light_kind_</sprite>
+      <sprite>sprites\sword_light_kind</sprite>
+      <sprite>sprites\zijs_light_kind</sprite>
+      <sprite>sprites\helm_nightmare</sprite>
+      <sprite>sprites\helm_gardian_</sprite>
+      <sprite>sprites\cape_light_kind</sprite>
+      <sprite>sprites\knuggle</sprite>
+      <sprite>sprites\lord_of_war_hammer</sprite>
+      <sprite>sprites\lord_of_war</sprite>
+      <sprite>sprites\lord_of_war_cape</sprite>
+      <sprite>sprites\lord_of_war_great_sword</sprite>
+      <sprite>sprites\ice_helm</sprite>
+      <sprite>sprites\basic_knight_helm</sprite>
+      <sprite>sprites\forgatten_lord</sprite>
+    </sprites>
+    <sprite>sprites\spr_lightning_bolt</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
     <scripts name="custom_codes">
-      <script>scripts\scr_shake_view.gml</script>
-      <script>scripts\fade_in.gml</script>
-      <script>scripts\fade_out.gml</script>
       <script>scripts\counter.gml</script>
       <script>scripts\counter_heal.gml</script>
       <script>scripts\counter_heal_mana.gml</script>
@@ -278,6 +297,8 @@
     </scripts>
     <script>scripts\User_Content.gml</script>
     <script>scripts\shadow_init.gml</script>
+    <script>scripts\light_object.gml</script>
+    <script>scripts\target_player.gml</script>
     <scripts name="inventory">
       <script>scripts\inv_create.gml</script>
       <script>scripts\inv_step.gml</script>
@@ -297,15 +318,16 @@
       <script>scripts\ui_select_inv_info.gml</script>
       <script>scripts\ui_select_stats.gml</script>
       <script>scripts\ui_select_click.gml</script>
+      <script>scripts\ui_select_hold.gml</script>
       <script>scripts\ui_select_inv.gml</script>
       <script>scripts\ui_inv_drag.gml</script>
-      <script>scripts\ui_inv_drag_new.gml</script>
       <script>scripts\ui_unequip.gml</script>
       <script>scripts\ui_equip.gml</script>
       <script>scripts\ui_select_image_index.gml</script>
     </scripts>
     <scripts name="equip">
       <script>scripts\equip_mainhand.gml</script>
+      <script>scripts\equip_offhand.gml</script>
       <script>scripts\equip_helm.gml</script>
       <script>scripts\equip_gem.gml</script>
       <script>scripts\equip_ring.gml</script>
@@ -314,6 +336,7 @@
     <scripts name="item">
       <script>scripts\item_init.gml</script>
       <script>scripts\item_add.gml</script>
+      <script>scripts\item_add_bank.gml</script>
       <script>scripts\draw_rarity.gml</script>
       <scripts name="items">
         <scripts name="gems">
@@ -327,6 +350,8 @@
             <script>scripts\info_ga_waterweed.gml</script>
             <script>scripts\info_gs_waterweed.gml</script>
             <script>scripts\info_sc_waterweed.gml</script>
+            <script>scripts\info_sw_waterweed.gml</script>
+            <script>scripts\info_sh_waterweed.gml</script>
           </scripts>
           <scripts name="ranged">
             <script>scripts\info_rb_waterweed.gml</script>
@@ -344,29 +369,51 @@
         </scripts>
       </scripts>
     </scripts>
-    <script>scripts\effect_trail.gml</script>
-    <script>scripts\blur.gml</script>
-    <script>scripts\tree_fall.gml</script>
+    <scripts name="silhoute">
+      <script>scripts\silhoute_init.gml</script>
+      <script>scripts\silhoute_draw.gml</script>
+    </scripts>
+    <scripts name="effect">
+      <script>scripts\tree_fall.gml</script>
+      <script>scripts\blur.gml</script>
+      <script>scripts\fade_in.gml</script>
+      <script>scripts\fade_out.gml</script>
+      <script>scripts\light.gml</script>
+      <script>scripts\effect_trail.gml</script>
+      <script>scripts\scr_shake_view.gml</script>
+      <scripts name="shear">
+        <script>scripts\shear_step.gml</script>
+        <script>scripts\shear_draw.gml</script>
+        <script>scripts\shear_init.gml</script>
+      </scripts>
+    </scripts>
+    <scripts name="Lynx">
+      <script>scripts\run_lynx.gml</script>
+    </scripts>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ui_stats_font</font>
     <font>fonts\ui_item_stats</font>
+    <font>fonts\Arial_Black</font>
+    <fonts name="GMS">
+      <font>fonts\GMS_font_1</font>
+      <font>fonts\GMS_font_2</font>
+      <font>fonts\GMS_font_3</font>
+    </fonts>
   </fonts>
   <objects name="objects">
     <object>objects\obj_player</object>
+    <object>objects\obj_other_player</object>
     <object>objects\obj_helmet</object>
     <object>objects\obj_back</object>
-    <object>objects\obj_counter</object>
-    <object>objects\obj_counter_heal</object>
-    <object>objects\obj_writer</object>
-    <object>objects\obj_exp</object>
-    <object>objects\obj_move_click</object>
     <objects name="cam">
+      <object>objects\obj_firefly</object>
       <object>objects\obj_cam</object>
       <object>objects\obj_cam_mover</object>
     </objects>
     <objects name="weapons">
       <object>objects\obj_greatsword</object>
+      <object>objects\obj_shortsword</object>
       <object>objects\obj_greataxe</object>
       <object>objects\obj_nodachi</object>
       <object>objects\obj_scythe</object>
@@ -382,10 +429,13 @@
       <object>objects\obj_tool</object>
     </objects>
     <objects name="controllers">
+      <object>objects\GMS</object>
+      <object>objects\obj_login</object>
       <object>objects\obj_regelaar</object>
       <object>objects\obj_gui</object>
       <object>objects\obj_options</object>
       <object>objects\obj_shadow</object>
+      <object>objects\obj_lightning</object>
       <object>objects\ITEM</object>
     </objects>
     <objects name="Decoration">
@@ -394,10 +444,7 @@
       <object>objects\obj_deco_Estlia_logs</object>
       <object>objects\obj_deco_Esylia_grass</object>
       <object>objects\obj_deco_Esylia_rocks</object>
-      <object>objects\obj_deco_Esylia_leaves_ani</object>
       <object>objects\obj_deco_Esylia_flowers3</object>
-      <object>objects\obj_deco_parent</object>
-      <object>objects\obj_oak_tree</object>
     </objects>
     <objects name="parents">
       <object>objects\obj_weapon_parent</object>
@@ -407,9 +454,14 @@
       <object>objects\parent_interact</object>
       <object>objects\parent_enemy</object>
       <object>objects\parent_text</object>
+      <object>objects\obj_deco_parent</object>
+      <object>objects\par_silhouette_back</object>
+      <object>objects\obj_player_parent</object>
     </objects>
     <objects name="mobs">
       <object>objects\mob_trufflin</object>
+      <object>objects\mob_backup</object>
+      <object>objects\mob_spawn</object>
     </objects>
     <objects name="critter">
       <object>objects\critter_frog</object>
@@ -418,10 +470,28 @@
       <object>objects\obj_blur</object>
       <object>objects\obj_trail</object>
       <object>objects\obj_tree_falling</object>
+      <object>objects\obj_counter</object>
+      <object>objects\obj_move_click</object>
+      <object>objects\obj_exp</object>
+      <object>objects\obj_writer</object>
+      <object>objects\obj_counter_heal</object>
+    </objects>
+    <objects name="weather">
+      <object>objects\obj_rain</object>
+      <object>objects\obj_puddle</object>
+      <object>objects\obj_lightning_strike</object>
+    </objects>
+    <objects name="trees">
+      <object>objects\obj_oak_tree</object>
+    </objects>
+    <objects name="Lynx System">
+      <object>objects\LYNX</object>
     </objects>
   </objects>
   <rooms name="rooms">
-    <room>rooms\room0</room>
+    <room>rooms\rm_init</room>
+    <room>rooms\rm_login</room>
+    <room>rooms\test_room</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

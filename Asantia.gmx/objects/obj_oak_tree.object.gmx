@@ -25,20 +25,26 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///depth
+            <string>///init
 maxstack=3
 class="oak tree"
-
 
 /////
 depth=y*-1
 stack=maxstack
 cut=false
 type="tree"
-
+sprite_masking=1;// mask the silhouette over this sprite.
+draw_alpha=0.6; // changing the draw alpha for the silhouette
 sprite_normal=sprite_index
 sprite_cut=asset_get_index(string(sprite_get_name(sprite_index))+"_cut") 
 sprite_top=asset_get_index(string(sprite_get_name(sprite_index))+"_top") 
+
+
+//silhouette
+
+
+
 </string>
           </argument>
         </arguments>
@@ -98,6 +104,9 @@ if stack&lt;1
  sprite_index=sprite_cut
  cut=true
 }
+
+
+
 </string>
           </argument>
         </arguments>
@@ -115,5 +124,8 @@ if stack&lt;1
   <PhysicsObjectFriction>0.200000002980232</PhysicsObjectFriction>
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
-  <PhysicsShapePoints/>
+  <PhysicsShapePoints>
+    <point>39,83</point>
+    <point>42,42</point>
+  </PhysicsShapePoints>
 </object>

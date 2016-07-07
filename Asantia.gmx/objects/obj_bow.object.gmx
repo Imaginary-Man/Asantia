@@ -110,7 +110,7 @@ switch (state)
 {
  case 0://normal
  {
-  image_angle=300*obj_player.image_xscale
+  image_angle=(300*obj_player.image_xscale)-global.player_angle/2
   depth=obj_player.depth-2
   image_yscale=1
   image_xscale=obj_player.image_xscale
@@ -152,9 +152,9 @@ switch (state)
  {
   alarm[11]=-1
   depth=obj_player.depth+3
-  y=obj_player.y-2
+  y=(obj_player.y-4)+obj_helmet.movewith
   x=obj_player.x
-  image_angle=270*obj_player.image_xscale
+  image_angle=(270*obj_player.image_xscale)+global.player_angle/2
   image_xscale=obj_player.image_xscale
   image_yscale=1
   break;

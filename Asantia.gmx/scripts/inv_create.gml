@@ -7,9 +7,18 @@ for(i=0; i<slots; i+=1)
 {
  slot[i]=0
  slotid[i]=0
- slotstack[i] = 0
+ slotstack[i]=0
  slotx[i]=0
  sloty[i]=0
+}
+
+for(i=0; i<88; i+=1)
+{
+ b_slot[i]=0
+ b_slotid[i]=0
+ b_slotstack[i]=0
+ b_slotx[i]=0
+ b_sloty[i]=0
 }
 
 i_ring[1]=0

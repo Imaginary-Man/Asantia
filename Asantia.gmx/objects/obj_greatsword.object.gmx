@@ -107,11 +107,11 @@ switch (state)
 {
  case 0://normal
  {
-  image_angle=0
+  image_angle=-(global.player_angle/2)
   depth=obj_player.depth-2
   image_yscale=1
   image_xscale=obj_player.image_xscale
-  y=obj_player.y+4
+  y=obj_player.y+4+(obj_helmet.movewith/2)
   x=obj_player.x
   if alarm[11]=-1{alarm[11]=500}
   if obj_player.gather=true {state=3}
@@ -149,9 +149,9 @@ switch (state)
  {
   alarm[11]=-1
   depth=obj_player.depth+3
-  y=obj_player.y-3
+  y=(obj_player.y-3)+obj_helmet.movewith/2
   x=obj_player.x+(17*obj_player.image_xscale)
-  image_angle=10*obj_player.image_xscale
+  image_angle=(10*obj_player.image_xscale)
   image_xscale=obj_player.image_xscale
   image_yscale=-1
   break;
@@ -199,5 +199,8 @@ switch (state)
   <PhysicsObjectFriction>0.200000002980232</PhysicsObjectFriction>
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
-  <PhysicsShapePoints/>
+  <PhysicsShapePoints>
+    <point>0,0</point>
+    <point>16,16</point>
+  </PhysicsShapePoints>
 </object>

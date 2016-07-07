@@ -83,5 +83,3 @@ if global.sp<0
 
 
 
-
-

@@ -27,19 +27,9 @@
             <kind>1</kind>
             <string>///(full)screen and cam_move
 instance_create(x,y,obj_cam_mover)
-dh=display_get_height()
-dw=display_get_width()
+dh=window_get_height()
+dw=window_get_width()
 
-
-window_set_fullscreen(1);
-window_set_size(display_get_width(),display_get_height());
-        
-view_wport[0] = display_get_width();
-view_hport[0] = display_get_height();
-view_wview[0] = display_get_width();
-view_hview[0] = display_get_height();
-view_enabled = 1;
-view_visible = 1;
 
 
 </string>
@@ -64,14 +54,14 @@ view_visible = 1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///view follow player
+            <string>///view follow cam
 view_xview = x-view_wview/2;
 view_yview = y-view_hview/2;
 view_xview[0] = median(0, view_xview[0], room_width - view_wview[0])
 view_yview[0] = median(0, view_yview[0], room_height - view_hview[0]) 
 
 //screenshake
-if keyboard_check(vk_end)
+if keyboard_check(vk_delete)
 {
  scr_shake_view(10)
 }
@@ -98,10 +88,12 @@ if keyboard_check(vk_end)
           <argument>
             <kind>1</kind>
             <string>///cam init 
-if keyboard_check(global.cam_center)
+if keyboard_check(global.cam_center) or global.joystick_follow=true
 {
  x=obj_player.x
  y=obj_player.y
+ obj_cam_mover.x=x
+ obj_cam_mover.y=y
 }
  else
 {
@@ -139,22 +131,22 @@ if keyboard_check(global.cam_center)
 view_wview=dw/global.zoomfactor
 view_hview=dh/global.zoomfactor
 //zoom with keys
-if keyboard_check_pressed(global.cam_zoomout)
+if keyboard_check_pressed(global.cam_zoomout) or gamepad_button_check_pressed(0,gp_padd)
 {
  if global.zoomfactor&gt;2 {global.zoomfactor--}
 }
-if keyboard_check_pressed(global.cam_zoomin)
+if keyboard_check_pressed(global.cam_zoomin) or gamepad_button_check_pressed(0,gp_padu)
 {
  if global.zoomfactor&lt;10 {global.zoomfactor++}
 }
 //zoom with mouse
 if mouse_wheel_down()
 {
- if global.zoomfactor&gt;2 {global.zoomfactor--}
+ if global.zoomfactor&gt;2 {global.zoomfactor-=.5}
 }
 if mouse_wheel_up()
 {
- if global.zoomfactor&lt;10 {global.zoomfactor++}
+ if global.zoomfactor&lt;10 {global.zoomfactor+=.5}
 }
 </string>
           </argument>
@@ -173,5 +165,8 @@ if mouse_wheel_up()
   <PhysicsObjectFriction>0.200000002980232</PhysicsObjectFriction>
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
-  <PhysicsShapePoints/>
+  <PhysicsShapePoints>
+    <point>16,16</point>
+    <point>16,16</point>
+  </PhysicsShapePoints>
 </object>

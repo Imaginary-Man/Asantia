@@ -1,8 +1,8 @@
 ///player_stats
 global.mhp=10
+global.hp=global.mhp
 global.msp=10
 global.sp=global.msp
-global.hp=global.mhp
 global.xp=0
 global.mxp=3
 global.level=1
@@ -120,7 +120,7 @@ global.actualcritchance=0
 //basic attack calulations
 global.dmg_basic_attack=0
 
+//balancing
+global.armor_reduction=20
 
 ///
-
-

@@ -1,0 +1,70 @@
+<constants>
+@c_my_window: $AB8778;
+@c_my_border: $391506;
+@c_my_button: $552916;
+</constants>
+<styles>
+overlay:
+{
+width: max;
+height: max;
+background: $000000;
+background-alpha: 0.5;
+}
+center-container:
+{
+center: true;
+width: max;
+height: min;
+}
+window:
+{
+background: @c_my_window;
+border-size: 3;
+border-color: @c_my_border;
+center: true;
+width: 300;
+height: max;
+}
+input:
+{
+width: max;
+font: @f_text;
+background: $FFFFFF;
+height: min;
+margin: 10;
+height: 40;
+password:
+{
+	
+}
+}
+title:
+{
+font: @f_title;
+width: max;
+}
+button:
+{
+margin: 10;
+background: @c_my_button;
+border-color: @c_my_border;
+border-size: 3;
+color: $FFFFFF;
+width: max;
+height: 48;
+font: @f_text;
+}
+</styles>
+<layout>
+<canvas style[overlay]>
+<canvas style[window]>
+<container style[center-container]>
+<label style[title]>LOGIN</label>
+<textbox style[input] name[login.username] />
+<textbox style[input, input.password] name[login.password] />
+<button style[button]>Login</button>
+</container>
+</canvas>
+</canvas>
+</layout>

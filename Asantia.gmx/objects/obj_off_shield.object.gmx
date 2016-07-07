@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>///init
+type="shield"
 state=0
 </string>
           </argument>
@@ -55,9 +56,23 @@ state=obj_weapon_parent.state
 //real states
 switch (state)
 {
- case 0:
+ case 0://normal
  {
-  //
+  depth=obj_player.depth-2
+  x=obj_player.x-(13*obj_player.image_xscale)
+  y=obj_player.y+(3+(obj_helmet.movewith*-0.5))
+  image_xscale=obj_player.image_xscale
+  image_angle=-global.player_angle
+  break;
+ }  
+ case 3://sheated
+ {
+  depth=obj_player.depth+4
+  x=obj_player.x
+  y=obj_player.y-3
+  image_xscale=obj_player.image_xscale*-1
+  image_angle=+(global.player_angle/2)
+  break;
  }
 }
 </string>

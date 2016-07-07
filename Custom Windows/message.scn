@@ -1,0 +1,138 @@
+<constants>
+</constants>
+<styles>
+overlay:
+{
+}
+
+window:
+{
+	width: min;
+	height: min;
+
+	margin-left: 20;
+
+	drop-shadow: 2;
+	drop-shadow-intensity: 0.04;
+	drop-shadow-spread: 3;
+
+	open:
+	{
+		x-offset: 0;
+		tween-speed: 0.5;
+	}
+
+	close:
+	{
+		x-offset: -1;
+		tween-speed: 0.5;
+	}
+}
+
+titlebar:
+{
+	width: max;
+	height: 52;
+
+	title:
+	{
+		color: @c_text;
+		font: @f_text;
+		width: max;
+		height: max;
+		padding-left: 20;
+		padding-right: 20;
+	}
+
+	closecontainer:
+	{
+		width: min;
+	}
+
+	closearrow:
+	{
+		height: max;
+		color: @c_text;
+		width: 32;
+
+		hover:
+		{
+			arrow-size: 15;
+			arrow-length: -34;
+			alpha: 1.0;
+			tween-speed: 0.2;
+		}
+
+		unhover:
+		{
+			arrow-size: 10;
+			arrow-length: -20;
+			alpha: 0.5;
+			tween-speed: 0.2;
+		}
+	}
+}
+
+backgrounds:
+{
+	normal:
+	{
+		background-1: @c_background1;
+		background-2: @c_background1;
+		background-3: @c_background2;
+		background-4: @c_background2;
+	}
+
+	highlight:
+	{
+		background-1: @c_button1;
+		background-2: @c_button1;
+		background-3: @c_button2;
+		background-4: @c_button2;
+	}
+
+	hover:
+	{
+		background-1: @c_buttonhover1;
+		background-2: @c_buttonhover1;
+		background-3: @c_buttonhover2;
+		background-4: @c_buttonhover2;
+	}
+}
+
+border:
+{
+	border-size: 1;
+	border-color: @c_border;
+}
+</styles>
+<layout>
+	<canvas
+		name[overlay]
+		style[overlay]
+		onopen[overlay]
+		onclose[overlay]>
+		
+		<canvas
+			name[window]
+			style[window, backgrounds.normal, border, window.close] 
+			open[window.open] 
+			close[window.close]>
+			<multielement
+				name[titlebar]
+				style[titlebar]>
+				<label
+					name[message.title]
+					style[titlebar.title]>Size43 logged in</label>
+				<canvas
+					style[backgrounds.highlight, titlebar.closecontainer]>
+					<arrow 
+						style[titlebar.closearrow, titlebar.closearrow.unhover]
+						hover[titlebar.closearrow.hover]
+						unhover[titlebar.closearrow.unhover]
+						name[message.close] />
+				</canvas>
+			</multielement>
+		</canvas>
+	</canvas>
+</layout>

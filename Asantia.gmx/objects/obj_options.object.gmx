@@ -26,11 +26,37 @@
           <argument>
             <kind>1</kind>
             <string>///Init Options
+window_set_fullscreen(0);
+window_set_size(1024,768);
+        
+view_wport[0] = window_get_width();
+view_hport[0] = window_get_height();
+view_wview[0] = window_get_width();
+view_hview[0] = window_get_height();
+view_enabled = 1;
+view_visible = 1;
+
+
+
+///joystick
+if joystick_exists(1)
+{
+ global.mode="joystick"
+ global.joystick_follow=true
+}
+ else
+{
+ global.mode="mouse"
+ global.joystick_follow=false
+}
+
+
 global.debug=false
 global.zoomfactor=3//3
 global.camspeed=5//5
-global.mouse_lock=true
+global.mouse_lock=false
 global.mouse_size=2
+gamepad_set_axis_deadzone(0,0.5)
 key_init()
 
 ///UI options
@@ -76,25 +102,35 @@ if global.mouse_lock=true
  if display_mouse_get_y()&lt;0 {display_mouse_set(display_mouse_get_x(),0)}
  if display_mouse_get_y()&gt;display_get_height() {display_mouse_set(display_mouse_get_x(),display_get_height())}
 }
+
 </string>
           </argument>
         </arguments>
       </action>
-    </event>
-    <event eventtype="9" enumb="123">
       <action>
         <libid>1</libid>
-        <id>331</id>
-        <kind>0</kind>
+        <id>603</id>
+        <kind>7</kind>
         <userelative>0</userelative>
         <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_restart_game</functionname>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
         <codestring></codestring>
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///gamepad lock
+if gamepad_button_check_pressed(0,gp_stickr)
+{
+ global.joystick_follow=!global.joystick_follow
+}
+</string>
+          </argument>
+        </arguments>
       </action>
     </event>
     <event eventtype="9" enumb="122">

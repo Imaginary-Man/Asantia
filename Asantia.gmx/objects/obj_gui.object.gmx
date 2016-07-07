@@ -4,7 +4,7 @@
   <solid>0</solid>
   <visible>-1</visible>
   <depth>-10000000</depth>
-  <persistent>0</persistent>
+  <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -26,8 +26,9 @@
           <argument>
             <kind>1</kind>
             <string>///UI init
-d_width=display_get_width()
-d_height=display_get_height()
+randomize()
+d_width=window_get_width()
+d_height=window_get_height()
 movewith=0
 dragitem=0
 dragstack=0
@@ -35,6 +36,7 @@ dragsprite=0
 drag=false
 oldslot=0
 oldslotid=0
+twohanded=false
 //ui_windows
 show_inventory=false
 show_stats=false
@@ -51,6 +53,15 @@ init_gem_zero()
 init_gem_one()
 init_gem_two()
 init_gem_three()
+
+///
+inv_x=0
+inv_y=0
+inv_select=0
+stats_x=0
+stats_y=0
+stats_select=0
+
 </string>
           </argument>
         </arguments>
@@ -97,11 +108,13 @@ init_gem_three()
             <kind>1</kind>
             <string>///test items
 item_add(0,1,round(random_range(0,11)))
+item_add(10,1,round(random_range(0,11)))
 item_add(7,1,round(random_range(0,11)))
 item_add(8,1,round(random_range(0,11)))
 item_add(4,1,round(random_range(0,11)))
 item_add(2,1,round(random_range(0,11)))
 item_add(1,1,round(random_range(0,11)))
+item_add(11,1,round(random_range(0,11)))
 
 item_add(3,1,round(random_range(0,11)))
 item_add(3,1,round(random_range(0,11)))
@@ -240,6 +253,29 @@ itembonus_step()
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///check screen 
+d_width=window_get_width()
+d_height=window_get_height()
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="5" enumb="34">
       <action>
@@ -316,18 +352,18 @@ itembonus_step()
 if global.ui_border=true
 {
  draw_set_color(make_color_rgb(142,93,28))
- draw_rectangle(0,display_get_height()-(global.border_size*global.ui_size),display_get_width(),display_get_height(),0)
- draw_rectangle(0,(global.border_size*global.ui_size),display_get_width(),0,0)
+ draw_rectangle(0,window_get_height()-(global.border_size*global.ui_size),window_get_width(),window_get_height(),0)
+ draw_rectangle(0,(global.border_size*global.ui_size),window_get_width(),0,0)
  draw_set_color(make_color_rgb(120,80,20))
- draw_rectangle(0,display_get_height()-(global.border_size*global.ui_size),display_get_width(),display_get_height(),1)
- draw_rectangle(0,(global.border_size*global.ui_size),display_get_width(),0,1)
+ draw_rectangle(0,window_get_height()-(global.border_size*global.ui_size),window_get_width(),window_get_height(),1)
+ draw_rectangle(0,(global.border_size*global.ui_size),window_get_width(),0,1)
 }
 
 ///basic UI 
-draw_sprite_ext(ui_normal_1,-1,display_get_width()/2,display_get_height(),global.ui_size,global.ui_size,0,c_white,1)
-draw_sprite_ext(ui_normal_1_exp,100*(global.xp/global.mxp),display_get_width()/2,display_get_height(),global.ui_size,global.ui_size,0,c_white,1)
-draw_sprite_ext(ui_normal_1_health,100*(global.hp/global.f_mhp),display_get_width()/2,display_get_height(),global.ui_size,global.ui_size,0,c_white,1)
-draw_sprite_ext(ui_normal_1_mana,100*(global.sp/global.f_msp),display_get_width()/2,display_get_height(),global.ui_size,global.ui_size,0,c_white,1)
+draw_sprite_ext(ui_normal_1,-1,window_get_width()/2,window_get_height(),global.ui_size,global.ui_size,0,c_white,1)
+draw_sprite_ext(ui_normal_1_exp,100*(global.xp/global.mxp),window_get_width()/2,window_get_height(),global.ui_size,global.ui_size,0,c_white,1)
+if global.mhp&gt;0 {draw_sprite_ext(ui_normal_1_health,100*(global.hp/global.f_mhp),window_get_width()/2,window_get_height(),global.ui_size,global.ui_size,0,c_white,1)}
+if global.msp&gt;0 {draw_sprite_ext(ui_normal_1_mana,100*(global.sp/global.f_msp),window_get_width()/2,window_get_height(),global.ui_size,global.ui_size,0,c_white,1)}
 
 
 
@@ -336,7 +372,7 @@ draw_set_font(global.counterfont)
 draw_set_color(c_white)
 draw_set_halign(fa_center)
 draw_set_valign(fa_center)
-draw_text_transformed(display_get_width()/2-(3*global.ui_size),display_get_height()-33*global.ui_size,global.level,global.ui_size,global.ui_size,0)
+draw_text_transformed(window_get_width()/2-(3*global.ui_size),window_get_height()-33*global.ui_size,global.level,global.ui_size,global.ui_size,0)
 
 
 ///draw health and mana in value
@@ -345,12 +381,12 @@ if global.ui_hpvalue=true
  draw_set_font(global.normalfont)
  draw_set_color(c_white)
  draw_set_halign(fa_center)
- draw_text_transformed((display_get_width()/2)-(70*global.ui_size),display_get_height()-18*global.ui_size,"/",global.ui_size,global.ui_size,0)
+ draw_text_transformed((window_get_width()/2)-(70*global.ui_size),window_get_height()-18*global.ui_size,"/",global.ui_size,global.ui_size,0)
  draw_set_color(make_color_rgb(255,50,50))
  draw_set_halign(fa_right)
- draw_text_transformed((display_get_width()/2)-(75*global.ui_size),display_get_height()-18*global.ui_size,round(global.hp),global.ui_size,global.ui_size,0)
+ draw_text_transformed((window_get_width()/2)-(75*global.ui_size),window_get_height()-18*global.ui_size,round(global.hp),global.ui_size,global.ui_size,0)
  draw_set_halign(fa_left)
- draw_text_transformed((display_get_width()/2)-(65*global.ui_size),display_get_height()-18*global.ui_size,round(global.f_mhp),global.ui_size,global.ui_size,0)
+ draw_text_transformed((window_get_width()/2)-(65*global.ui_size),window_get_height()-18*global.ui_size,round(global.f_mhp),global.ui_size,global.ui_size,0)
 }
 //sp
 if global.ui_spvalue=true
@@ -358,12 +394,12 @@ if global.ui_spvalue=true
  draw_set_font(global.normalfont)
  draw_set_color(c_white)
  draw_set_halign(fa_center)
- draw_text_transformed((display_get_width()/2)+(70*global.ui_size),display_get_height()-18*global.ui_size,"/",global.ui_size,global.ui_size,0)
+ draw_text_transformed((window_get_width()/2)+(70*global.ui_size),window_get_height()-18*global.ui_size,"/",global.ui_size,global.ui_size,0)
  draw_set_color(make_color_rgb(72,188,255))
  draw_set_halign(fa_left)
- draw_text_transformed((display_get_width()/2)+(75*global.ui_size),display_get_height()-18*global.ui_size,round(global.f_msp),global.ui_size,global.ui_size,0)
+ draw_text_transformed((window_get_width()/2)+(75*global.ui_size),window_get_height()-18*global.ui_size,round(global.f_msp),global.ui_size,global.ui_size,0)
  draw_set_halign(fa_right)
- draw_text_transformed((display_get_width()/2)+(65*global.ui_size),display_get_height()-18*global.ui_size,round(global.sp),global.ui_size,global.ui_size,0)
+ draw_text_transformed((window_get_width()/2)+(65*global.ui_size),window_get_height()-18*global.ui_size,round(global.sp),global.ui_size,global.ui_size,0)
 }
 
 ///FPS
@@ -371,17 +407,17 @@ draw_set_font(global.normalfont)
 draw_set_color(c_white)
 draw_set_halign(fa_right)
 draw_set_valign(fa_top)
-draw_text_transformed(display_get_width(),0,fps,global.ui_size,global.ui_size,0)
+draw_text_transformed(window_get_width(),0,fps,global.ui_size,global.ui_size,0)
 draw_set_color(c_black)
 
 
 ///UI bottombar buttons
-draw_sprite_ext(ui_options_icon,ui_select_image_index(d_width-(global.ui_size*15),d_height-(global.ui_size*10)),d_width-(global.ui_size*15),d_height-(global.ui_size*10),global.ui_size,global.ui_size,0,c_white,1)
+draw_sprite_ext(ui_options_icon,ui_select_image_index(d_width-(global.ui_size*15),d_height-(global.ui_size*10)),d_width-(global.ui_size*15),d_height-(global.ui_size*10)-((obj_options.menu*2)*global.ui_size),global.ui_size,global.ui_size,0,c_white,1)
 draw_sprite_ext(ui_mail_icon,ui_select_image_index(d_width-(global.ui_size*35),d_height-(global.ui_size*10)),d_width-(global.ui_size*35),d_height-(global.ui_size*10),global.ui_size,global.ui_size,0,c_white,1)
 draw_sprite_ext(ui_clans_icon,ui_select_image_index(d_width-(global.ui_size*55),d_height-(global.ui_size*10)),d_width-(global.ui_size*55),d_height-(global.ui_size*10),global.ui_size,global.ui_size,0,c_white,1)
 draw_sprite_ext(ui_social_icon,ui_select_image_index(d_width-(global.ui_size*75),d_height-(global.ui_size*10)),d_width-(global.ui_size*75),d_height-(global.ui_size*10),global.ui_size,global.ui_size,0,c_white,1)
-draw_sprite_ext(ui_player_icon,ui_select_image_index(d_width-(global.ui_size*95),d_height-(global.ui_size*10)),d_width-(global.ui_size*95),d_height-(global.ui_size*10),global.ui_size,global.ui_size,0,c_white,1)
-draw_sprite_ext(ui_inventory_icon,ui_select_image_index(d_width-(global.ui_size*115),d_height-(global.ui_size*10)),d_width-(global.ui_size*115),d_height-(global.ui_size*10),global.ui_size,global.ui_size,0,c_white,1)
+draw_sprite_ext(ui_player_icon,ui_select_image_index(d_width-(global.ui_size*95),d_height-(global.ui_size*10)),d_width-(global.ui_size*95),d_height-(global.ui_size*10)-((show_stats*2)*global.ui_size),global.ui_size,global.ui_size,0,c_white,1)
+draw_sprite_ext(ui_inventory_icon,ui_select_image_index(d_width-(global.ui_size*115),d_height-(global.ui_size*10)),d_width-(global.ui_size*115),d_height-(global.ui_size*10)-((show_inventory*2)*global.ui_size),global.ui_size,global.ui_size,0,c_white,1)
 
 
 
@@ -469,15 +505,15 @@ draw_sprite_ext(ui_inventory_icon,ui_select_image_index(d_width-(global.ui_size*
             <string>///UI:stats
 if show_stats=true
 {
- draw_sprite_ext(ui_stats,0,(global.ui_size*70),d_height-(d_height/2),global.ui_size,global.ui_size,0,c_white,1)
- draw_sprite_ext(ui_stats_xp_bar,100*(global.xp/global.mxp),(global.ui_size*70),d_height-(d_height/2),global.ui_size,global.ui_size,0,c_white,1)
+ draw_sprite_ext(ui_stats,0,(global.ui_size*70)+stats_x,(d_height-(d_height/2))+stats_y,global.ui_size,global.ui_size,0,c_white,1)
+ draw_sprite_ext(ui_stats_xp_bar,100*(global.xp/global.mxp),(global.ui_size*70)+stats_x,(d_height-(d_height/2))+stats_y,global.ui_size,global.ui_size,0,c_white,1)
  draw_set_color(c_black)
  draw_set_alpha(0.2)
- draw_ellipse((global.ui_size*70)-((12*global.ui_size)+movewith),d_height-((d_height/2)+global.ui_size*40)-global.ui_size*3,(global.ui_size*70)+((12*global.ui_size)+movewith),d_height-((d_height/2)+global.ui_size*40)+global.ui_size*3,0)
+ draw_ellipse(((global.ui_size*70)+stats_x)-(((12*global.ui_size)+movewith)),(d_height-((d_height/2)+global.ui_size*40)-global.ui_size*3)+stats_y,((global.ui_size*70)+((12*global.ui_size)+movewith))+stats_x,(d_height-((d_height/2)+global.ui_size*40)+global.ui_size*3)+stats_y,0)
  draw_set_alpha(1)
- draw_sprite_ext(obj_player.sprite_index,obj_player.image_index,global.ui_size*70,d_height-((d_height/2)+global.ui_size*46),global.ui_size,global.ui_size,0,global.playercolor,global.playeralpha)
- draw_sprite_ext(spr_eyes,global.player_eyes,global.ui_size*70,d_height-((d_height/2)+global.ui_size*46)+movewith*global.ui_size,global.ui_size,global.ui_size,0,c_white,1)
- draw_sprite_ext(obj_helmet.sprite_index,obj_helmet.image_index,global.ui_size*70,d_height-((d_height/2)+global.ui_size*46)+movewith*global.ui_size,global.ui_size,global.ui_size,0,c_white,1)
+ draw_sprite_ext(obj_player.sprite_index,obj_player.image_index,(global.ui_size*70)+stats_x,(d_height-((d_height/2)+global.ui_size*46))+stats_y,global.ui_size,global.ui_size,0,global.playercolor,global.playeralpha)
+ draw_sprite_ext(spr_eyes,global.player_eyes,(global.ui_size*70)+stats_x,(d_height-((d_height/2)+global.ui_size*46)+movewith*global.ui_size)+stats_y,global.ui_size,global.ui_size,0,c_white,1)
+ draw_sprite_ext(obj_helmet.sprite_index,obj_helmet.image_index,(global.ui_size*70)+stats_x,(d_height-((d_height/2)+global.ui_size*46)+movewith*global.ui_size)+stats_y,global.ui_size,global.ui_size,0,c_white,1)
  
  //////////stats &amp; numbers
  //stats
@@ -485,55 +521,55 @@ if show_stats=true
  draw_set_font(ui_stats_font)
  draw_set_valign(fa_top)
  draw_set_halign(fa_left)
- draw_text_transformed((global.ui_size*28),d_height-(d_height/2)-27*global.ui_size,"Str",global.ui_size/3,global.ui_size/3,0)
- draw_text_transformed((global.ui_size*28),d_height-(d_height/2)-19.5*global.ui_size,"Agi",global.ui_size/3,global.ui_size/3,0) 
- draw_text_transformed((global.ui_size*28),d_height-(d_height/2)-12*global.ui_size,"Sta",global.ui_size/3,global.ui_size/3,0) 
- draw_text_transformed((global.ui_size*28),d_height-(d_height/2)-4.5*global.ui_size,"Dex",global.ui_size/3,global.ui_size/3,0) 
- draw_text_transformed((global.ui_size*28),d_height-(d_height/2)+3*global.ui_size,"Char",global.ui_size/3,global.ui_size/3,0) 
- draw_text_transformed((global.ui_size*28),d_height-(d_height/2)+10.5*global.ui_size,"Int",global.ui_size/3,global.ui_size/3,0) 
- draw_text_transformed((global.ui_size*28),d_height-(d_height/2)+18*global.ui_size,"Wis",global.ui_size/3,global.ui_size/3,0) 
- draw_text_transformed((global.ui_size*28),d_height-(d_height/2)+25.5*global.ui_size,"Will",global.ui_size/3,global.ui_size/3,0) 
+ draw_text_transformed((global.ui_size*28)+stats_x,(d_height-(d_height/2)-27*global.ui_size)+stats_y,"Str",global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*28)+stats_x,(d_height-(d_height/2)-19.5*global.ui_size)+stats_y,"Agi",global.ui_size/3,global.ui_size/3,0) 
+ draw_text_transformed((global.ui_size*28)+stats_x,(d_height-(d_height/2)-12*global.ui_size)+stats_y,"Sta",global.ui_size/3,global.ui_size/3,0) 
+ draw_text_transformed((global.ui_size*28)+stats_x,(d_height-(d_height/2)-4.5*global.ui_size)+stats_y,"Dex",global.ui_size/3,global.ui_size/3,0) 
+ draw_text_transformed((global.ui_size*28)+stats_x,(d_height-(d_height/2)+3*global.ui_size)+stats_y,"Char",global.ui_size/3,global.ui_size/3,0) 
+ draw_text_transformed((global.ui_size*28)+stats_x,(d_height-(d_height/2)+10.5*global.ui_size)+stats_y,"Int",global.ui_size/3,global.ui_size/3,0) 
+ draw_text_transformed((global.ui_size*28)+stats_x,(d_height-(d_height/2)+18*global.ui_size)+stats_y,"Wis",global.ui_size/3,global.ui_size/3,0) 
+ draw_text_transformed((global.ui_size*28)+stats_x,(d_height-(d_height/2)+25.5*global.ui_size)+stats_y,"Will",global.ui_size/3,global.ui_size/3,0) 
  // 
- draw_text_transformed((global.ui_size*28),d_height-(d_height/2)+36*global.ui_size,"AD",global.ui_size/3,global.ui_size/3,0)
- draw_text_transformed((global.ui_size*28),d_height-(d_height/2)+43.5*global.ui_size,"AP",global.ui_size/3,global.ui_size/3,0) 
+ draw_text_transformed((global.ui_size*28)+stats_x,(d_height-(d_height/2)+36*global.ui_size)+stats_y,"AD",global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*28)+stats_x,(d_height-(d_height/2)+43.5*global.ui_size)+stats_y,"AP",global.ui_size/3,global.ui_size/3,0) 
  //
- draw_text_transformed((global.ui_size*27),d_height-(d_height/2)+55*global.ui_size,"Movespeed",global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*27)+stats_x,(d_height-(d_height/2)+55*global.ui_size)+stats_y,"Movespeed",global.ui_size/3,global.ui_size/3,0)
  //////
- draw_text_transformed((global.ui_size*64),d_height-(d_height/2)-27*global.ui_size,"Armor",global.ui_size/3,global.ui_size/3,0)
- draw_text_transformed((global.ui_size*64),d_height-(d_height/2)-19.5*global.ui_size,"Resist",global.ui_size/3,global.ui_size/3,0)
- draw_text_transformed((global.ui_size*64),d_height-(d_height/2)-12*global.ui_size,"AR",global.ui_size/3,global.ui_size/3,0) 
- draw_text_transformed((global.ui_size*64),d_height-(d_height/2)-4.5*global.ui_size,"AS",global.ui_size/3,global.ui_size/3,0)
- draw_text_transformed((global.ui_size*64),d_height-(d_height/2)+3*global.ui_size,"Crit+",global.ui_size/3,global.ui_size/3,0)
- draw_text_transformed((global.ui_size*64),d_height-(d_height/2)+10.5*global.ui_size,"Critx",global.ui_size/3,global.ui_size/3,0)
- draw_text_transformed((global.ui_size*64),d_height-(d_height/2)+18*global.ui_size,"CDR",global.ui_size/3,global.ui_size/3,0)      
- draw_text_transformed((global.ui_size*64),d_height-(d_height/2)+25.5*global.ui_size,"CT",global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*64)+stats_x,(d_height-(d_height/2)-27*global.ui_size)+stats_y,"Armor",global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*64)+stats_x,(d_height-(d_height/2)-19.5*global.ui_size)+stats_y,"Resist",global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*64)+stats_x,(d_height-(d_height/2)-12*global.ui_size)+stats_y,"AR",global.ui_size/3,global.ui_size/3,0) 
+ draw_text_transformed((global.ui_size*64)+stats_x,(d_height-(d_height/2)-4.5*global.ui_size)+stats_y,"AS",global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*64)+stats_x,(d_height-(d_height/2)+3*global.ui_size)+stats_y,"Crit+",global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*64)+stats_x,(d_height-(d_height/2)+10.5*global.ui_size)+stats_y,"Critx",global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*64)+stats_x,(d_height-(d_height/2)+18*global.ui_size)+stats_y,"CDR",global.ui_size/3,global.ui_size/3,0)      
+ draw_text_transformed((global.ui_size*64)+stats_x,(d_height-(d_height/2)+25.5*global.ui_size)+stats_y,"CT",global.ui_size/3,global.ui_size/3,0)
   
  //numbers
  draw_set_color(c_white)
- draw_text_transformed((global.ui_size*44),d_height-(d_height/2)-27*global.ui_size,round(global.f_str),global.ui_size/3,global.ui_size/3,0)
- draw_text_transformed((global.ui_size*44),d_height-(d_height/2)-19.5*global.ui_size,round(global.f_agi),global.ui_size/3,global.ui_size/3,0)
- draw_text_transformed((global.ui_size*44),d_height-(d_height/2)-12*global.ui_size,round(global.f_sta),global.ui_size/3,global.ui_size/3,0)
- draw_text_transformed((global.ui_size*44),d_height-(d_height/2)-4.5*global.ui_size,round(global.f_dex),global.ui_size/3,global.ui_size/3,0)
- draw_text_transformed((global.ui_size*44),d_height-(d_height/2)+3*global.ui_size,round(global.f_char),global.ui_size/3,global.ui_size/3,0)
- draw_text_transformed((global.ui_size*44),d_height-(d_height/2)+10.5*global.ui_size,round(global.f_int),global.ui_size/3,global.ui_size/3,0)
- draw_text_transformed((global.ui_size*44),d_height-(d_height/2)+18*global.ui_size,round(global.f_wis),global.ui_size/3,global.ui_size/3,0)
- draw_text_transformed((global.ui_size*44),d_height-(d_height/2)+25.5*global.ui_size,round(global.f_will),global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*44)+stats_x,(d_height-(d_height/2)-27*global.ui_size)+stats_y,round(global.f_str),global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*44)+stats_x,(d_height-(d_height/2)-19.5*global.ui_size)+stats_y,round(global.f_agi),global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*44)+stats_x,(d_height-(d_height/2)-12*global.ui_size)+stats_y,round(global.f_sta),global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*44)+stats_x,(d_height-(d_height/2)-4.5*global.ui_size)+stats_y,round(global.f_dex),global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*44)+stats_x,(d_height-(d_height/2)+3*global.ui_size)+stats_y,round(global.f_char),global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*44)+stats_x,(d_height-(d_height/2)+10.5*global.ui_size)+stats_y,round(global.f_int),global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*44)+stats_x,(d_height-(d_height/2)+18*global.ui_size)+stats_y,round(global.f_wis),global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*44)+stats_x,(d_height-(d_height/2)+25.5*global.ui_size)+stats_y,round(global.f_will),global.ui_size/3,global.ui_size/3,0)
  //
- draw_text_transformed((global.ui_size*39),d_height-(d_height/2)+36*global.ui_size,round(global.f_ad),global.ui_size/3,global.ui_size/3,0)
- draw_text_transformed((global.ui_size*39),d_height-(d_height/2)+43.5*global.ui_size,round(global.f_ap),global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*39)+stats_x,(d_height-(d_height/2)+36*global.ui_size)+stats_y,round(global.f_ad),global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*39)+stats_x,(d_height-(d_height/2)+43.5*global.ui_size)+stats_y,round(global.f_ap),global.ui_size/3,global.ui_size/3,0)
  //
  draw_set_halign(fa_middle)
- draw_text_transformed((global.ui_size*42),d_height-(d_height/2)+65*global.ui_size,global.f_mspeed,global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*42)+stats_x,(d_height-(d_height/2)+65*global.ui_size)+stats_y,global.f_mspeed,global.ui_size/3,global.ui_size/3,0)
  draw_set_halign(fa_left)
  //////
- draw_text_transformed((global.ui_size*88),d_height-(d_height/2)-27*global.ui_size,round(global.f_armor),global.ui_size/3,global.ui_size/3,0)
- draw_text_transformed((global.ui_size*88),d_height-(d_height/2)-19.5*global.ui_size,round(global.f_resist),global.ui_size/3,global.ui_size/3,0)
- draw_text_transformed((global.ui_size*88),d_height-(d_height/2)-12*global.ui_size,round(global.f_attackrange),global.ui_size/3,global.ui_size/3,0)
- draw_text_transformed((global.ui_size*88),d_height-(d_height/2)-4.5*global.ui_size,global.f_attackspeed,global.ui_size/3,global.ui_size/3,0)
- draw_text_transformed((global.ui_size*88),d_height-(d_height/2)+3*global.ui_size,global.f_critchance,global.ui_size/3,global.ui_size/3,0)
- draw_text_transformed((global.ui_size*88),d_height-(d_height/2)+10.5*global.ui_size,global.f_critmultiplier,global.ui_size/3,global.ui_size/3,0)
- draw_text_transformed((global.ui_size*88),d_height-(d_height/2)+18*global.ui_size,round(global.f_cooldown),global.ui_size/3,global.ui_size/3,0)
- draw_text_transformed((global.ui_size*88),d_height-(d_height/2)+25.5*global.ui_size,global.f_casttime,global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*88)+stats_x,(d_height-(d_height/2)-27*global.ui_size)+stats_y,round(global.f_armor),global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*88)+stats_x,(d_height-(d_height/2)-19.5*global.ui_size)+stats_y,round(global.f_resist),global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*88)+stats_x,(d_height-(d_height/2)-12*global.ui_size)+stats_y,round(global.f_attackrange),global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*88)+stats_x,(d_height-(d_height/2)-4.5*global.ui_size)+stats_y,global.f_attackspeed,global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*88)+stats_x,(d_height-(d_height/2)+3*global.ui_size)+stats_y,global.f_critchance,global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*88)+stats_x,(d_height-(d_height/2)+10.5*global.ui_size)+stats_y,global.f_critmultiplier,global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*88)+stats_x,(d_height-(d_height/2)+18*global.ui_size)+stats_y,round(global.f_cooldown),global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed((global.ui_size*88)+stats_x,(d_height-(d_height/2)+25.5*global.ui_size)+stats_y,global.f_casttime,global.ui_size/3,global.ui_size/3,0)
  // 
  
  draw_set_color(c_black)
@@ -545,49 +581,49 @@ if show_stats=true
  draw_set_valign(fa_top)
  draw_set_halign(fa_left) 
   //strengt
- if ui_select_stats((global.ui_size*28),d_height-(d_height/2)-27*global.ui_size,15*global.ui_size)
+ if ui_select_stats((global.ui_size*28)+stats_x,(d_height-(d_height/2)-27*global.ui_size)+stats_y,15*global.ui_size)
  {
   draw_roundrect(window_mouse_get_x(),window_mouse_get_y(),window_mouse_get_x()+117*global.ui_size,window_mouse_get_y()-7*global.ui_size,0)
   draw_text_transformed_colour(window_mouse_get_x()+global.ui_size,window_mouse_get_y()-7.5*global.ui_size,"Strengt increases physical damage output",global.ui_size/3,global.ui_size/3,0,c_white,c_white,c_white,c_white,1)
  }
   //agility
- if ui_select_stats((global.ui_size*28),d_height-(d_height/2)-19.5*global.ui_size,15*global.ui_size)
+ if ui_select_stats((global.ui_size*28)+stats_x,(d_height-(d_height/2)-19.5*global.ui_size)+stats_y,15*global.ui_size)
  {
   draw_roundrect(window_mouse_get_x(),window_mouse_get_y(),window_mouse_get_x()+106*global.ui_size,window_mouse_get_y()-7*global.ui_size,0)
   draw_text_transformed_colour(window_mouse_get_x()+global.ui_size,window_mouse_get_y()-7.5*global.ui_size,"Agility boosts total basic attack speed",global.ui_size/3,global.ui_size/3,0,c_white,c_white,c_white,c_white,1)
  } 
   //stamina
- if ui_select_stats((global.ui_size*28),d_height-(d_height/2)-12*global.ui_size,15*global.ui_size)
+ if ui_select_stats((global.ui_size*28)+stats_x,(d_height-(d_height/2)-12*global.ui_size)+stats_y,15*global.ui_size)
  {
   draw_roundrect(window_mouse_get_x(),window_mouse_get_y(),window_mouse_get_x()+79*global.ui_size,window_mouse_get_y()-7*global.ui_size,0)
   draw_text_transformed_colour(window_mouse_get_x()+global.ui_size,window_mouse_get_y()-7.5*global.ui_size,"Stamina boosts total Health",global.ui_size/3,global.ui_size/3,0,c_white,c_white,c_white,c_white,1)
  } 
   //dexterity
- if ui_select_stats((global.ui_size*28),d_height-(d_height/2)-4.5*global.ui_size,15*global.ui_size)
+ if ui_select_stats((global.ui_size*28)+stats_x,(d_height-(d_height/2)-4.5*global.ui_size)+stats_y,15*global.ui_size)
  {
   draw_roundrect(window_mouse_get_x(),window_mouse_get_y(),window_mouse_get_x()+107*global.ui_size,window_mouse_get_y()-7*global.ui_size,0)
   draw_text_transformed_colour(window_mouse_get_x()+global.ui_size,window_mouse_get_y()-7.5*global.ui_size,"Dexterity increases critical hit chances",global.ui_size/3,global.ui_size/3,0,c_white,c_white,c_white,c_white,1)
  }  
   //charisma
- if ui_select_stats((global.ui_size*28),d_height-(d_height/2)+3*global.ui_size,15*global.ui_size)
+ if ui_select_stats((global.ui_size*28)+stats_x,(d_height-(d_height/2)+3*global.ui_size)+stats_y,15*global.ui_size)
  {
   draw_roundrect(window_mouse_get_x(),window_mouse_get_y(),window_mouse_get_x()+107*global.ui_size,window_mouse_get_y()-7*global.ui_size,0)
   draw_text_transformed_colour(window_mouse_get_x()+global.ui_size,window_mouse_get_y()-7.5*global.ui_size,"Charisma decreases ability cooldowns",global.ui_size/3,global.ui_size/3,0,c_white,c_white,c_white,c_white,1)
  }  
   //Intellect
- if ui_select_stats((global.ui_size*28),d_height-(d_height/2)+10.5*global.ui_size,15*global.ui_size)
+ if ui_select_stats((global.ui_size*28)+stats_x,(d_height-(d_height/2)+10.5*global.ui_size)+stats_y,15*global.ui_size)
  {
   draw_roundrect(window_mouse_get_x(),window_mouse_get_y(),window_mouse_get_x()+115*global.ui_size,window_mouse_get_y()-7*global.ui_size,0)
   draw_text_transformed_colour(window_mouse_get_x()+global.ui_size,window_mouse_get_y()-7.5*global.ui_size,"Intellect increases ability damage output",global.ui_size/3,global.ui_size/3,0,c_white,c_white,c_white,c_white,1)
  }  
   //wisdom
- if ui_select_stats((global.ui_size*28),d_height-(d_height/2)+18*global.ui_size,15*global.ui_size)
+ if ui_select_stats((global.ui_size*28)+stats_x,(d_height-(d_height/2)+18*global.ui_size)+stats_y,15*global.ui_size)
  {
   draw_roundrect(window_mouse_get_x(),window_mouse_get_y(),window_mouse_get_x()+77*global.ui_size,window_mouse_get_y()-7*global.ui_size,0)
   draw_text_transformed_colour(window_mouse_get_x()+global.ui_size,window_mouse_get_y()-7.5*global.ui_size,"Wisdom boosts total Mana",global.ui_size/3,global.ui_size/3,0,c_white,c_white,c_white,c_white,1)
  } 
   //will
- if ui_select_stats((global.ui_size*28),d_height-(d_height/2)+25.5*global.ui_size,15*global.ui_size)
+ if ui_select_stats((global.ui_size*28)+stats_x,(d_height-(d_height/2)+25.5*global.ui_size)+stats_y,15*global.ui_size)
  {
   draw_roundrect(window_mouse_get_x(),window_mouse_get_y(),window_mouse_get_x()+69*global.ui_size,window_mouse_get_y()-7*global.ui_size,0)
   draw_text_transformed_colour(window_mouse_get_x()+global.ui_size,window_mouse_get_y()-7.5*global.ui_size,"Will decreases cast time",global.ui_size/3,global.ui_size/3,0,c_white,c_white,c_white,c_white,1)
@@ -595,69 +631,69 @@ if show_stats=true
  
  //
   //AD
- if ui_select_stats((global.ui_size*28),d_height-(d_height/2)+36*global.ui_size,9*global.ui_size)
+ if ui_select_stats((global.ui_size*28)+stats_x,(d_height-(d_height/2)+36*global.ui_size)+stats_y,9*global.ui_size)
  {
   draw_roundrect(window_mouse_get_x(),window_mouse_get_y(),window_mouse_get_x()+112*global.ui_size,window_mouse_get_y()-7*global.ui_size,0)
   draw_text_transformed_colour(window_mouse_get_x()+global.ui_size,window_mouse_get_y()-7.5*global.ui_size,"Attack Damage is total physical damage",global.ui_size/3,global.ui_size/3,0,c_white,c_white,c_white,c_white,1)
  } 
   //AP
- if ui_select_stats((global.ui_size*28),d_height-(d_height/2)+43.5*global.ui_size,9*global.ui_size)
+ if ui_select_stats((global.ui_size*28)+stats_x,(d_height-(d_height/2)+43.5*global.ui_size)+stats_y,9*global.ui_size)
  {
   draw_roundrect(window_mouse_get_x(),window_mouse_get_y(),window_mouse_get_x()+102*global.ui_size,window_mouse_get_y()-7*global.ui_size,0)
   draw_text_transformed_colour(window_mouse_get_x()+global.ui_size,window_mouse_get_y()-7.5*global.ui_size,"Ability Power is total ability damage",global.ui_size/3,global.ui_size/3,0,c_white,c_white,c_white,c_white,1)
  }  
  //
   //movespeed
- if ui_select_stats((global.ui_size*28),d_height-(d_height/2)+55*global.ui_size,30*global.ui_size)
+ if ui_select_stats((global.ui_size*28)+stats_x,(d_height-(d_height/2)+55*global.ui_size)+stats_y,30*global.ui_size)
  {
   draw_roundrect(window_mouse_get_x(),window_mouse_get_y(),window_mouse_get_x()+125*global.ui_size,window_mouse_get_y()-7*global.ui_size,0)
   draw_text_transformed_colour(window_mouse_get_x()+global.ui_size,window_mouse_get_y()-7.5*global.ui_size,"Movespeed is equal to overal walking speed",global.ui_size/3,global.ui_size/3,0,c_white,c_white,c_white,c_white,1) 
  }
  /////////
   //armor
- if ui_select_stats((global.ui_size*64),d_height-(d_height/2)-27*global.ui_size,22*global.ui_size)
+ if ui_select_stats((global.ui_size*64)+stats_x,(d_height-(d_height/2)-27*global.ui_size)+stats_y,22*global.ui_size)
  {
   draw_roundrect(window_mouse_get_x(),window_mouse_get_y(),window_mouse_get_x()+123*global.ui_size,window_mouse_get_y()-7*global.ui_size,0)
   draw_text_transformed_colour(window_mouse_get_x()+global.ui_size,window_mouse_get_y()-7.5*global.ui_size,"Armor decreases incoming physical damage",global.ui_size/3,global.ui_size/3,0,c_white,c_white,c_white,c_white,1) 
  }  
   //resist
- if ui_select_stats((global.ui_size*64),d_height-(d_height/2)-19.5*global.ui_size,22*global.ui_size)
+ if ui_select_stats((global.ui_size*64)+stats_x,(d_height-(d_height/2)-19.5*global.ui_size)+stats_y,22*global.ui_size)
  {
   draw_roundrect(window_mouse_get_x(),window_mouse_get_y(),window_mouse_get_x()+117*global.ui_size,window_mouse_get_y()-7*global.ui_size,0)
   draw_text_transformed_colour(window_mouse_get_x()+global.ui_size,window_mouse_get_y()-7.5*global.ui_size,"Resist decreases incoming ability damage",global.ui_size/3,global.ui_size/3,0,c_white,c_white,c_white,c_white,1) 
  } 
   //attack range
- if ui_select_stats((global.ui_size*64),d_height-(d_height/2)-12*global.ui_size,22*global.ui_size)
+ if ui_select_stats((global.ui_size*64)+stats_x,(d_height-(d_height/2)-12*global.ui_size)+stats_y,22*global.ui_size)
  {
   draw_roundrect(window_mouse_get_x(),window_mouse_get_y(),window_mouse_get_x()+117*global.ui_size,window_mouse_get_y()-7*global.ui_size,0)
   draw_text_transformed_colour(window_mouse_get_x()+global.ui_size,window_mouse_get_y()-7.5*global.ui_size,"Attack Range is equal to basic attack area",global.ui_size/3,global.ui_size/3,0,c_white,c_white,c_white,c_white,1) 
  } 
   //attack speed
- if ui_select_stats((global.ui_size*64),d_height-(d_height/2)-4.5*global.ui_size,22*global.ui_size)
+ if ui_select_stats((global.ui_size*64)+stats_x,(d_height-(d_height/2)-4.5*global.ui_size)+stats_y,22*global.ui_size)
  {
   draw_roundrect(window_mouse_get_x(),window_mouse_get_y(),window_mouse_get_x()+132*global.ui_size,window_mouse_get_y()-7*global.ui_size,0)
   draw_text_transformed_colour(window_mouse_get_x()+global.ui_size,window_mouse_get_y()-7.5*global.ui_size,"Attack Speed is equal to basic attack quickness",global.ui_size/3,global.ui_size/3,0,c_white,c_white,c_white,c_white,1) 
  } 
   //critical chance
- if ui_select_stats((global.ui_size*64),d_height-(d_height/2)+3*global.ui_size,22*global.ui_size)
+ if ui_select_stats((global.ui_size*64)+stats_x,(d_height-(d_height/2)+3*global.ui_size)+stats_y,22*global.ui_size)
  {
   draw_roundrect(window_mouse_get_x(),window_mouse_get_y(),window_mouse_get_x()+192*global.ui_size,window_mouse_get_y()-7*global.ui_size,0)
   draw_text_transformed_colour(window_mouse_get_x()+global.ui_size,window_mouse_get_y()-7.5*global.ui_size,"Critical Chance is the total chance of having a critical basic attack hit",global.ui_size/3,global.ui_size/3,0,c_white,c_white,c_white,c_white,1) 
  }  
   //critical multiplier
- if ui_select_stats((global.ui_size*64),d_height-(d_height/2)+10.5*global.ui_size,22*global.ui_size)
+ if ui_select_stats((global.ui_size*64)+stats_x,(d_height-(d_height/2)+10.5*global.ui_size)+stats_y,22*global.ui_size)
  {
   draw_roundrect(window_mouse_get_x(),window_mouse_get_y(),window_mouse_get_x()+153*global.ui_size,window_mouse_get_y()-7*global.ui_size,0)
   draw_text_transformed_colour(window_mouse_get_x()+global.ui_size,window_mouse_get_y()-7.5*global.ui_size,"Critical Multiplier is the total multiplier of a critical hit",global.ui_size/3,global.ui_size/3,0,c_white,c_white,c_white,c_white,1) 
  } 
   //cooldown reduction
- if ui_select_stats((global.ui_size*64),d_height-(d_height/2)+18*global.ui_size,22*global.ui_size)
+ if ui_select_stats((global.ui_size*64)+stats_x,(d_height-(d_height/2)+18*global.ui_size)+stats_y,22*global.ui_size)
  {
   draw_roundrect(window_mouse_get_x(),window_mouse_get_y(),window_mouse_get_x()+149*global.ui_size,window_mouse_get_y()-7*global.ui_size,0)
   draw_text_transformed_colour(window_mouse_get_x()+global.ui_size,window_mouse_get_y()-7.5*global.ui_size,"Cooldown Reduction decreases cooldown of abilities",global.ui_size/3,global.ui_size/3,0,c_white,c_white,c_white,c_white,1) 
  }  
   //casttime
- if ui_select_stats((global.ui_size*64),d_height-(d_height/2)+25.5*global.ui_size,22*global.ui_size)
+ if ui_select_stats((global.ui_size*64)+stats_x,(d_height-(d_height/2)+25.5*global.ui_size)+stats_y,22*global.ui_size)
  {
   draw_roundrect(window_mouse_get_x(),window_mouse_get_y(),window_mouse_get_x()+190*global.ui_size,window_mouse_get_y()-7*global.ui_size,0)
   draw_text_transformed_colour(window_mouse_get_x()+global.ui_size,window_mouse_get_y()-7.5*global.ui_size,"Cast Time decreases set amount of time needed for casting abilities",global.ui_size/3,global.ui_size/3,0,c_white,c_white,c_white,c_white,1) 
@@ -709,7 +745,7 @@ if show_stats=true
             <string>///UI:inventory
 if show_inventory=true
 {
- draw_sprite_ext(ui_inventory,0,d_width-(global.ui_size*70),d_height-(d_height/2),global.ui_size,global.ui_size,0,c_white,1)
+ draw_sprite_ext(ui_inventory,0,d_width-(global.ui_size*70)+inv_x,d_height-(d_height/2)+inv_y,global.ui_size,global.ui_size,0,c_white,1)
  for(i=0; i&lt;slots; i+=1)
  {
   if slot[i]=1
@@ -810,34 +846,6 @@ if show_inventory=true
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///UI:menu
-if obj_options.menu=true
-{
- draw_set_alpha(0.8)
- draw_set_color(c_black)
- draw_rectangle(0,0,display_get_width(),display_get_height(),0)
- draw_set_alpha(1)
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>///UI:clicking
 
 //options
@@ -859,12 +867,39 @@ if ui_select_click(d_width-(global.ui_size*95),d_height-(global.ui_size*10),6)//
  show_stats=!show_stats
 }
 
+//stats
+if ui_select_click(d_width-(global.ui_size*75),d_height-(global.ui_size*10),6)//friends
+{
+ gms_show_friends()
+}
+
 if show_stats=true//stats esc button
 {
- if ui_select_click(global.ui_size*102,d_height-((d_height/2)+global.ui_size*80),4)
+ if ui_select_click((global.ui_size*102)+stats_x,(d_height-((d_height/2)+global.ui_size*80))+stats_y,4)
  {
   show_stats=false
  }
+ //stats drag
+ if ui_select_hold((global.ui_size*41)+stats_x,(d_height-(d_height/2)-85*global.ui_size)+stats_y)
+ {
+  if inv_select=0
+  {
+   stats_select=1
+  }
+ }
+ if stats_select=1
+ {
+  stats_x=window_mouse_get_x()-(global.ui_size*41)-29*global.ui_size
+  stats_y=window_mouse_get_y()-(d_height-(d_height/2)-85*global.ui_size)-6*global.ui_size  
+  if mouse_check_button_released(mb_left)
+  {
+   stats_select=0
+  }
+ }
+}
+ else
+{
+ stats_select=0
 }
 
 //inventory
@@ -875,10 +910,31 @@ if ui_select_click(d_width-(global.ui_size*115),d_height-(global.ui_size*10),6)/
 
 if show_inventory=true //inv esc button
 {
- if ui_select_click(d_width-(global.ui_size*38),d_height-((d_height/2)+global.ui_size*80),4)
+ if ui_select_click((d_width-(global.ui_size*38))+inv_x,(d_height-((d_height/2)+global.ui_size*80))+inv_y,4)
  {
   show_inventory=false
  }
+ ///drag inv
+ if ui_select_hold((d_width-(global.ui_size*99))+inv_x,(d_height-(d_height/2)-85*global.ui_size)+inv_y)
+ {
+  if stats_select=0
+  {
+   inv_select=1
+  }
+ }
+ if inv_select=1
+ {
+  inv_x=window_mouse_get_x()-(d_width-global.ui_size*99)-29*global.ui_size
+  inv_y=window_mouse_get_y()-(d_height-(d_height/2)-85*global.ui_size)-6*global.ui_size  
+  if mouse_check_button_released(mb_left)
+  {
+   inv_select=0
+  } 
+ }
+}
+ else
+{
+ inv_select=0
 }
 </string>
           </argument>
@@ -903,10 +959,8 @@ if show_inventory=true //inv esc button
             <string>///debug
 if global.debug=true
 {
- draw_rectangle( d_width-(global.ui_size*119),
-                 d_height-(d_height/2)-73*global.ui_size,
-                 d_width-(global.ui_size*21),
-                 d_height-(d_height/2)+84*global.ui_size,
+ draw_rectangle( (d_width-(global.ui_size*41))+inv_x,(d_height-(d_height/2)-85*global.ui_size)+inv_y,
+                 (global.ui_size*99),d_height-(d_height/2)-73*global.ui_size,
                  1)
 
                                  
@@ -916,7 +970,7 @@ if global.debug=true
  draw_set_halign(fa_left)
  draw_set_color(c_white)
  draw_text_transformed(0,0,window_mouse_get_x(),global.ui_size,global.ui_size,0)
- draw_text_transformed(0,20*global.ui_size,window_mouse_get_y(),global.ui_size,global.ui_size,0)
+ draw_text_transformed(0,10*global.ui_size,window_mouse_get_y(),global.ui_size,global.ui_size,0)
  draw_set_color(c_black)
 }
 </string>
@@ -981,10 +1035,10 @@ draw_sprite_ext(spr_mouse_2,0,window_mouse_get_x(),window_mouse_get_y(),global.m
             <string>///global.walk
 if show_inventory=true
 {
- if window_mouse_get_x()&gt;=d_width-(global.ui_size*119)
- and window_mouse_get_x()&lt;=d_width-(global.ui_size*21)
- and window_mouse_get_y()&gt;=d_height-(d_height/2)-73*global.ui_size
- and window_mouse_get_y()&lt;=d_height-(d_height/2)+84*global.ui_size
+ if window_mouse_get_x()&gt;=(d_width-(global.ui_size*119))+inv_x
+ and window_mouse_get_x()&lt;=(d_width-(global.ui_size*21))+inv_x
+ and window_mouse_get_y()&gt;=(d_height-(d_height/2)-73*global.ui_size)+inv_y
+ and window_mouse_get_y()&lt;=(d_height-(d_height/2)+84*global.ui_size)+inv_y
  {
   global.walk=false
  }
@@ -996,6 +1050,40 @@ if show_inventory=true
  else
 {
  global.walk=true
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///UI:menu
+if obj_options.menu=true
+{
+ draw_set_alpha(0.8)
+ draw_set_color(c_black)
+ draw_rectangle(0,0,window_get_width(),window_get_height(),0)
+ draw_set_alpha(1)
+ draw_set_valign(fa_center)
+ draw_set_halign(fa_center)
+ draw_set_font(ui_stats_font)
+ draw_set_color(c_white)
+ draw_text_transformed(window_get_width()/2,window_get_height()/2,"Press ESC to close the game",global.ui_size,global.ui_size,0)
+ draw_set_color(c_black)
 }
 </string>
           </argument>
@@ -1019,7 +1107,16 @@ if show_inventory=true
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///test
+            <string>///AM: Attack Move
+if keyboard_check_direct(global.key_attack)
+{
+  draw_set_alpha(0.2)
+  draw_set_color(c_red)
+  draw_circle(mouse_x,mouse_y,50,0)
+  draw_circle(mouse_x,mouse_y,50,1)
+  draw_set_alpha(1)
+  draw_set_color(c_black)
+}
 </string>
           </argument>
         </arguments>

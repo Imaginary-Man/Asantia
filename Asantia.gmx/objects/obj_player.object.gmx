@@ -4,9 +4,9 @@
   <solid>-1</solid>
   <visible>-1</visible>
   <depth>0</depth>
-  <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
-  <maskName>&lt;undefined&gt;</maskName>
+  <persistent>-1</persistent>
+  <parentName>obj_player_parent</parentName>
+  <maskName>spr_player_mask</maskName>
   <events>
     <event eventtype="0" enumb="0">
       <action>
@@ -26,6 +26,10 @@
           <argument>
             <kind>1</kind>
             <string>///state &amp; stats
+randomize()
+global.player_angle=0
+wiggle_anim=0
+wiggle=0
 n=id
 type="player"
 attacking=false
@@ -33,15 +37,43 @@ follow=false
 state=0
 image_index=image_number-1
 target_x=x
-target_y=y
+target_y=y+7
 scale=1
 jump=0
 gather=0
 //f_mspeed=0
 
-
-
-///tool
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///image_xscale
+if x&lt;target_x
+{
+ image_xscale=scale
+}
+if x&gt;target_x
+{
+ image_xscale=-scale
+}
 </string>
           </argument>
         </arguments>
@@ -64,32 +96,93 @@ gather=0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///states &amp; other
+            <string>///Mouse: states &amp; other
 distance=point_distance(x,y,target_x,target_y-7)
 //
-switch(state)
+if global.mode="mouse"
 {
- case 0://normal state
+ switch(state)
  {
-  if attacking=false
+  case 0://normal state
   {
-   mp_potential_step(target_x,target_y-7,min(global.f_mspeed,distance),false)
-  }
-   else
-  {
-   if instance_exists(n)
+   if attacking=false
    {
-    if point_distance(x,y+7,n.x,n.y)&gt;global.f_attackrange
     mp_potential_step(target_x,target_y-7,min(global.f_mspeed,distance),false)
    }
+    else
+   {
+    if instance_exists(n)
+    {
+     mp_potential_step(target_x,target_y-7,min(global.f_mspeed,distance),false)   
+    }
+   }
+   break;
   }
- }
- case 20://gathering
- {
-  image_speed=0.01
+  case 20://gathering
+  {
+   image_speed=0.01
+   break;
+  }
  }
 }
 
+
+
+
+
+
+
+
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Mouse: sprite &amp; depth (depth general)
+if global.mode="mouse"
+{
+ if state=0
+ {
+  if point_distance(x,y,target_x,target_y-7)&gt;1
+  {
+   image_speed=global.f_mspeed/8
+   //
+   wiggle_anim+=0.10*global.f_mspeed
+   wiggle=sin(wiggle_anim)*4
+   global.player_angle=wiggle
+   //
+  }
+   else
+  {
+   image_speed=0.05
+   wiggle_anim=0;
+   global.player_angle=0;
+  }
+ }
+  else
+ {
+  image_speed=0.05
+  wiggle_anim=0;
+  global.player_angle=0;
+ }
+}
 
 //depth
 depth=(y+7)*-1
@@ -100,6 +193,7 @@ if follow=true and instance_exists(n)
  target_x=n.x
  target_y=n.y
 }
+
 </string>
           </argument>
         </arguments>
@@ -120,29 +214,66 @@ if follow=true and instance_exists(n)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///sprite
-if state=0
+            <string>///Joystick: states &amp; other
+
+if global.mode="joystick"
 {
- if point_distance(x,y,target_x,target_y-7)&gt;1
+ switch(state)
  {
-  image_speed=global.f_mspeed/8
-  if target_x&lt;x
+  case 0:
   {
-   image_xscale=-scale
-  }
-   else
-  {
-   image_xscale=scale
+   ///movement 
+   if gamepad_axis_value(0,gp_axislh)&gt;0
+   {
+    //
+    {
+     x+=global.f_mspeed
+     target_x=x+global.f_mspeed
+     image_speed=global.f_mspeed/8
+     wiggle_anim+=0.10*global.f_mspeed
+     wiggle=sin(wiggle_anim)*4
+     global.player_angle=wiggle 
+     image_xscale=1   
+    }   
+   }
+   if gamepad_axis_value(0,gp_axislh)&lt;0
+   {
+    x-=global.f_mspeed
+    target_x=x-global.f_mspeed
+    image_speed=global.f_mspeed/8
+    wiggle_anim+=0.10*global.f_mspeed
+    wiggle=sin(wiggle_anim)*4
+    global.player_angle=wiggle  
+    image_xscale=-1  
+   } 
+   if gamepad_axis_value(0,gp_axislv)&gt;0
+   {
+    y+=global.f_mspeed
+    target_y=y+7+global.f_mspeed
+    image_speed=global.f_mspeed/8
+    wiggle_anim+=0.10*global.f_mspeed
+    wiggle=sin(wiggle_anim)*4
+    global.player_angle=wiggle    
+   }
+   if gamepad_axis_value(0,gp_axislv)&lt;0
+   {
+    y-=global.f_mspeed
+    target_y=y+7-global.f_mspeed
+    image_speed=global.f_mspeed/8
+    wiggle_anim+=0.10*global.f_mspeed
+    wiggle=sin(wiggle_anim)*4
+    global.player_angle=wiggle    
+   }
+   //
+   if gamepad_axis_value(0,gp_axislv)=0 and gamepad_axis_value(0,gp_axislh)=0
+   {
+    image_speed=0.05
+    wiggle_anim=0;
+    global.player_angle=0;
+   }
+   break;
   }
  }
-  else
- {
-  image_speed=0.05
- }
-}
- else
-{
- image_speed=0.05
 }
 </string>
           </argument>
@@ -164,36 +295,39 @@ if state=0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///interacting
-if instance_exists(n)
+            <string>///mouse interacting
+if global.mode="mouse"
 {
- //attacking
- if n.type="enemy" and attacking=true
+ if instance_exists(n)
  {
-  if point_distance(x,y+7,n.x,n.y)&lt;global.f_attackrange
+  //attacking
+  if n.type="enemy" and attacking=true
   {
-   if state=0
+   if point_distance(x,y+7,n.x,n.y)&lt;=global.f_attackrange
    {
-    state=1
-    obj_weapon_parent.state=1
+    if state=0
+    {
+     state=1
+     obj_weapon_parent.state=1
+    }
    }
   }
+  //woodcutting
+  if n.type="tree" and gather=true and n.cut=false
+  {
+   if point_distance(x,y+7,n.x,n.y)&lt;=8
+   {
+    if state=0 and y+7&gt;n.y
+    {
+     state=20
+     g=instance_create(x,y,obj_tool)
+     g.gather="woodcutting"
+     g.n=n
+     g.depth=depth-1
+    }
+   }
+  } 
  }
- //woodcutting
- if n.type="tree" and gather=true and n.cut=false
- {
-  if point_distance(x,y+7,n.x,n.y)&lt;=8
-  {
-   if state=0 and y+7&gt;n.y
-   {
-    state=20
-    g=instance_create(x,y,obj_tool)
-    g.gather="woodcutting"
-    g.n=n
-    g.depth=depth-1
-   }
-  }
- } 
 }
 </string>
           </argument>
@@ -218,8 +352,82 @@ if instance_exists(n)
             <string>///move_outside
 if instance_place(x,y,all)
 {
- move_outside_solid(random(360),1)
+ move_outside_solid(random(360),10)
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>605</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>online</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///set variables
+
+//player
+gms_self_set("playercolor",global.playercolor)
+gms_self_set("player_angle",global.player_angle)
+gms_self_set("img_xscale",image_xscale)
+gms_self_set("img_yscale",image_yscale)
+gms_self_set("img_index",image_index)
+gms_self_set("player_eyes",global.player_eyes)
+
+//helm
+gms_self_set("helm",obj_helmet.helm)
+gms_self_set("back",obj_back.back)
+gms_self_set("neck",obj_helmet.neck)
+
+
+//main hand weapon
+gms_self_set("weapon_index",obj_weapon_parent.sprite_index)
+gms_self_set("weaponx",obj_weapon_parent.x)
+gms_self_set("weapony",obj_weapon_parent.y)
+gms_self_set("weapon_angle",obj_weapon_parent.image_angle)
+gms_self_set("weapon_xscale",obj_weapon_parent.image_xscale)
+gms_self_set("weapon_yscale",obj_weapon_parent.image_yscale)
+gms_self_set("weaponstate",obj_weapon_parent.state)
+if instance_exists(obj_ringblade) {gms_self_set("shot",obj_ringblade.shot)} else {gms_self_set("shot",false)}
+
+
+
+
+
+
+
+
+
 </string>
           </argument>
         </arguments>
@@ -251,7 +459,7 @@ if global.walk=true
  {
   n=instance_nearest(mouse_x,mouse_y,parent_enemy)
   //
-  if point_distance(mouse_x,mouse_y,n.x,n.y)&lt;=50 and obj_weapon_parent.sprite_index!=spr_none
+  if collision_circle(mouse_x,mouse_y,50,n,0,1) and obj_weapon_parent.sprite_index!=spr_none
   {
    i=instance_create(mouse_x,mouse_y,obj_move_click)
    follow=true
@@ -354,7 +562,7 @@ if global.debug=true
  draw_ellipse(target_x-4,target_y-1,target_x+4,target_y+1,1)
  draw_set_halign(fa_center)
  draw_set_valign(fa_center)
- draw_text(x,y+17,obj_weapon_parent.alarm[9])
+ draw_text(x,y+17,global.irl_time)
  draw_set_alpha(0.05)
  draw_set_color(c_red)
  draw_circle(x,y,global.f_attackrange,0)
@@ -362,22 +570,7 @@ if global.debug=true
  draw_set_color(c_black)
 }
 
-
-
-if keyboard_check_direct(global.key_attack)
-{
- draw_set_alpha(0.2)
- draw_set_color(c_red)
- draw_circle(mouse_x,mouse_y,50,0)
- draw_circle(mouse_x,mouse_y,50,1)
- draw_set_alpha(1)
- draw_set_color(c_black)
-}
-
-
-
-draw_sprite_ext(sprite_index,image_index,x,y-jump,image_xscale,image_yscale,image_angle,global.playercolor,global.playeralpha)
-
+draw_sprite_ext(sprite_index,image_index,x,y-jump,image_xscale,image_yscale,global.player_angle,global.playercolor,global.playeralpha)
 
 </string>
           </argument>
@@ -396,5 +589,8 @@ draw_sprite_ext(sprite_index,image_index,x,y-jump,image_xscale,image_yscale,imag
   <PhysicsObjectFriction>0.200000002980232</PhysicsObjectFriction>
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
-  <PhysicsShapePoints/>
+  <PhysicsShapePoints>
+    <point>10,6</point>
+    <point>10,10</point>
+  </PhysicsShapePoints>
 </object>

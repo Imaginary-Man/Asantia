@@ -26,10 +26,15 @@
 */
 
 
-///item id left:10
+///item id left:12
+
+////////////////////////////////////////
+/////////WEAPONS////////////////////////
+///////////////////////////////////////
+
 
 //greatswords
-global.item[0,0]="Waterweed GreatSword"
+global.item[0,0]="Waterweed Greatsword"
 global.item[0,2]=1
 global.item[0,3]=item_gs_waterweed
 global.item[0,4]=gs_waterweed
@@ -37,7 +42,7 @@ global.item[0,6]="bothhand"
 
 
 ///greataxes
-global.item[7,0]="Waterweed GreatAxe"
+global.item[7,0]="Waterweed Greataxe"
 global.item[7,2]=1
 global.item[7,3]=item_ga_waterweed
 global.item[7,4]=ga_waterweed
@@ -50,6 +55,22 @@ global.item[8,2]=1
 global.item[8,3]=item_sc_waterweed
 global.item[8,4]=sc_waterweed
 global.item[8,6]="bothhand"
+
+
+//shortswords
+global.item[10,0]="Waterweed Shortsword"
+global.item[10,2]=1
+global.item[10,3]=item_sw_waterweed
+global.item[10,4]=sw_waterweed
+global.item[10,6]="mainhand"
+
+
+//shields
+global.item[11,0]="Waterweed Shield"
+global.item[11,2]=1
+global.item[11,3]=item_sh_waterweed
+global.item[11,4]=sh_waterweed
+global.item[11,6]="offhand"
 
 
 //bows
@@ -68,6 +89,10 @@ global.item[4,4]=rb_waterweed
 global.item[4,6]="bothhand"
 
 
+////////////////////////////////////////
+/////////HELMETS////////////////////////
+///////////////////////////////////////
+
 //helmets
 global.item[1,0]="Waterweed Helmet"
 global.item[1,2]=1
@@ -75,7 +100,9 @@ global.item[1,3]=item_helm_waterweed
 global.item[1,4]=helm_waterweed
 global.item[1,6]="helm"
 
-
+////////////////////////////////////////
+////////////GEMS///////////////////////
+///////////////////////////////////////
 
 //gems
 global.item[3,0]="Holy Gem"
@@ -84,12 +111,21 @@ global.item[3,3]=item_gem_light_1
 global.item[3,4]=back_holy_wings_1
 global.item[3,6]="gem"
 
+////////////////////////////////////////
+/////////NECKLACES//////////////////////
+///////////////////////////////////////
+
+
 //necklaces
 global.item[5,0]="Lapiz Necklace"
 global.item[5,2]=1
 global.item[5,3]=item_nl_lapiz
 global.item[5,4]=nl_lapiz
 global.item[5,6]="necklace"
+
+////////////////////////////////////////
+/////////RINGS/////////////////////////
+///////////////////////////////////////
 
 //rings
 global.item[6,0]="Lapiz Ring"
@@ -106,7 +142,7 @@ global.item[6,6]="ring"
 /////////MATERIALS//////////////////////
 ///////////////////////////////////////
 
-//log
+//logs
 global.item[9,0]="Oak Log"
 global.item[9,2]=100
 global.item[9,3]=item_log_1

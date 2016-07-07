@@ -27,6 +27,8 @@
             <kind>1</kind>
             <string>///back and animation
 back=spr_none
+back1=spr_none
+back2=spr_none
 movewith=0
 </string>
           </argument>
@@ -98,8 +100,10 @@ movewith=0
           <argument>
             <kind>1</kind>
             <string>///sync with player
+depth=obj_player.depth+1
 visible=obj_player.visible
 jump=obj_player.jump
+sprite_index=back
 </string>
           </argument>
         </arguments>
@@ -123,9 +127,7 @@ jump=obj_player.jump
           <argument>
             <kind>1</kind>
             <string>///draw backslot on player
-depth=obj_player.depth+1
-draw_sprite_ext(back,-1,obj_player.x,obj_player.y+2-jump,obj_player.image_xscale,obj_player.image_yscale,obj_player.image_angle,c_white,1)
-
+draw_sprite_ext(back,-1,obj_player.x,obj_player.y+movewith-jump,obj_player.image_xscale,obj_player.image_yscale,((global.player_angle)+(obj_player.wiggle*-0.5)),c_white,1)
 </string>
           </argument>
         </arguments>
@@ -143,5 +145,8 @@ draw_sprite_ext(back,-1,obj_player.x,obj_player.y+2-jump,obj_player.image_xscale
   <PhysicsObjectFriction>0.200000002980232</PhysicsObjectFriction>
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
-  <PhysicsShapePoints/>
+  <PhysicsShapePoints>
+    <point>0,0</point>
+    <point>16,16</point>
+  </PhysicsShapePoints>
 </object>

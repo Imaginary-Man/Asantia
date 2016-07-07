@@ -1,0 +1,29 @@
+<constants>
+@c_my_window: $AB8778;
+@c_my_border: $391506;
+</constants>
+<styles>
+overlay:
+{
+	width: max;
+	height: max;
+	background: $000000;
+	background-alpha: 0.5;
+}
+
+window:
+{
+	background: @c_my_window;
+	border-size: 3;
+	border-color: @c_my_border;
+	center: true;
+	width: 300;
+	height: max;
+}
+</styles>
+<layout>
+	<canvas style[overlay]>
+		<canvas style[window]>
+		</canvas>
+	</canvas>
+</layout>

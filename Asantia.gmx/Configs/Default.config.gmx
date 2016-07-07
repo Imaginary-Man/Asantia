@@ -4,11 +4,16 @@
     <option_aborterrors>False</option_aborterrors>
     <option_android_GPU_device>0</option_android_GPU_device>
     <option_android_adcolony_ads>0</option_android_adcolony_ads>
+    <option_android_adcolony_enable_V4VC>false</option_android_adcolony_enable_V4VC>
     <option_android_advertising_enable>false</option_android_advertising_enable>
     <option_android_advertising_key></option_android_advertising_key>
     <option_android_advertising_type>MoPub</option_android_advertising_type>
     <option_android_amazon_ads>0</option_android_amazon_ads>
     <option_android_amazon_game_circle>0</option_android_amazon_game_circle>
+    <option_android_amazon_gc_achievements>true</option_android_amazon_gc_achievements>
+    <option_android_amazon_gc_leaderboards>true</option_android_amazon_gc_leaderboards>
+    <option_android_amazon_gc_whispersync>false</option_android_amazon_gc_whispersync>
+    <option_android_amazon_iap>false</option_android_amazon_iap>
     <option_android_apk_expansion>0</option_android_apk_expansion>
     <option_android_arch_armv5>True</option_android_arch_armv5>
     <option_android_arch_armv7>True</option_android_arch_armv7>
@@ -32,6 +37,7 @@
     <option_android_google_play_cloud_save_enable>0</option_android_google_play_cloud_save_enable>
     <option_android_google_play_id></option_android_google_play_id>
     <option_android_google_tracking_id></option_android_google_tracking_id>
+    <option_android_iap_suppress_toast>false</option_android_iap_suppress_toast>
     <option_android_icade_support>-1</option_android_icade_support>
     <option_android_icon_hdpi>Configs\Default\android\icons\icon_hdpi.png</option_android_icon_hdpi>
     <option_android_icon_ldpi>Configs\Default\android\icons\icon_ldpi.png</option_android_icon_ldpi>
@@ -59,6 +65,9 @@
     <option_android_package_domain>com</option_android_package_domain>
     <option_android_package_product>Asantia</option_android_package_product>
     <option_android_permission_flags>8</option_android_permission_flags>
+    <option_android_pocketchange_enable>false</option_android_pocketchange_enable>
+    <option_android_pocketchange_id></option_android_pocketchange_id>
+    <option_android_pocketchange_test_enable>false</option_android_pocketchange_test_enable>
     <option_android_portrait_splash_png>Configs\Default\android\portrait_splash.png</option_android_portrait_splash_png>
     <option_android_push_enable>0</option_android_push_enable>
     <option_android_push_id></option_android_push_id>
@@ -217,8 +226,8 @@
     <option_frequency>0</option_frequency>
     <option_frontimage>nil</option_frontimage>
     <option_fullscreen>False</option_fullscreen>
-    <option_gameguid>{7D82AFBD-9070-4236-B6E2-E5F21D9DA62A}</option_gameguid>
-    <option_gameid>327133437</option_gameid>
+    <option_gameguid>{58EFDE3E-C342-446D-B459-388AF019A9E7}</option_gameguid>
+    <option_gameid>886895200</option_gameid>
     <option_haptic_effects>0</option_haptic_effects>
     <option_hasloadimage>false</option_hasloadimage>
     <option_helpkey>true</option_helpkey>
@@ -256,7 +265,9 @@
     <option_html5_usebuiltinparticles>True</option_html5_usebuiltinparticles>
     <option_html5_usesplash>False</option_html5_usesplash>
     <option_icon>nil</option_icon>
+    <option_in_app_purchase_enable>false</option_in_app_purchase_enable>
     <option_in_app_purchase_sandbox_mode>0</option_in_app_purchase_sandbox_mode>
+    <option_in_app_purchase_server_url></option_in_app_purchase_server_url>
     <option_information></option_information>
     <option_interpolate>False</option_interpolate>
     <option_ios_adcolony_enable_V4VC>false</option_ios_adcolony_enable_V4VC>
@@ -450,12 +461,12 @@
     <option_variableerrors>False</option_variableerrors>
     <option_version>100</option_version>
     <option_version_build>1</option_version_build>
-    <option_version_company></option_version_company>
-    <option_version_copyright></option_version_copyright>
+    <option_version_company>Sabo Tage</option_version_company>
+    <option_version_copyright>SaboTage2016</option_version_copyright>
     <option_version_description></option_version_description>
     <option_version_major>0</option_version_major>
     <option_version_minor>0</option_version_minor>
-    <option_version_product></option_version_product>
+    <option_version_product>Asantia</option_version_product>
     <option_version_release>0</option_version_release>
     <option_win8_advertising_appid></option_win8_advertising_appid>
     <option_win8_advertising_enable>0</option_win8_advertising_enable>
@@ -524,11 +535,11 @@
     <option_winUAP_texture_page>1024</option_winUAP_texture_page>
     <option_winUAP_wide_logo>Configs\Default\WindowsUAP\logos\WideLogo.scale-100.png</option_winUAP_wide_logo>
     <option_windowcolor>clBlack</option_windowcolor>
-    <option_windows_alternate_sync_method>True</option_windows_alternate_sync_method>
+    <option_windows_alternate_sync_method>False</option_windows_alternate_sync_method>
     <option_windows_build_version>1</option_windows_build_version>
-    <option_windows_company_info></option_windows_company_info>
-    <option_windows_copyright_info></option_windows_copyright_info>
-    <option_windows_create_textures_on_demand>False</option_windows_create_textures_on_demand>
+    <option_windows_company_info>Sabo Tage</option_windows_company_info>
+    <option_windows_copyright_info>SaboTage2016</option_windows_copyright_info>
+    <option_windows_create_textures_on_demand>True</option_windows_create_textures_on_demand>
     <option_windows_description_info></option_windows_description_info>
     <option_windows_enable_steam>0</option_windows_enable_steam>
     <option_windows_game_icon>Configs\Default\windows\runner_icon.ico</option_windows_game_icon>
@@ -536,7 +547,7 @@
     <option_windows_mainor_version>0</option_windows_mainor_version>
     <option_windows_major_version>0</option_windows_major_version>
     <option_windows_nsis_file>Configs\Default\windows\RunnerInstaller.nsi</option_windows_nsis_file>
-    <option_windows_product_info></option_windows_product_info>
+    <option_windows_product_info>Asantia</option_windows_product_info>
     <option_windows_release_version>0</option_windows_release_version>
     <option_windows_runner_finished>Configs\Default\windows\Runner_finish.bmp</option_windows_runner_finished>
     <option_windows_runner_header>Configs\Default\windows\Runner_header.bmp</option_windows_runner_header>
@@ -547,7 +558,8 @@
     <option_windows_steam_app_id>0</option_windows_steam_app_id>
     <option_windows_texture_page>2048</option_windows_texture_page>
     <option_windows_use_splash>0</option_windows_use_splash>
-    <option_windows_vertex_buffer_method2>2</option_windows_vertex_buffer_method2>
+    <option_windows_vertex_buffer_method>0</option_windows_vertex_buffer_method>
+    <option_windows_vertex_buffer_method2>0</option_windows_vertex_buffer_method2>
     <option_winphone_480_splash_image>Configs\Default\WinPhone\SplashScreenImage480.jpg</option_winphone_480_splash_image>
     <option_winphone_720_splash_image>Configs\Default\WinPhone\SplashScreenImage720.jpg</option_winphone_720_splash_image>
     <option_winphone_768_splash_image>Configs\Default\WinPhone\SplashScreenImage.jpg</option_winphone_768_splash_image>

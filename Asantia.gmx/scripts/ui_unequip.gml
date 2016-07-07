@@ -15,6 +15,7 @@ if drag=false
      {
       slot[i]=1
       slotid[i]=i_mainhand
+      twohanded=false
       i_mainhand=0
       init_mainhand()
       obj_weapon_parent.sprite_index=spr_none
@@ -37,6 +38,7 @@ if drag=false
       slotid[i]=i_offhand
       i_offhand=0
       init_offhand()
+      obj_offhand_parent.sprite_index=spr_none
       break;
      }
     }

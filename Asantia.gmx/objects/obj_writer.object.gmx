@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-100000</depth>
+  <depth>-1000000</depth>
   <persistent>0</persistent>
   <parentName>parent_text</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -29,6 +29,7 @@
 depth=y-100000
 vspeed=random_range(-0.3,-0.5)
 alarm[0]=25
+
 </string>
           </argument>
         </arguments>
@@ -85,6 +86,37 @@ if alarm[0]=-1
         </arguments>
       </action>
     </event>
+    <event eventtype="7" enumb="22">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///sync
+if !gms_instance_is_owner(id)
+{
+ text=ds_map_find_value(variable_map,"text")
+ color=ds_map_find_value(variable_map,"color")
+ font=ds_map_find_value(variable_map,"font")
+ scale=ds_map_find_value(variable_map,"scale")
+ event_perform(ev_create,0)
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
@@ -103,6 +135,15 @@ if alarm[0]=-1
           <argument>
             <kind>1</kind>
             <string>///draw
+if !gms_instance_is_owner(id)
+{
+ text=gms_instance_get(id,"text")
+ font=gms_instance_get(id,"font")
+ color=gms_instance_get(id,"color")
+ crit=gms_instance_get(id,"crit")
+ scale=gms_instance_get(id,"scale")
+}
+
 draw_set_halign(fa_center)
 draw_set_valign(fa_center)
 draw_set_font(global.normalfont)

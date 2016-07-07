@@ -18,6 +18,7 @@ if drag=false
       i_mainhand=slotid[i]
       slotid[i]=0
       slot[i]=0
+      twohanded=true
       equip_mainhand()
       obj_weapon_parent.sprite_index=i_mainhand.sprite_ingame
       break;
@@ -38,13 +39,15 @@ if drag=false
      }
     }
 
-    if slotid[i].type="offhand"
+    if slotid[i].type="offhand" and twohanded=false
     {
      if i_offhand=0
      {
       i_offhand=slotid[i]
       slotid[i]=0
       slot[i]=0  
+      equip_offhand()
+      obj_offhand_parent.sprite_index=i_offhand.sprite_ingame
       //    
       break;      
      }

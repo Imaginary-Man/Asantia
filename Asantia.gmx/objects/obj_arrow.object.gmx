@@ -28,38 +28,45 @@
             <string>///move
 depth=y*-1
 blur(0.01,0.1)
-if instance_exists(n)
-{
- if alarm[0]=-1
- {
-  image_angle=point_direction(x,y,n.x,n.y-(n.sprite_height/2))
-  move_towards_point(n.x,n.y-(n.sprite_height/2),6)
- }
 
- if position_meeting(n.x,n.y-(n.sprite_height/2),self) and n.type="enemy"
+if gms_instance_is_owner(id)
+{
+ if instance_exists(n) 
  {
-  n.attacked=true
-  n.agro=obj_player
-  n.hp-=global.dmg_basic_attack
-  counter(n.x,n.y-n.sprite_height,global.dmg_basic_attack,c_red,global.normalfont)
-  if global.f_lifesteal&gt;0
+  if alarm[0]=-1
   {
-   global.hp+=global.dmg_basic_attack*global.f_lifesteal
-   counter_heal(obj_player.x,obj_player.y-10,global.dmg_basic_attack*global.f_lifesteal)
-  } 
-  instance_destroy()
+   image_angle=point_direction(x,y,n.x,n.y-(n.sprite_height/2))
+   gms_instance_set(id,"image_angle",image_angle)
+   move_towards_point(n.x,n.y-(n.sprite_height/2),6)
+  }  
+
+  if position_meeting(n.x,n.y-(n.sprite_height/2),self) and n.type="enemy"
+  {
+   n.attacked=1
+   n.hp-=global.dmg_basic_attack
+   n.target=obj_player
+   gms_instance_set_real(n,"hp",n.hp)
+   gms_instance_set(n,"attacked",n.attacked)
+   gms_instance_set(n,"target",n.target)
+   counter(n.x,n.y-n.sprite_height,global.dmg_basic_attack,c_red,global.normalfont)
+   if global.f_lifesteal&gt;0
+   {
+    global.hp+=global.dmg_basic_attack*global.f_lifesteal
+    counter_heal(obj_player.x,obj_player.y-10,global.dmg_basic_attack*global.f_lifesteal)
+   } 
+   gms_instance_sync_destroy(id)
+   instance_destroy()
+  }
+ }
+  else
+ {
+  gms_instance_sync_destroy(id)
+  instance_destroy()  
  }
 }
  else
 {
- fade_out()
-}
-
-
-///destroy
-if !instance_exists(n)
-{
- instance_destroy()
+ image_angle=gms_instance_get(id,"image_angle")
 }
 </string>
           </argument>
@@ -78,5 +85,8 @@ if !instance_exists(n)
   <PhysicsObjectFriction>0.200000002980232</PhysicsObjectFriction>
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
-  <PhysicsShapePoints/>
+  <PhysicsShapePoints>
+    <point>6,1</point>
+    <point>6,6</point>
+  </PhysicsShapePoints>
 </object>

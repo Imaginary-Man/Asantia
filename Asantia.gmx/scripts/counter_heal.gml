@@ -4,3 +4,4 @@ i.text=argument2
 i.color=c_lime
 i.font=global.normalfont
 i.scale=global.f_lifesteal
+gms_instance_sync(i,is_extended,"text","color","font","scale")

@@ -26,7 +26,9 @@
           <argument>
             <kind>1</kind>
             <string>///enemy init
+wiggle=0.3
 mhp=300
+hp=mhp
 dmg=10
 sight_radius=300
 attack_range=15
@@ -45,7 +47,8 @@ idle_image_speed=0.05
 walk_image_speed=1
 
 ///normal init
-hp=mhp
+target=obj_player
+wiggle_anim=0
 set_random=true
 type="enemy"
 select=false
@@ -55,10 +58,16 @@ random_y=y
 start_x=x
 start_y=y
 image_speed=idle_image_speed
-target=obj_player
-attacked=false
-agro=obj_player
+attacked=0
 reset=false
+im_angle=0
+
+
+///sync
+gms_instance_sync(id,is_full)
+gms_instance_set(id,"hp",hp)
+gms_instance_set(id,"attacked",attacked)
+gms_instance_set(id,"target",target)
 </string>
           </argument>
         </arguments>
@@ -82,8 +91,11 @@ reset=false
           <argument>
             <kind>1</kind>
             <string>///exp
-plus_exp(obj_player.x,obj_player.y-12,c_yellow,0.5)
-global.xp+=xp
+if gms_self_ismaster()
+{
+ plus_exp(obj_player.x,obj_player.y-12,c_yellow,0.5)
+ global.xp+=xp
+}
 </string>
           </argument>
         </arguments>
@@ -182,6 +194,7 @@ set_random=true
 if hp&lt;0
 {
  hp=0
+ if state!=5 {state=5}
 }
 </string>
           </argument>
@@ -206,141 +219,190 @@ if hp&lt;0
           <argument>
             <kind>1</kind>
             <string>///states
-switch (state)
+if gms_instance_is_owner(id)
 {
- case 0://idle
+ //sync
+ gms_instance_set_real(id,"image_xscale",image_xscale)
+ gms_instance_set_real(id,"image_yscale",image_yscale)
+ gms_instance_set_real(id,"image_angle",image_angle)
+ gms_instance_set_real(id,"image_speed",image_speed)
+ gms_instance_set_real(id,"sprite_index",sprite_index)
+ gms_instance_set_real(id,"image_alpha",image_alpha)
+ gms_instance_set_real(id,"im_angle",im_angle)
+ target=gms_instance_get_real(id,"target")
+ hp=gms_instance_get_real(id,"hp")
+ attacked=gms_instance_get_real(id,"attacked")
+ //
+ switch (state)
  {
-  reset=false
-  alarm[1]=-1
-  if alarm[0]=-1 {alarm[0]=floor(random_range(50,200))}//walk timer
-  sprite_index=spr_idle
-  image_speed=idle_image_speed
-  if set_random=true
+  case 0://idle
   {
-   random_x=random_range(x-walkrange,x+walkrange)
-   random_y=random_range(y-walkrange,y+walkrange)
-   set_random=false
+   wiggle_anim=0;
+   im_angle=0;  
+   //
+   reset=false
+   alarm[1]=-1
+   if alarm[0]=-1 {alarm[0]=floor(random_range(50,200))}//walk timer
+   sprite_index=spr_idle
+   image_speed=idle_image_speed
+   if set_random=true
+   {
+    random_x=random_range(x-walkrange,x+walkrange)
+    random_y=random_range(y-walkrange,y+walkrange)
+    set_random=false
+   }
+   break;
   }
-  break;
- }
- case 1://walk
- {
-  alarm[0]=-1
-  sprite_index=spr_walk
-  image_speed=walk_image_speed
-  distance=distance_to_point(random_x,random_y)
-  mp_potential_step(random_x,random_y,min(mspeed,distance),false)
-  //stop walking
-  if distance&lt;=5
+  case 1://walk
   {
-   if alarm[1]=-1 {alarm[1]=3}
-  }  
-  ///image
-  if x&lt;random_x
-  {
-   image_xscale=-1
+   wiggle_anim+=wiggle
+   im_angle=sin(wiggle_anim)*4;  
+   //
+   alarm[0]=-1
+   sprite_index=spr_walk
+   image_speed=walk_image_speed
+   distance=distance_to_point(random_x,random_y)
+   mp_potential_step(random_x,random_y,min(mspeed,distance),false)
+   //stop walking
+   if distance&lt;=5
+   {
+    if alarm[1]=-1 {alarm[1]=3}
+   }  
+   ///image
+   if x&lt;random_x
+   {
+    image_xscale=-1
+   }
+   else
+   {
+    image_xscale=1
+   }
+   break;
   }
-  else
+  case 2://follow
   {
-   image_xscale=1
-  }
-  break;
- }
- case 2://follow
- {
- alarm[0]=-1
- alarm[1]=-1
- if sprite_index!=spr_walk
- {
-  sprite_index=spr_walk
-  image_speed=walk_image_speed
- }
- if distance_to_point(target.x,target.y+7)&lt;attack_range
- {
-  if alarm[3]=-1 {state=3}
- }
-  else
- {
-  distance=point_distance(x,y,target.x,target.y)
-  mp_potential_step(target.x,target.y+7,min(mspeed,distance),false)
- }
-  if x&lt;target.x
-  {
-   image_xscale=-1
-  }
-  else
-  {
-   image_xscale=1
-  }  
- break;
- }
- case 3://attack
- {
-  if sprite_index!=spr_attack
-  {
-   sprite_index=spr_attack
-   image_index=0
-   image_speed=1
-  }
-  if (image_index == (image_number-1))
-  {
-   global.hp-=dmg/(global.f_armor/20)
-   state=2
-   alarm[3]=attack_timer
-  }
-  if x&lt;target.x
-  {
-   image_xscale=-1
-  }
-  else
-  {
-   image_xscale=1
-  } 
- break;
- }
-  case 4://walk back
- {
-  hp=mhp
-  attacked=false
   alarm[0]=-1
   alarm[1]=-1
-  sprite_index=spr_walk
-  image_speed=walk_image_speed
-  distancestart=distance_to_point(start_x,start_y)
-  mp_potential_step(start_x,start_y,min(mspeed,distancestart),false)
-  //stop walking
-  if distancestart&lt;=10
+  if sprite_index!=spr_walk
   {
-   state=0
-  }  
-  ///image
-  if x&lt;start_x
-  {
-   image_xscale=-1
+   sprite_index=spr_walk
+   image_speed=walk_image_speed
+   wiggle_anim+=wiggle
+   im_angle=sin(wiggle_anim)*4;    
   }
-  else
+  if distance_to_point(target.x,target.y+7)&lt;attack_range
   {
-   image_xscale=1
+   if alarm[3]=-1 {state=3}
   }
+   else
+  {
+   distance=point_distance(x,y,target.x,target.y)
+   mp_potential_step(target.x,target.y+7,min(mspeed,distance),false)
+  }
+   if x&lt;target.x
+   {
+    image_xscale=-1
+   }
+   else
+   {
+    image_xscale=1
+   }  
   break;
+  }
+  case 3://attack
+  {
+   wiggle_anim=0;
+   im_angle=0;   
+   if sprite_index!=spr_attack
+   {
+    sprite_index=spr_attack
+    image_index=0
+    image_speed=1
+   }
+   if (image_index == (image_number-1))
+   {
+    if global.f_armor&gt;0
+    {
+     global.hp-=dmg/(global.f_armor/global.armor_reduction)
+    }
+     else
+    {
+     global.hp-=dmg
+    }
+    state=2
+    alarm[3]=attack_timer
+   }
+   if x&lt;target.x
+   {
+    image_xscale=-1
+   }
+   else
+   {
+    image_xscale=1
+   } 
+  break;
+  }
+   case 4://walk back
+  {
+   wiggle_anim+=wiggle
+   im_angle=sin(wiggle_anim)*4;    
+   hp=mhp
+   attacked=false
+   alarm[0]=-1
+   alarm[1]=-1
+   sprite_index=spr_walk
+   image_speed=walk_image_speed
+   distancestart=distance_to_point(start_x,start_y)
+   mp_potential_step(start_x,start_y,min(mspeed,distancestart),false)
+   //stop walking
+   if distancestart&lt;=10
+   {
+    state=0
+   }  
+   ///image
+   if x&lt;start_x
+   {
+    image_xscale=-1
+   }
+   else
+   {
+    image_xscale=1
+   }
+   break;
+  }
+  case 5://dying
+  {
+   wiggle_anim=0;
+   im_angle=0;   
+   if sprite_index!=spr_die
+   {
+    attacked=false
+    sprite_index=spr_die
+    image_index=0
+    image_speed=1
+    type="dead"
+   }
+   if (image_index == (image_number-1))
+   {
+    image_speed=0
+    fade_out()
+   }
+   break;
+  }
  }
- case 5://dying
- {
- if sprite_index!=spr_die
- {
-  attacked=false
-  sprite_index=spr_die
-  image_index=0
-  image_speed=1
-  type="dead"
- }
- if (image_index == (image_number-1))
- {
-  image_speed=0
-  fade_out()
- }
- break;
- }
+}
+ else
+{
+ image_xscale=gms_instance_get_real(id,"image_xscale")
+ image_yscale=gms_instance_get_real(id,"image_yscale")
+ image_angle=gms_instance_get_real(id,"image_angle")
+ image_speed=gms_instance_get_real(id,"image_speed")
+ sprite_index=gms_instance_get_real(id,"sprite_index")
+ image_alpha=gms_instance_get_real(id,"image_alpha")
+ hp=gms_instance_get_real(id,"hp")
+ im_angle=gms_instance_get_real(id,"im_angle")
+ target=gms_instance_get_real(id,"target")
+ attacked=gms_instance_get_real(id,"attacked")
 }
 
 </string>
@@ -364,32 +426,34 @@ switch (state)
           <argument>
             <kind>1</kind>
             <string>///walk back to start if to far
-if distance_to_point(start_x,start_y)&gt;=50 and (state=0 or state=1)
+if gms_instance_is_owner(id)
 {
- if reset=false
+ if distance_to_point(start_x,start_y)&gt;=50 and (state=0 or state=1)
  {
-  random_x=start_x
-  random_y=start_y
-  reset=true
+  if reset=false
+  {
+   random_x=start_x
+   random_y=start_y
+   reset=true
+  }
  }
-}
 
-if distance_to_point(start_x,start_y)&gt;sight_radius and state=2
-{
- state=4
- if reset=false
+ if distance_to_point(start_x,start_y)&gt;sight_radius and state=2
  {
-  writer(x,y-sprite_height,"RESET",c_white,global.normalfont,0.7)
-  reset=true
- }
+  state=4
+  if reset=false
+  {
+   writer(x,y-sprite_height,"RESET",c_white,global.normalfont,0.7)
+   reset=true
+  }
+ } 
+
+ ///make sure not to have a walk destination out of the room
+ if random_x&gt;room_width  {random_x=random_range(x-walkrange,x+walkrange)}
+ if random_x&lt;0           {random_x=random_range(x-walkrange,x+walkrange)}
+ if random_y&lt;0           {random_y=random_range(y-walkrange,y+walkrange)}
+ if random_y&gt;room_height {random_y=random_range(y-walkrange,y+walkrange)}
 }
-
-///make sure not to have a walk destination out of the room
-if random_x&gt;room_width  {random_x=random_range(x-walkrange,x+walkrange)}
-if random_x&lt;0           {random_x=random_range(x-walkrange,x+walkrange)}
-if random_y&lt;0           {random_y=random_range(y-walkrange,y+walkrange)}
-if random_y&gt;room_height {random_y=random_range(y-walkrange,y+walkrange)}
-
 
    
    
@@ -414,32 +478,35 @@ if random_y&gt;room_height {random_y=random_range(y-walkrange,y+walkrange)}
           <argument>
             <kind>1</kind>
             <string>///agro
-if agressive=true
+if gms_instance_is_owner(id)
 {
- if distance_to_point(obj_player.x,obj_player.y)&lt;sight_radius/2
+ if agressive=true
  {
-  if state=0 or state=1
+  if distance_to_point(target.x,target.y)&lt;sight_radius/2
+  {
+   if state=0 or state=1
+   {
+    state=2
+   }
+  }
+ ///
+  if distance_to_point(target.x,target.y)&gt;sight_radius
+  {
+   if state!=0 or state!=1
+   {
+    state=0
+    attacked=0
+    gms_instance_set(id,"attacked",attacked)
+   }
+  }
+ }  
+
+ if state=0 or state=1
+ {
+  if attacked=1
   {
    state=2
   }
- }
-///
- if distance_to_point(target.x,target.y)&gt;sight_radius
- {
-  if state!=0 or state!=1
-  {
-   state=0
-   attacked=false
-  }
- }
-}
-
-if state=0 or state=1
-{
- if attacked=true
- {
-  state=2
-  target=agro
  }
 }
 </string>
@@ -485,36 +552,13 @@ depth=y*-1
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///dying
-if hp&lt;=0 and state!=5
-{
- state=5
- hp=0
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>///move_outside
-if instance_place(x,y,all)
+if gms_instance_is_owner(id)
 {
- move_outside_solid(random(360),1)
+ if instance_place(x,y,all)
+ {
+  move_outside_solid(random(360),1)
+ }
 }
 </string>
           </argument>
@@ -539,12 +583,6 @@ if instance_place(x,y,all)
           <argument>
             <kind>1</kind>
             <string>///draw
-if select=true
-{
- draw_sprite_ext(sprite_index,image_index,x,y,1.1,1.1,image_angle,c_red,0.8)
-}
-
-
 
 ///testing
 if global.debug=true
@@ -558,11 +596,11 @@ if global.debug=true
  draw_line(x,y,start_x,start_y)
  draw_ellipse(start_x-3,start_y-1,start_x+3,start_y+1,1)
  draw_set_color(c_white)
- draw_text(x,y+10,state)
+ draw_text(x,y+10,hp)
  draw_set_color(c_black)
 }
 
-draw_self()
+draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,image_angle+im_angle,c_white,image_alpha)
 </string>
           </argument>
         </arguments>
@@ -605,5 +643,8 @@ if attacked!=0
   <PhysicsObjectFriction>0.200000002980232</PhysicsObjectFriction>
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
-  <PhysicsShapePoints/>
+  <PhysicsShapePoints>
+    <point>11,28</point>
+    <point>14,14</point>
+  </PhysicsShapePoints>
 </object>

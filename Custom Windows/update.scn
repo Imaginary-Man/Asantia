@@ -1,0 +1,198 @@
+<constants>
+</constants>
+<styles>
+overlay:
+{
+	background: 0;
+
+	open:
+	{
+		background-alpha: 0.5;
+	}
+
+	close:
+	{
+		background-alpha: 0;
+	}
+}
+
+window:
+{
+	width: preferred;
+	height: min;
+
+	min-width: 200;
+	preferred-width: 640;
+
+	center: true;
+
+	drop-shadow: 2;
+	drop-shadow-intensity: 0.04;
+	drop-shadow-spread: 10;
+
+	open:
+	{
+		y-offset: 0;
+		tween-speed: 0.3;
+	}
+
+	close:
+	{
+		y-offset: 1;
+		tween-speed: 0.3;
+	}
+
+	extrawindow:
+	{
+		y-offset: -1;
+	}
+
+	unextrawindow:
+	{
+		y-offset: 0;
+	}
+
+	error:
+	{
+		x-offset: 0.005;
+		tween-type: shake;
+		tween-speed: 1;
+	}
+}
+
+contents:
+{
+	width: max;
+	height: max;
+	padding: 20;	
+}
+
+titlebar:
+{
+	width: max;
+	height: 52;
+
+	title:
+	{
+		color: @c_text;
+		font: @f_title;
+		width: max;
+		height: max;
+	}
+
+	closearrow:
+	{
+		height: max;
+		color: @c_text;
+		width: 32;
+
+		hover:
+		{
+			arrow-size: 15;
+			arrow-length: 34;
+			alpha: 1.0;
+			tween-speed: 0.2;
+		}
+
+		unhover:
+		{
+			arrow-size: 10;
+			arrow-length: 20;
+			alpha: 0.5;
+			tween-speed: 0.2;
+		}
+	}
+}
+
+backgrounds:
+{
+	normal:
+	{
+		background-1: @c_background1;
+		background-2: @c_background1;
+		background-3: @c_background2;
+		background-4: @c_background2;
+	}
+
+	highlight:
+	{
+		background-1: @c_button1;
+		background-2: @c_button1;
+		background-3: @c_button2;
+		background-4: @c_button2;
+	}
+
+	hover:
+	{
+		background-1: @c_buttonhover1;
+		background-2: @c_buttonhover1;
+		background-3: @c_buttonhover2;
+		background-4: @c_buttonhover2;
+	}
+}
+
+border:
+{
+	border-size: 1;
+	border-color: @c_border;
+}
+
+progressbar:
+{
+	width: max;
+	height: 52;
+	outside:
+	{
+		border-size: 1;
+		border-color: @c_border;
+	}
+
+	inside:
+	{
+		background-1: @c_button1;
+		background-2: @c_button1;
+		background-3: @c_button2;
+		background-4: @c_button2;
+		width: 0;
+	}
+}
+</styles>
+<layout>
+	<canvas
+		name[overlay]
+		style[overlay, overlay.close]
+		open[overlay.open]
+		close[overlay.close]
+		extrawindow[overlay.close]
+		unextrawindow[overlay.open]>
+		
+		<canvas
+			name[window]
+			style[window, window.close, backgrounds.normal, border] 
+			open[window.open] 
+			close[window.close]
+			extrawindow[window.extrawindow] 
+			unextrawindow[window.unextrawindow]
+			error[window.error]>
+			<multielement
+				name[titlebar]
+				style[titlebar, backgrounds.highlight]>
+				<label
+					name[title]
+					style[titlebar.title]>@txt_updating_game</label>
+			</multielement>
+
+			<canvas 
+				style[contents]
+				name[contents]>
+				<canvas 
+					name[update.progressbox]
+					style[progressbar, progressbar.outside]>
+					<canvas
+						name[update.progress] 
+						style[progressbar, progressbar.inside]/>
+				</canvas>
+			</canvas>
+		</canvas>
+	</canvas>
+</layout>
