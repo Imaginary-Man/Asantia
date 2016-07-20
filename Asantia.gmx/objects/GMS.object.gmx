@@ -29,6 +29,7 @@
 gms_init(GMS)
 gms_settings(1,0,obj_player,obj_other_player)
 gms_show_set_fonts(GMS_font_1,GMS_font_2,GMS_font_3)
+gms_show_set_allowguest(1)
 gms_debug_enable()
 //errors
 //gms_debug_hide_errors()

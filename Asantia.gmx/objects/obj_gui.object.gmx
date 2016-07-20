@@ -37,6 +37,7 @@ drag=false
 oldslot=0
 oldslotid=0
 twohanded=false
+draw_player_range=false
 //ui_windows
 show_inventory=false
 show_stats=false
@@ -276,6 +277,28 @@ d_height=window_get_height()
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///ui show
+visible=global.ui_show
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="5" enumb="34">
       <action>
@@ -351,10 +374,10 @@ d_height=window_get_height()
 //UI border
 if global.ui_border=true
 {
- draw_set_color(make_color_rgb(142,93,28))
+ draw_set_color(make_color_rgb(210,210,210))
  draw_rectangle(0,window_get_height()-(global.border_size*global.ui_size),window_get_width(),window_get_height(),0)
  draw_rectangle(0,(global.border_size*global.ui_size),window_get_width(),0,0)
- draw_set_color(make_color_rgb(120,80,20))
+ draw_set_color(make_color_rgb(180,180,180))
  draw_rectangle(0,window_get_height()-(global.border_size*global.ui_size),window_get_width(),window_get_height(),1)
  draw_rectangle(0,(global.border_size*global.ui_size),window_get_width(),0,1)
 }
@@ -1117,6 +1140,59 @@ if keyboard_check_direct(global.key_attack)
   draw_set_alpha(1)
   draw_set_color(c_black)
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///draw_player_range
+if draw_player_range=true
+{  
+ draw_set_alpha(0.05)
+ draw_set_color(c_red)
+ draw_circle(obj_player.x,obj_player.y,global.f_attackrange,0)
+ draw_set_alpha(1)
+ draw_set_color(c_black)
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="103">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///test item delete
+if item_check(oak_log,3)=true {item_delete(oak_log,3)}
 </string>
           </argument>
         </arguments>

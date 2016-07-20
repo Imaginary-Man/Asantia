@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>///move
 depth=y*-1
-blur(0.01,0.1)
+blur(0.01,0.1,c_white,false)
 
 if gms_instance_is_owner(id)
 {

@@ -64,10 +64,10 @@ im_angle=0
 
 
 ///sync
-gms_instance_sync(id,is_full)
 gms_instance_set(id,"hp",hp)
 gms_instance_set(id,"attacked",attacked)
 gms_instance_set(id,"target",target)
+gms_instance_set(id,"im_angle",im_angle)
 </string>
           </argument>
         </arguments>
@@ -194,7 +194,10 @@ set_random=true
 if hp&lt;0
 {
  hp=0
- if state!=5 {state=5}
+ if gms_instance_is_owner(id)
+ {
+  if state!=5 {state=5}
+ }
 }
 </string>
           </argument>
@@ -357,6 +360,8 @@ if gms_instance_is_owner(id)
    //stop walking
    if distancestart&lt;=10
    {
+    attacked=false
+    gms_instance_set_real(id,"attacked",attacked)
     state=0
    }  
    ///image
@@ -565,6 +570,38 @@ if gms_instance_is_owner(id)
         </arguments>
       </action>
     </event>
+    <event eventtype="7" enumb="22">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///ds map sync
+event_perform(ev_create,0)
+/*
+if !gms_instance_is_owner(id)
+{
+ hp=ds_map_find_value(variable_map,"hp")
+ im_angle=ds_map_find_value(variable_map,"im_angle")
+ target=ds_map_find_value(variable_map,"target")
+ attacked=ds_map_find_value(variable_map,"attacked")
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
@@ -623,8 +660,8 @@ draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,image_ang
             <kind>1</kind>
             <string>///healthbar
 if attacked!=0
-{
- draw_bar(x-6,y-30,12,1,hp,mhp,c_red)
+{              
+ if hp&gt;0 {draw_bar(x-6,y-30,12,1,hp,mhp,c_red)}
 }
 </string>
           </argument>

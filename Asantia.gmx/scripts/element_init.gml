@@ -1,55 +1,42 @@
-///element_init()
-element[7]=0 // [?] = total elements
+///element_init(amount)
+global.element[argument0]=0 // [?] = total elements
+global.element_=NORMAL
+// element colors
+global.c_element[NORMAL]    =make_colour_rgb(191, 191, 191)
+global.c_element[FIRE]      =make_colour_rgb(255, 0, 0)
+global.c_element[WATER]     =make_colour_rgb(19, 143, 236)
+global.c_element[EARTH]     =make_colour_rgb(97, 63, 39)
+global.c_element[ELECTRO]   =make_colour_rgb(255, 255, 0)
+global.c_element[WIND]      =make_colour_rgb(0, 255, 0)
+global.c_element[DEATH]     =make_colour_rgb(86, 72, 94)
+global.c_element[LIFE]      =make_colour_rgb(252, 255, 196)
+global.c_element[SACRIFICE] =make_colour_rgb(254, 214, 177)
+global.c_element[FLAME]     =make_colour_rgb(185, 0, 0)
+global.c_element[BLAZE]     =make_colour_rgb(255, 113, 113)
+global.c_element[SCORCH]    =make_colour_rgb(91, 28, 28)
+global.c_element[BLAST]     =make_colour_rgb(221, 137, 23)
+global.c_element[SMOKE]     =make_colour_rgb(104, 117, 140)
+global.c_element[TORMENT]   =make_colour_rgb(62, 0, 0)
+global.c_element[TORNADO]   =make_colour_rgb(20, 80, 29)
+global.c_element[GROSS]     =make_colour_rgb(62, 85, 26)
+global.c_element[STORM]     =make_colour_rgb(142, 145, 47)
+global.c_element[ICE]       =make_colour_rgb(145, 203, 238)
+global.c_element[DREAD]     =make_colour_rgb(27, 44, 27)
+global.c_element[MOTION]    =make_colour_rgb(179, 255, 174)
+global.c_element[GRAVITY]   =make_colour_rgb(74, 51, 9)
+global.c_element[CARBON]    =make_colour_rgb(60, 60, 60)
+global.c_element[ANCIENT]   =make_colour_rgb(100, 114, 73)
+global.c_element[DECAY]     =make_colour_rgb(47, 43, 26)
+global.c_element[TITAN]     =make_colour_rgb(163, 124, 54)
+global.c_element[THUNDER]   =make_colour_rgb(244, 238, 0)
+global.c_element[CONDUCTION]=make_colour_rgb(96, 102, 145)
+global.c_element[VOLTAGE]   =make_colour_rgb(105, 103, 1)
+global.c_element[HOPE]      =make_colour_rgb(255, 249, 215)
+global.c_element[TIDAL]     =make_colour_rgb(3, 24, 220)
+global.c_element[POISON]    =make_colour_rgb(107, 11, 145)
+global.c_element[BLOOD]     =make_colour_rgb(148, 16, 1)
+global.c_element[LIGHT]     =make_colour_rgb(255, 255, 255)
+global.c_element[DARKNESS]  =make_colour_rgb(30, 30, 30)
+global.c_element[CHAOS]     =make_colour_rgb(47, 30, 62)
 
-
-
-
-/*
-
-//base
-
-d_fire=0
-d_water=0
-d_earth=0
-d_electro=0
-d_wind=0
-d_life=0
-d_death=0
-
-
-
-//combined
-
-d_flame=0
-d_blaze=0
-d_scorch=0
-d_blast=0
-d_smoke=0
-d_torment=0
-d_passion=0
-d_tornado=0
-d_gross=0
-d_storm=0
-d_whirl=0
-d_dread=0
-d_motion=0
-d_gravity=0
-d_scorch=0
-d_gross=0
-d_carbon=0
-d_ancient=0
-d_decay=0
-d_titan=0
-d_thunder=0
-d_carbon=0
-d_conduction=0
-d_voltage=0
-d_hope=0
-d_current=0
-d_ancient=0
-d_poison=0
-d_sacrifice=0
-d_light=0
-d_darkness=0
-d_chaos=0
 

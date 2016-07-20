@@ -1,8 +1,6 @@
-//lynx_execute(body,mind,element1,element2,artificial)
-
+//lynx_execute(body,mind,artificial)
 body=argument0
 mind=argument1
-col_one=argument2
-col_two=argument3 
-artif=argument4
+artif=argument2
+script_execute(asset_get_index(body))
 

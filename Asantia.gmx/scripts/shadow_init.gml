@@ -29,34 +29,37 @@ if instance_exists(obj_player)
  }
 }
 ////////////////////////////////////////////
-if instance_exists(obj_other_player)
+var inst=obj_other_player
+if instance_number(inst)>0
 {
- if floor(obj_other_player.image_index)=0
+ with(inst)
  {
-  draw_ellipse(obj_other_player.x-11,obj_other_player.y+3,obj_other_player.x+10,obj_other_player.y+9,0)
- }
- if floor(obj_other_player.image_index)=1
- {
-  draw_ellipse(obj_other_player.x-12,obj_other_player.y+3,obj_other_player.x+11,obj_other_player.y+9,0)
- }
- if floor(obj_other_player.image_index)=2
- {
-  draw_ellipse(obj_other_player.x-13,obj_other_player.y+3,obj_other_player.x+12,obj_other_player.y+9,0)
- }
- if floor(obj_other_player.image_index)=3
- {
-  draw_ellipse(obj_other_player.x-13,obj_other_player.y+3,obj_other_player.x+12,obj_other_player.y+9,0)
- }
- if floor(obj_other_player.image_index)=4
- {
-  draw_ellipse(obj_other_player.x-12,obj_other_player.y+3,obj_other_player.x+11,obj_other_player.y+9,0)
- }
- if floor(obj_other_player.image_index)=5
- {
-  draw_ellipse(obj_other_player.x-11,obj_other_player.y+3,obj_other_player.x+10,obj_other_player.y+9,0)
- }
-} 
-
+  if floor(image_index)=0
+  {
+   draw_ellipse(x-11,y+3,x+10,y+9,0)
+  }
+  if floor(image_index)=1
+  {
+   draw_ellipse(x-12,y+3,x+11,y+9,0)
+  }
+  if floor(image_index)=2
+  {
+   draw_ellipse(x-13,y+3,x+12,y+9,0)
+  }
+  if floor(image_index)=3
+  {
+   draw_ellipse(x-13,y+3,x+12,y+9,0)
+  }
+  if floor(image_index)=4
+  {
+   draw_ellipse(x-12,y+3,x+11,y+9,0)
+  }
+  if floor(image_index)=5
+  {
+   draw_ellipse(x-11,y+3,x+10,y+9,0)
+  }
+ }  
+}
 
 
 //firefly

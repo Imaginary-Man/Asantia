@@ -414,6 +414,11 @@ gms_self_set("img_yscale",image_yscale)
 gms_self_set("img_index",image_index)
 gms_self_set("player_eyes",global.player_eyes)
 
+//stats
+gms_self_set("level",global.level)
+gms_self_set("mhp",global.f_mhp)
+gms_self_set("hp",global.hp)
+
 //helm
 gms_self_set("helm",obj_helmet.helm)
 gms_self_set("back",obj_back.back)
@@ -570,9 +575,6 @@ if global.debug=true
  draw_set_color(c_white)
  draw_line(x,y+7,target_x,target_y)
  draw_ellipse(target_x-4,target_y-1,target_x+4,target_y+1,1)
- draw_set_halign(fa_center)
- draw_set_valign(fa_center)
- draw_text(x,y+17,global.irl_time)
  draw_set_alpha(0.05)
  draw_set_color(c_red)
  draw_circle(x,y,global.f_attackrange,0)
@@ -580,6 +582,7 @@ if global.debug=true
  draw_set_color(c_black)
 }
 
+if global.ui_show draw_name(x,y-17-jump,c_white,c_black,1,gms_self_name(),global.level)
 draw_sprite_ext(sprite_index,image_index,x,y-jump,image_xscale,image_yscale,global.player_angle,global.playercolor,global.playeralpha)
 
 </string>

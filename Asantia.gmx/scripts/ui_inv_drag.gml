@@ -121,10 +121,10 @@ if drag=false
   }
     
    ////
-   if window_mouse_get_x()>=d_width-(global.ui_size*119)
-   and window_mouse_get_x()<=d_width-(global.ui_size*21)
-   and window_mouse_get_y()>=d_height-(d_height/2)-73*global.ui_size
-   and window_mouse_get_y()<=d_height-(d_height/2)+84*global.ui_size
+   if window_mouse_get_x()>=(d_width-(global.ui_size*119))+inv_x
+   and window_mouse_get_x()<=(d_width-(global.ui_size*21))+inv_x
+   and window_mouse_get_y()>=(d_height-(d_height/2)-73*global.ui_size)+inv_y
+   and window_mouse_get_y()<=(d_height-(d_height/2)+84*global.ui_size)+inv_y
    {
     //
    } 

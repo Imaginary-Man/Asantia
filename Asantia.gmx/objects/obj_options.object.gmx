@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>///Init Options
 window_set_fullscreen(0);
-window_set_size(1024,768);
+//window_set_size(1024,768);
         
 view_wport[0] = window_get_width();
 view_hport[0] = window_get_height();
@@ -60,12 +60,17 @@ gamepad_set_axis_deadzone(0,0.5)
 key_init()
 
 ///UI options
+global.name_font=ingame_name_font
+global.name_font_size=0.3    
 global.ui_size=3 //3
 global.ui_alpha=1//1
 global.ui_hpvalue=true//true
 global.ui_spvalue=true//true
-global.ui_border=true//true
+global.ui_border=false//false
 global.border_size=7 //8
+global.ui_name_show=true
+global.ui_name_show_other=true
+global.ui_show=true
 
 
 ///other
@@ -152,6 +157,30 @@ if gamepad_button_check_pressed(0,gp_stickr)
             <kind>1</kind>
             <string>///change debug
 global.debug=!global.debug
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="121">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///change ui show
+global.ui_show=!global.ui_show
 </string>
           </argument>
         </arguments>

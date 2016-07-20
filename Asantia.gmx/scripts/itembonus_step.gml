@@ -14,7 +14,6 @@ global.i_wis= mainhand_wis + offhand_wis + helm_wis + necklace_wis + ring_zero_w
 global.i_char= mainhand_char + offhand_char + helm_char + necklace_char + ring_zero_char + ring_one_char + gem_zero_char + gem_one_char + gem_two_char + gem_three_char
 global.i_int= mainhand_int + offhand_int + helm_int + necklace_int + ring_zero_int + ring_one_int + gem_zero_int + gem_one_int + gem_two_int + gem_three_int
 global.i_will= mainhand_will + offhand_will + helm_will + necklace_will + ring_zero_will + ring_one_will + gem_zero_will + gem_one_will + gem_two_will + gem_three_will
-global.i_jump=//
 global.i_mspeed= mainhand_mspeed + offhand_mspeed + helm_mspeed + necklace_mspeed + ring_zero_mspeed + ring_one_mspeed + gem_zero_mspeed + gem_one_mspeed + gem_two_mspeed + gem_three_mspeed
 global.i_ad= mainhand_ad + offhand_ad + helm_ad + necklace_ad + ring_zero_ad + ring_one_ad + gem_zero_ad + gem_one_ad + gem_two_ad + gem_three_ad
 global.i_ap= mainhand_ap + offhand_ap + helm_ap + necklace_ap + ring_zero_ap + ring_one_ap + gem_zero_ap + gem_one_ap + gem_two_ap + gem_three_ap
@@ -25,5 +24,6 @@ global.i_lifesteal= mainhand_lifesteal + offhand_lifesteal + helm_lifesteal + ne
 global.i_spellvamp= mainhand_spellvamp + offhand_spellvamp + helm_spellvamp + necklace_spellvamp + ring_zero_spellvamp + ring_one_spellvamp + gem_zero_spellvamp + gem_one_spellvamp + gem_two_spellvamp + gem_three_spellvamp
 global.i_hpregen= mainhand_hpregen + offhand_hpregen + helm_hpregen + necklace_hpregen + ring_zero_hpregen + ring_one_hpregen + gem_zero_hpregen + gem_one_hpregen + gem_two_hpregen + gem_three_hpregen
 global.i_spregen= mainhand_spregen + offhand_spregen + helm_spregen + necklace_spregen + ring_zero_spregen + ring_one_spregen + gem_zero_spregen + gem_one_spregen + gem_two_spregen + gem_three_spregen
+//global.i_jump
 
 

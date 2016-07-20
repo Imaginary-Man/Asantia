@@ -23,7 +23,7 @@ if step>0
 if step<37
 {
  image_angle=(image_xscale*-1)*(step*5)
- blur(0.02,0.2)
+ blur(0.02,0.2,c_white,false)
 }
 
 

@@ -27,7 +27,7 @@ if step<20
 {
  y=obj_player.y+3
  x=obj_player.x-(10*image_xscale)-(step*-obj_player.image_xscale)
- blur(0.02,0.1)
+ blur(0.02,0.1,c_white,false)
 }
 
 
@@ -35,7 +35,7 @@ if step>30
 {
  y=obj_player.y+3
  x=obj_player.x-((step-30)*(obj_player.image_xscale*2))
- blur(0.02,0.2) 
+ blur(0.02,0.2,c_white,false) 
 }
 
 

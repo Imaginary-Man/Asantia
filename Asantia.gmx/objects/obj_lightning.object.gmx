@@ -26,13 +26,9 @@
           <argument>
             <kind>1</kind>
             <string>///light init
-dalpha=0
-daylenght=5
-nightlenght=2
 global.flash=0
 //surface
 global.day_night=surface_create(room_width,room_height)
-
 
 </string>
           </argument>
@@ -57,21 +53,16 @@ global.day_night=surface_create(room_width,room_height)
           <argument>
             <kind>1</kind>
             <string>///set alpha border
-if keyboard_check(vk_numpad1) and dalpha&gt;=10
-{
- dalpha-=5
-}
 
-if keyboard_check(vk_numpad2) and dalpha&lt;=190
-{
- dalpha+=5
-}
-
-
+//flash
 if global.flash&gt;0
 {
  global.flash-=2
 }
+
+
+
+
 </string>
           </argument>
         </arguments>
@@ -102,11 +93,11 @@ if !surface_exists(global.day_night)
  else
 {
  surface_set_target(global.day_night) 
- draw_clear(make_colour_rgb(dalpha-global.flash,dalpha-global.flash,dalpha-global.flash))
- light_object() 
+ draw_clear(c_white)
+ light_object()
  surface_reset_target()
  draw_set_blend_mode(bm_subtract)
- draw_surface_ext(global.day_night,0,0,1,1,0,c_white,1)
+ draw_surface_ext(global.day_night,0,0,1,1,0,make_colour_rgb((global.alpha*220)-global.flash,(global.alpha*220)-global.flash,(global.alpha*220)-global.flash),1)//global.alpha
  draw_set_blend_mode(bm_normal)
 }
 </string>

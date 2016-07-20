@@ -18,7 +18,7 @@ if step=0
 if step>20 and step<40
 {
  image_angle-=10*image_xscale
- blur(0.02,0.2)
+ blur(0.02,0.2,c_white,false)
 }
 
 if step>30 and shot=false

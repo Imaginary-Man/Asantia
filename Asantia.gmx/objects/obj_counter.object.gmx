@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-1000000</depth>
+  <depth>-100000000</depth>
   <persistent>0</persistent>
   <parentName>parent_text</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -26,9 +26,9 @@
           <argument>
             <kind>1</kind>
             <string>///start
-depth=y-100000
 vspeed=random_range(-0.3,-0.5)
 alarm[0]=25
+spr=spr_none
 </string>
           </argument>
         </arguments>
@@ -130,6 +130,7 @@ if crit=1
             <string>///sync
 if !gms_instance_is_owner(id)
 {
+ element=ds_map_find_value(variable_map,"element")
  text=ds_map_find_value(variable_map,"text")
  color=ds_map_find_value(variable_map,"color")
  font=ds_map_find_value(variable_map,"font")
@@ -159,10 +160,50 @@ if !gms_instance_is_owner(id)
           <argument>
             <kind>1</kind>
             <string>///draw
-draw_set_halign(fa_center)
-draw_set_valign(fa_center)
+draw_set_halign(fa_left)
+draw_set_valign(fa_top)
 draw_set_font(global.normalfont)
 draw_text_transformed_colour(x,y,round(text),1+(crit/2),1+(crit/2),0,color,color,color,color,image_alpha)
+
+///draw_element
+if element=NORMAL {spr=spr_none}
+if element=FIRE {spr=e_fire_icon}
+if element=WATER {spr=e_water_icon}
+if element=EARTH {spr=e_earth_icon}
+if element=ELECTRO {spr=e_electro_icon}
+if element=WIND {spr=e_wind_icon}
+if element=DEATH {spr=e_death_icon}
+if element=LIFE {spr=e_life_icon}
+if element=SACRIFICE {spr=e_sacrifice_icon}
+if element=FLAME {spr=e_flame_icon}
+if element=BLAZE {spr=e_blaze_icon}
+if element=SCORCH {spr=e_scorch_icon}
+if element=BLAST {spr=e_blast_icon}
+if element=SMOKE {spr=e_smoke_icon}
+if element=TORMENT {spr=e_torment_icon}
+if element=TORNADO {spr=e_tornado_icon}
+if element=GROSS {spr=e_gross_icon}
+if element=STORM {spr=e_storm_icon}
+if element=ICE {spr=e_ice_icon}
+if element=DREAD {spr=e_dread_icon}
+if element=MOTION {spr=e_motion_icon}
+if element=GRAVITY {spr=e_gravity_icon}
+if element=CARBON {spr=e_carbon_icon}
+if element=ANCIENT {spr=e_ancient_icon}
+if element=DECAY {spr=e_decay_icon}
+if element=TITAN {spr=e_titan_icon}
+if element=THUNDER {spr=e_thunder_icon}
+if element=CONDUCTION {spr=e_conduction_icon}
+if element=VOLTAGE {spr=e_voltage_icon}
+if element=HOPE {spr=e_hope_icon}
+if element=TIDAL {spr=e_tidal_icon}
+if element=POISON {spr=e_poison_icon}
+if element=BLOOD {spr=e_blood_icon}
+if element=LIGHT {spr=e_light_icon}
+if element=DARKNESS {spr=e_darkness_icon}
+if element=CHAOS {spr=e_chaos_icon}
+
+draw_sprite_ext(spr,-1,x-14,y,image_xscale,image_yscale,image_angle,c_white,image_alpha)
 </string>
           </argument>
         </arguments>

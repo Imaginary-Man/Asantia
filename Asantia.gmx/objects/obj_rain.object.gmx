@@ -2,7 +2,7 @@
 <object>
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
-  <visible>-1</visible>
+  <visible>0</visible>
   <depth>0</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
@@ -27,13 +27,13 @@
             <kind>1</kind>
             <string>///Rain System
 partRain_sys = part_system_create();
-storm        = false
+storm        = true
 //Rain Particle
 partRain = part_type_create();
 part_type_shape(partRain,pt_shape_line);
-part_type_size(partRain,0.05,0.1,0,0);
+part_type_size(partRain,0.05,0.15,0,0);
 part_type_color2(partRain,make_color_rgb(8,138,203),make_color_rgb(135,216,255));
-part_type_alpha2(partRain,1,.5);
+part_type_alpha2(partRain,1,1);
 part_type_gravity(partRain,0.1,270);
 part_type_speed(partRain,0.1,0.5,0,0);
 part_type_direction(partRain,250,330,0,1);

@@ -43,6 +43,12 @@ weapon_xscale=1
 weapon_yscale=1
 weaponstate=0
 shot=false
+
+
+//stats
+level=1
+hp=10
+mhp=15
 </string>
           </argument>
         </arguments>
@@ -74,6 +80,11 @@ image_yscale=gms_other_get(player_id,"img_yscale")
 player_angle=gms_other_get(player_id,"player_angle")
 player_color=gms_other_get(player_id,"playercolor")
 player_eyes=gms_other_get(player_id,"player_eyes")
+
+//stats
+level=gms_other_get(player_id,"level")
+hp=gms_other_get(player_id,"hp")
+mhp=gms_other_get(player_id,"mhp")
 
 //helm &amp; back
 helm=gms_other_get(player_id,"helm")
@@ -178,6 +189,13 @@ if weaponstate!=3
  {
   draw_sprite_ext(weapon_index,-1,weaponx,weapony,weapon_xscale,weapon_yscale,weapon_angle,c_white,1)
  }
+}
+
+//name
+if global.ui_show=true
+{
+ draw_name(x,y-17,c_white,c_black,1,gms_other_get(player_id,"name"),level)
+ if mhp&gt;0 and hp&gt;=0 {draw_bar(x-10,y-21,20,0.5,hp,mhp,c_lime)}
 }
 </string>
           </argument>

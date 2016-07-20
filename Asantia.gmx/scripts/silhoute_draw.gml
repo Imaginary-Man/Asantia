@@ -1,5 +1,4 @@
 ///Masking & Silhouetting.
-
 if (sprite_masking) {
     draw_sprite_ext(sprite_index  ,image_index  ,x  ,y  ,image_xscale  ,image_yscale  ,image_angle  ,c_white  ,1);    //Draw the obscuring object if you want to make the silhouette masked by the obscuring object.
 }

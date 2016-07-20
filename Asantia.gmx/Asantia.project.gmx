@@ -24,16 +24,32 @@
       <sprite>sprites\spr_firefly_wings</sprite>
     </sprites>
     <sprite>sprites\spr_player_mask</sprite>
-    <sprite>sprites\spr_block</sprite>
-    <sprite>sprites\spr_circle</sprite>
+    <sprites name="sort_sprites">
+      <sprite>sprites\spr_block</sprite>
+      <sprite>sprites\spr_plus</sprite>
+      <sprite>sprites\spr_circle</sprite>
+      <sprite>sprites\spr_triangle</sprite>
+      <sprite>sprites\spr_circle_p</sprite>
+      <sprite>sprites\spr_circle_s</sprite>
+      <sprite>sprites\spr_circle_c</sprite>
+    </sprites>
     <sprites name="Helmet">
       <sprite>sprites\helm_example</sprite>
+      <sprite>sprites\nameless_1</sprite>
       <sprite>sprites\hair_1</sprite>
       <sprite>sprites\helm_deathleaf_2</sprite>
       <sprite>sprites\helm_deathleaf_1</sprite>
       <sprite>sprites\helm_firecage</sprite>
       <sprite>sprites\helm_waterweed</sprite>
       <sprite>sprites\helm_executioner</sprite>
+      <sprite>sprites\helm_grail</sprite>
+      <sprite>sprites\helm_nightmare</sprite>
+      <sprite>sprites\helm_templeguard</sprite>
+      <sprite>sprites\helm_knuggle</sprite>
+      <sprite>sprites\helm_forgotten</sprite>
+      <sprite>sprites\helm_knight_2</sprite>
+      <sprite>sprites\helm_warlord</sprite>
+      <sprite>sprites\helm_snowguard</sprite>
       <sprites name="old">
         <sprite>sprites\helm_user5_6</sprite>
         <sprite>sprites\helm_user5_5</sprite>
@@ -69,12 +85,6 @@
       <sprite>sprites\spr_move_click_1</sprite>
       <sprite>sprites\spr_move_click_2</sprite>
     </sprites>
-    <sprites name="trees">
-      <sprite>sprites\spr_tree_1</sprite>
-      <sprite>sprites\spr_tree_1_top</sprite>
-      <sprite>sprites\spr_tree_1_cut</sprite>
-      <sprite>sprites\spr_tree_1_mask</sprite>
-    </sprites>
     <sprites name="weapons">
       <sprites name="bow">
         <sprite>sprites\bow_firecage</sprite>
@@ -87,11 +97,14 @@
         <sprite>sprites\gs_firecage_1</sprite>
         <sprite>sprites\gs_firecage_2</sprite>
         <sprite>sprites\gs_waterweed</sprite>
+        <sprite>sprites\gs_warlord</sprite>
+        <sprite>sprites\gs_grail</sprite>
         <sprite>sprites\gs_executioner</sprite>
       </sprites>
       <sprites name="scythe">
         <sprite>sprites\sc_deathleaf_1</sprite>
         <sprite>sprites\sc_waterweed</sprite>
+        <sprite>sprites\sc_grail</sprite>
         <sprite>sprites\sc_executioner</sprite>
       </sprites>
       <sprites name="greataxe">
@@ -121,17 +134,22 @@
       <sprites name="lance">
         <sprite>sprites\la_executioner</sprite>
       </sprites>
+      <sprites name="warhammer">
+        <sprite>sprites\gh_warlord</sprite>
+      </sprites>
       <sprite>sprites\spr_weapon_example</sprite>
     </sprites>
     <sprites name="backslot">
       <sprite>sprites\back_example</sprite>
       <sprite>sprites\back_holy_halo_1</sprite>
+      <sprite>sprites\back_warlord</sprite>
       <sprite>sprites\back_holy_wings_1</sprite>
+      <sprite>sprites\back_grail</sprite>
       <sprite>sprites\back_darkness_wings_1</sprite>
       <sprite>sprites\back_death_wings_1</sprite>
       <sprite>sprites\back_executioner</sprite>
     </sprites>
-    <sprites name="decoration">
+    <sprites name="overworld / decoration">
       <sprite>sprites\deco_esylia_leaves</sprite>
       <sprite>sprites\deco_esylia_mushrooms</sprite>
       <sprite>sprites\deco_esylia_logs</sprite>
@@ -140,6 +158,20 @@
       <sprite>sprites\deco_esylia_leaves_ani</sprite>
       <sprite>sprites\spr_deco_grass</sprite>
       <sprite>sprites\deco_esylia_flowers3</sprite>
+      <sprites name="trees">
+        <sprite>sprites\spr_tree_1</sprite>
+        <sprite>sprites\spr_tree_1_top</sprite>
+        <sprite>sprites\spr_tree_1_cut</sprite>
+        <sprite>sprites\spr_tree_1_mask</sprite>
+        <sprite>sprites\spr_levelup</sprite>
+        <sprite>sprites\spr_mainmenu_titledeco</sprite>
+        <sprite>sprites\spr_gathering_particle</sprite>
+        <sprite>sprites\spr_tree1_bottom</sprite>
+        <sprite>sprites\spr_tree1_middle</sprite>
+        <sprite>sprites\spr_tree1_top</sprite>
+        <sprite>sprites\spr_tree2_top</sprite>
+        <sprite>sprites\spr_tree3_top</sprite>
+      </sprites>
     </sprites>
     <sprites name="bosses">
       <sprite>sprites\boss_wurm_walk</sprite>
@@ -155,18 +187,18 @@
         <sprite>sprites\mob_trufflin_walk</sprite>
       </sprites>
       <sprites name="Larvin">
+        <sprite>sprites\mob_larvin_mask</sprite>
         <sprite>sprites\mob_larvin_attack</sprite>
         <sprite>sprites\mob_larvin_die</sprite>
         <sprite>sprites\mob_larvin_walk</sprite>
-        <sprite>sprites\mob_larvin_mask</sprite>
         <sprite>sprites\mob_larvin_idle</sprite>
       </sprites>
       <sprites name="Cave_bat">
+        <sprite>sprites\mob_bat_mask</sprite>
         <sprite>sprites\mob_bat_walk</sprite>
         <sprite>sprites\mob_bat_idle</sprite>
         <sprite>sprites\mob_bat_attack</sprite>
         <sprite>sprites\mob_bat_die</sprite>
-        <sprite>sprites\mob_bat_mask</sprite>
       </sprites>
       <sprite>sprites\spr_mole</sprite>
       <sprite>sprites\mob_wurm_walk</sprite>
@@ -192,13 +224,19 @@
       <sprite>sprites\spr_mouse</sprite>
       <sprite>sprites\spr_mouse_2</sprite>
       <sprite>sprites\ui_inventory</sprite>
+      <sprite>sprites\spr_mainmenu_exit</sprite>
+      <sprite>sprites\spr_mainmenu_characterslot</sprite>
       <sprite>sprites\ui_bank</sprite>
+      <sprite>sprites\spr_mainmenu_characternew</sprite>
       <sprite>sprites\ui_stats</sprite>
       <sprite>sprites\ui_proffesions</sprite>
       <sprite>sprites\ui_example</sprite>
       <sprite>sprites\sprite170</sprite>
       <sprite>sprites\ui_stats_xp_bar</sprite>
       <sprite>sprites\spr_mouse_3</sprite>
+      <sprite>sprites\ui_font_1</sprite>
+      <sprite>sprites\ui_font_2</sprite>
+      <sprite>sprites\ui_font_3</sprite>
     </sprites>
     <sprites name="font">
       <sprite>sprites\spr_font_2</sprite>
@@ -241,37 +279,72 @@
     <sprites name="effect">
       <sprite>sprites\spr_trail</sprite>
     </sprites>
-    <sprites name="joel unused">
-      <sprite>sprites\helm_light_kind_</sprite>
-      <sprite>sprites\sword_light_kind</sprite>
-      <sprite>sprites\zijs_light_kind</sprite>
-      <sprite>sprites\helm_nightmare</sprite>
-      <sprite>sprites\helm_gardian_</sprite>
-      <sprite>sprites\cape_light_kind</sprite>
-      <sprite>sprites\knuggle</sprite>
-      <sprite>sprites\lord_of_war_hammer</sprite>
-      <sprite>sprites\lord_of_war</sprite>
-      <sprite>sprites\lord_of_war_cape</sprite>
-      <sprite>sprites\lord_of_war_great_sword</sprite>
-      <sprite>sprites\ice_helm</sprite>
-      <sprite>sprites\basic_knight_helm</sprite>
-      <sprite>sprites\forgatten_lord</sprite>
-    </sprites>
     <sprite>sprites\spr_lightning_bolt</sprite>
     <sprites name="mind_lynx">
-      <sprite>sprites\mind_test</sprite>
+      <sprite>sprites\m_test</sprite>
+      <sprite>sprites\m_netherflare</sprite>
+    </sprites>
+    <sprites name="element">
+      <sprite>sprites\e_fire_icon</sprite>
+      <sprite>sprites\e_water_icon</sprite>
+      <sprite>sprites\e_earth_icon</sprite>
+      <sprite>sprites\e_electro_icon</sprite>
+      <sprite>sprites\e_wind_icon</sprite>
+      <sprite>sprites\e_death_icon</sprite>
+      <sprite>sprites\e_life_icon</sprite>
+      <sprites name="combined">
+        <sprite>sprites\e_sacrifice_icon</sprite>
+        <sprite>sprites\e_flame_icon</sprite>
+        <sprite>sprites\e_blaze_icon</sprite>
+        <sprite>sprites\e_scorch_icon</sprite>
+        <sprite>sprites\e_blast_icon</sprite>
+        <sprite>sprites\e_smoke_icon</sprite>
+        <sprite>sprites\e_torment_icon</sprite>
+        <sprite>sprites\e_tornado_icon</sprite>
+        <sprite>sprites\e_gross_icon</sprite>
+        <sprite>sprites\e_storm_icon</sprite>
+        <sprite>sprites\e_ice_icon</sprite>
+        <sprite>sprites\e_dread_icon</sprite>
+        <sprite>sprites\e_motion_icon</sprite>
+        <sprite>sprites\e_gravity_icon</sprite>
+        <sprite>sprites\e_carbon_icon</sprite>
+        <sprite>sprites\e_ancient_icon</sprite>
+        <sprite>sprites\e_decay_icon</sprite>
+        <sprite>sprites\e_titan_icon</sprite>
+        <sprite>sprites\e_thunder_icon</sprite>
+        <sprite>sprites\e_conduction_icon</sprite>
+        <sprite>sprites\e_voltage_icon</sprite>
+        <sprite>sprites\e_hope_icon</sprite>
+        <sprite>sprites\e_tidal_icon</sprite>
+        <sprite>sprites\e_poison_icon</sprite>
+        <sprite>sprites\e_blood_icon</sprite>
+        <sprite>sprites\e_light_icon</sprite>
+        <sprite>sprites\e_darkness_icon</sprite>
+        <sprite>sprites\e_chaos_icon</sprite>
+      </sprites>
+      <sprites name="extra">
+        <sprite>sprites\e_passion_icon</sprite>
+        <sprite>sprites\e_titan_icon_1</sprite>
+        <sprite>sprites\e_poison_icon_1</sprite>
+        <sprite>sprites\e_death_icon_11</sprite>
+        <sprite>sprites\e_life_icon_1</sprite>
+        <sprite>sprites\e_water_icon_1</sprite>
+      </sprites>
     </sprites>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
     <scripts name="custom_codes">
+      <script>scripts\time_loop.gml</script>
       <script>scripts\counter.gml</script>
       <script>scripts\counter_heal.gml</script>
       <script>scripts\counter_heal_mana.gml</script>
       <script>scripts\writer.gml</script>
       <script>scripts\plus_exp.gml</script>
       <script>scripts\draw_bar.gml</script>
+      <script>scripts\draw_name.gml</script>
+      <script>scripts\crit_calculate.gml</script>
     </scripts>
     <scripts name="options">
       <script>scripts\key_init.gml</script>
@@ -297,7 +370,6 @@
       <script>scripts\stats_init.gml</script>
       <script>scripts\stats_step.gml</script>
       <script>scripts\ad_calculate.gml</script>
-      <script>scripts\crit_calculate.gml</script>
       <script>scripts\player_appearance.gml</script>
     </scripts>
     <script>scripts\User_Content.gml</script>
@@ -341,6 +413,8 @@
     <scripts name="item">
       <script>scripts\item_init.gml</script>
       <script>scripts\item_add.gml</script>
+      <script>scripts\item_check.gml</script>
+      <script>scripts\item_delete.gml</script>
       <script>scripts\item_add_bank.gml</script>
       <script>scripts\draw_rarity.gml</script>
       <scripts name="items">
@@ -394,6 +468,7 @@
     </scripts>
     <scripts name="Lynx">
       <script>scripts\lynx_execute.gml</script>
+      <script>scripts\mind_execute_particle.gml</script>
       <script>scripts\mind_execute.gml</script>
       <script>scripts\lynx_step.gml</script>
       <scripts name="element">
@@ -404,27 +479,32 @@
         <script>scripts\body_uppercut.gml</script>
       </scripts>
       <scripts name="mind">
-        <script>scripts\mind_netherstripes.gml</script>
+        <scripts name="netherflare">
+          <script>scripts\mind_netherflare.gml</script>
+          <script>scripts\mind_netherflare_s.gml</script>
+          <script>scripts\mind_netherflare_p.gml</script>
+          <script>scripts\mind_netherflare_b.gml</script>
+        </scripts>
       </scripts>
     </scripts>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ui_stats_font</font>
     <font>fonts\ui_item_stats</font>
-    <font>fonts\Arial_Black</font>
     <fonts name="GMS">
       <font>fonts\GMS_font_1</font>
       <font>fonts\GMS_font_2</font>
       <font>fonts\GMS_font_3</font>
     </fonts>
+    <font>fonts\ingame_name_font</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_player</object>
     <object>objects\obj_other_player</object>
+    <object>objects\obj_firefly</object>
     <object>objects\obj_helmet</object>
     <object>objects\obj_back</object>
     <objects name="cam">
-      <object>objects\obj_firefly</object>
       <object>objects\obj_cam</object>
       <object>objects\obj_cam_mover</object>
     </objects>
@@ -454,6 +534,7 @@
       <object>objects\obj_shadow</object>
       <object>objects\obj_lightning</object>
       <object>objects\ITEM</object>
+      <object>objects\obj_silhoute</object>
     </objects>
     <objects name="Decoration">
       <object>objects\obj_deco_Esylia_leaves</object>
@@ -503,6 +584,8 @@
     </objects>
     <objects name="Lynx System">
       <object>objects\LYNX</object>
+      <object>objects\MIND_P</object>
+      <object>objects\ELEMENT_P</object>
       <object>objects\MIND</object>
     </objects>
   </objects>
@@ -511,23 +594,61 @@
     <room>rooms\rm_login</room>
     <room>rooms\test_room</room>
   </rooms>
-  <constants number="16">
+  <constants number="54">
+    <constant name="T_MINUTE">60</constant>
+    <constant name="T_HOUR">3600</constant>
+    <constant name="oak_log">9</constant>
+    <constant name="lapiz_ring">6</constant>
+    <constant name="lapiz_necklace">5</constant>
+    <constant name="holy_gem">3</constant>
+    <constant name="waterweed_helmet">1</constant>
+    <constant name="waterweed_ringblade">4</constant>
+    <constant name="waterweed_bow">2</constant>
+    <constant name="waterweed_shield">11</constant>
+    <constant name="waterweed_shortsword">10</constant>
+    <constant name="waterweed_scythe">8</constant>
+    <constant name="waterweed_greataxe">0</constant>
+    <constant name="waterweed_greatsword">7</constant>
     <constant name="weaponII">obj_offhand_parent</constant>
     <constant name="weaponI">obj_weapon_parent</constant>
-    <constant name="C_DEATH">make_colour_rgb(0,50,0)</constant>
-    <constant name="C_EARTH">make_colour_rgb(75,50,0)</constant>
-    <constant name="C_ELECTRO">make_colour_rgb(255,255,0)</constant>
-    <constant name="C_FIRE">make_colour_rgb(255,0,0)</constant>
-    <constant name="C_LIFE">make_colour_rgb(255,230,200)</constant>
-    <constant name="C_WATER">make_colour_rgb(0,0,255)</constant>
-    <constant name="C_WIND">make_colour_rgb(155,255,155)</constant>
-    <constant name="DEATH">1</constant>
-    <constant name="EARTH">2</constant>
-    <constant name="ELECTRO">3</constant>
-    <constant name="FIRE">4</constant>
-    <constant name="LIFE">5</constant>
-    <constant name="WATER">6</constant>
-    <constant name="WIND">7</constant>
+    <constant name="NORMAL">0</constant>
+    <constant name="FIRE">1</constant>
+    <constant name="WATER">2</constant>
+    <constant name="EARTH">3</constant>
+    <constant name="ELECTRO">4</constant>
+    <constant name="WIND">5</constant>
+    <constant name="DEATH">6</constant>
+    <constant name="LIFE">7</constant>
+    <constant name="SACRIFICE">8</constant>
+    <constant name="FLAME">9</constant>
+    <constant name="BLAZE">10</constant>
+    <constant name="SCORCH">11</constant>
+    <constant name="BLAST">12</constant>
+    <constant name="SMOKE">13</constant>
+    <constant name="TORMENT">14</constant>
+    <constant name="TORNADO">15</constant>
+    <constant name="GROSS">16</constant>
+    <constant name="STORM">17</constant>
+    <constant name="ICE">18</constant>
+    <constant name="DREAD">19</constant>
+    <constant name="MOTION">20</constant>
+    <constant name="GRAVITY">21</constant>
+    <constant name="CARBON">22</constant>
+    <constant name="ANCIENT">23</constant>
+    <constant name="DECAY">24</constant>
+    <constant name="TITAN">25</constant>
+    <constant name="THUNDER">26</constant>
+    <constant name="CONDUCTION">27</constant>
+    <constant name="VOLTAGE">28</constant>
+    <constant name="TIDAL">29</constant>
+    <constant name="HOPE">30</constant>
+    <constant name="POISON">31</constant>
+    <constant name="BLOOD">32</constant>
+    <constant name="LIGHT">33</constant>
+    <constant name="DARKNESS">34</constant>
+    <constant name="CHAOS">35</constant>
+    <constant name="HOLY">36</constant>
+    <constant name="UNHOLY">37</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>

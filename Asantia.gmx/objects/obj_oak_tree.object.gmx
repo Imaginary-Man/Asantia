@@ -41,10 +41,6 @@ sprite_cut=asset_get_index(string(sprite_get_name(sprite_index))+"_cut")
 sprite_top=asset_get_index(string(sprite_get_name(sprite_index))+"_top") 
 
 
-//silhouette
-
-
-
 </string>
           </argument>
         </arguments>
