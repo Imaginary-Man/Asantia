@@ -29,7 +29,6 @@
 Sname=part_system_create()
 part_system_depth(Sname,-10000)
 script_execute(asset_get_index(string(mind)+"_p"))
-part_system_update(Sname)
 instance_destroy()
 </string>
           </argument>

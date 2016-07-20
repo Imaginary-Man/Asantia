@@ -11,10 +11,10 @@ m.alarm[0]=1
 m.color=global.c_element[global.element_]
 m.element=global.element_
 //sync
-gms_instance_sync_var_add("dies",m.dies)
-gms_instance_sync_var_add("mind",m.mind)
-gms_instance_sync_var_add("element",m.element)
-gms_instance_sync_var_add("color",m.color)
-gms_instance_sync_var_add("lightsource",m.lightsource)
-gms_instance_sync(m,is_full)
+//gms_instance_sync_var_add("dies",m.dies)
+//gms_instance_sync_var_add("mind",m.mind)
+//gms_instance_sync_var_add("element",m.element)
+//gms_instance_sync_var_add("color",m.color)
+//gms_instance_sync_var_add("lightsource",m.lightsource)
+//gms_instance_sync(m,is_full)
 

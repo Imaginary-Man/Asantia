@@ -64,10 +64,10 @@ im_angle=0
 
 
 ///sync
-gms_instance_set(id,"hp",hp)
-gms_instance_set(id,"attacked",attacked)
-gms_instance_set(id,"target",target)
-gms_instance_set(id,"im_angle",im_angle)
+//gms_instance_set(id,"hp",hp)
+//gms_instance_set(id,"attacked",attacked)
+//gms_instance_set(id,"target",target)
+//gms_instance_set(id,"im_angle",im_angle)
 </string>
           </argument>
         </arguments>
@@ -91,7 +91,7 @@ gms_instance_set(id,"im_angle",im_angle)
           <argument>
             <kind>1</kind>
             <string>///exp
-if gms_self_ismaster()
+//if gms_self_ismaster()
 {
  plus_exp(obj_player.x,obj_player.y-12,c_yellow,0.5)
  global.xp+=xp
@@ -194,7 +194,7 @@ set_random=true
 if hp&lt;0
 {
  hp=0
- if gms_instance_is_owner(id)
+ //if gms_instance_is_owner(id)
  {
   if state!=5 {state=5}
  }
@@ -222,19 +222,19 @@ if hp&lt;0
           <argument>
             <kind>1</kind>
             <string>///states
-if gms_instance_is_owner(id)
+//if gms_instance_is_owner(id)
 {
  //sync
- gms_instance_set_real(id,"image_xscale",image_xscale)
- gms_instance_set_real(id,"image_yscale",image_yscale)
- gms_instance_set_real(id,"image_angle",image_angle)
- gms_instance_set_real(id,"image_speed",image_speed)
- gms_instance_set_real(id,"sprite_index",sprite_index)
- gms_instance_set_real(id,"image_alpha",image_alpha)
- gms_instance_set_real(id,"im_angle",im_angle)
- target=gms_instance_get_real(id,"target")
- hp=gms_instance_get_real(id,"hp")
- attacked=gms_instance_get_real(id,"attacked")
+ //gms_instance_set_real(id,"image_xscale",image_xscale)
+ //gms_instance_set_real(id,"image_yscale",image_yscale)
+ //gms_instance_set_real(id,"image_angle",image_angle)
+ //gms_instance_set_real(id,"image_speed",image_speed)
+ //gms_instance_set_real(id,"sprite_index",sprite_index)
+ //gms_instance_set_real(id,"image_alpha",image_alpha)
+ //gms_instance_set_real(id,"im_angle",im_angle)
+ //target=gms_instance_get_real(id,"target")
+ //hp=gms_instance_get_real(id,"hp")
+ //attacked=gms_instance_get_real(id,"attacked")
  //
  switch (state)
  {
@@ -259,7 +259,7 @@ if gms_instance_is_owner(id)
   case 1://walk
   {
    wiggle_anim+=wiggle
-   im_angle=sin(wiggle_anim)*4;  
+   im_angle=sin(wiggle_anim)*4
    //
    alarm[0]=-1
    sprite_index=spr_walk
@@ -288,10 +288,10 @@ if gms_instance_is_owner(id)
   alarm[1]=-1
   if sprite_index!=spr_walk
   {
-   sprite_index=spr_walk
-   image_speed=walk_image_speed
    wiggle_anim+=wiggle
-   im_angle=sin(wiggle_anim)*4;    
+   im_angle=sin(wiggle_anim)*4
+   sprite_index=spr_walk
+   image_speed=walk_image_speed    
   }
   if distance_to_point(target.x,target.y+7)&lt;attack_range
   {
@@ -310,12 +310,10 @@ if gms_instance_is_owner(id)
    {
     image_xscale=1
    }  
-  break;
+   break;
   }
   case 3://attack
   {
-   wiggle_anim=0;
-   im_angle=0;   
    if sprite_index!=spr_attack
    {
     sprite_index=spr_attack
@@ -361,7 +359,7 @@ if gms_instance_is_owner(id)
    if distancestart&lt;=10
    {
     attacked=false
-    gms_instance_set_real(id,"attacked",attacked)
+    //gms_instance_set_real(id,"attacked",attacked)
     state=0
    }  
    ///image
@@ -396,19 +394,19 @@ if gms_instance_is_owner(id)
   }
  }
 }
- else
-{
- image_xscale=gms_instance_get_real(id,"image_xscale")
- image_yscale=gms_instance_get_real(id,"image_yscale")
- image_angle=gms_instance_get_real(id,"image_angle")
- image_speed=gms_instance_get_real(id,"image_speed")
- sprite_index=gms_instance_get_real(id,"sprite_index")
- image_alpha=gms_instance_get_real(id,"image_alpha")
- hp=gms_instance_get_real(id,"hp")
- im_angle=gms_instance_get_real(id,"im_angle")
- target=gms_instance_get_real(id,"target")
- attacked=gms_instance_get_real(id,"attacked")
-}
+ //else
+//{
+ //image_xscale=gms_instance_get_real(id,"image_xscale")
+ //image_yscale=gms_instance_get_real(id,"image_yscale")
+ //image_angle=gms_instance_get_real(id,"image_angle")
+ //image_speed=gms_instance_get_real(id,"image_speed")
+ //sprite_index=gms_instance_get_real(id,"sprite_index")
+ //image_alpha=gms_instance_get_real(id,"image_alpha")
+ //hp=gms_instance_get_real(id,"hp")
+ //im_angle=gms_instance_get_real(id,"im_angle")
+ //target=gms_instance_get_real(id,"target")
+ //attacked=gms_instance_get_real(id,"attacked")
+//}
 
 </string>
           </argument>
@@ -431,7 +429,7 @@ if gms_instance_is_owner(id)
           <argument>
             <kind>1</kind>
             <string>///walk back to start if to far
-if gms_instance_is_owner(id)
+//if gms_instance_is_owner(id)
 {
  if distance_to_point(start_x,start_y)&gt;=50 and (state=0 or state=1)
  {
@@ -483,7 +481,7 @@ if gms_instance_is_owner(id)
           <argument>
             <kind>1</kind>
             <string>///agro
-if gms_instance_is_owner(id)
+//if gms_instance_is_owner(id)
 {
  if agressive=true
  {
@@ -501,7 +499,7 @@ if gms_instance_is_owner(id)
    {
     state=0
     attacked=0
-    gms_instance_set(id,"attacked",attacked)
+    //gms_instance_set(id,"attacked",attacked)
    }
   }
  }  
@@ -558,7 +556,7 @@ depth=y*-1
           <argument>
             <kind>1</kind>
             <string>///move_outside
-if gms_instance_is_owner(id)
+//if gms_instance_is_owner(id)
 {
  if instance_place(x,y,all)
  {

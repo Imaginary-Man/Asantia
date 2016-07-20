@@ -893,7 +893,7 @@ if ui_select_click(d_width-(global.ui_size*95),d_height-(global.ui_size*10),6)//
 //stats
 if ui_select_click(d_width-(global.ui_size*75),d_height-(global.ui_size*10),6)//friends
 {
- gms_show_friends()
+ //gms_show_friends()
 }
 
 if show_stats=true//stats esc button

@@ -51,7 +51,7 @@ spin=30*image_xscale
           <argument>
             <kind>1</kind>
             <string>///
-if gms_instance_is_owner(id)
+//if gms_instance_is_owner(id)
 {
  if instance_exists(n)
  {
@@ -91,11 +91,11 @@ if gms_instance_is_owner(id)
             <kind>1</kind>
             <string>///move
 
-if gms_instance_is_owner(id)
+//if gms_instance_is_owner(id)
 {
  depth=obj_weapon_parent.depth
  image_angle-=spin
- gms_instance_set(id,"image_angle",image_angle)
+ //gms_instance_set(id,"image_angle",image_angle)
  if instance_exists(n) and instance_exists(obj_ringblade)
  {
   distance=point_distance(x,y,n.x,n.y)
@@ -112,9 +112,9 @@ if gms_instance_is_owner(id)
     n.attacked=1
     n.hp-=global.dmg_basic_attack
     n.target=obj_player
-    gms_instance_set_real(n,"hp",n.hp)
-    gms_instance_set_real(n,"attacked",n.attacked)
-    gms_instance_set_real(n,"target",n.target)  
+    //gms_instance_set_real(n,"hp",n.hp)
+    //gms_instance_set_real(n,"attacked",n.attacked)
+    //gms_instance_set_real(n,"target",n.target)  
     counter(n.x,n.y-n.sprite_height,global.dmg_basic_attack,c_red,global.normalfont)
     if global.f_lifesteal&gt;0
     {
@@ -138,10 +138,10 @@ if gms_instance_is_owner(id)
  }
  if n.x&lt;x {image_xscale=-1} else {image_xscale=1}
 }
- else
-{
- image_angle=gms_instance_get(id,"image_angle")
-}
+ //else
+//{
+ //image_angle=gms_instance_get(id,"image_angle")
+//}
 
 </string>
           </argument>
@@ -194,6 +194,7 @@ if alarm[11]=-1
           <argument>
             <kind>1</kind>
             <string>///sync
+/*
 if !gms_instance_is_owner(id)
 {
  point=ds_map_find_value(variable_map,"point")

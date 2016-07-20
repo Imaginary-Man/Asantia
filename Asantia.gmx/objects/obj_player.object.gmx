@@ -407,6 +407,7 @@ if instance_place(x,y,all)
             <string>///set variables
 
 //player
+/*
 gms_self_set("playercolor",global.playercolor)
 gms_self_set("player_angle",global.player_angle)
 gms_self_set("img_xscale",image_xscale)
@@ -582,7 +583,7 @@ if global.debug=true
  draw_set_color(c_black)
 }
 
-if global.ui_show draw_name(x,y-17-jump,c_white,c_black,1,gms_self_name(),global.level)
+if global.ui_show draw_name(x,y-17-jump,c_white,c_black,1,"name",global.level)
 draw_sprite_ext(sprite_index,image_index,x,y-jump,image_xscale,image_yscale,global.player_angle,global.playercolor,global.playeralpha)
 
 </string>

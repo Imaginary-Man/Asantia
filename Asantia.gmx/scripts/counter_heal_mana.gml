@@ -4,4 +4,4 @@ i.text=argument2
 i.color=make_colour_rgb(114,228,255)
 i.font=global.normalfont
 i.scale=0.8
-gms_instance_sync(i,is_extended,"text","color","font","scale")
+//gms_instance_sync(i,is_extended,"text","color","font","scale")

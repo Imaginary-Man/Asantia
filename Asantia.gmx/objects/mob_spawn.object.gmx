@@ -26,12 +26,12 @@
           <argument>
             <kind>1</kind>
             <string>///create mob
-if gms_self_ismaster()
+//if gms_self_ismaster()
 {
  if instance_number(mob)&lt;count
  {
   mb=instance_create(random_range(x-range,x+range),random_range(y-range,y+range),mob)
-  gms_instance_sync(mb,is_full)
+  //gms_instance_sync(mb,is_full)
  }
 }
 </string>

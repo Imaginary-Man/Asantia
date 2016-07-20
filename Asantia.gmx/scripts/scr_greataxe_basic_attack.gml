@@ -37,9 +37,9 @@ if step>30 and shot=false
   n.attacked=1
   n.hp-=global.dmg_basic_attack
   n.target=obj_player
-  gms_instance_set_real(n,"hp",n.hp)
-  gms_instance_set_real(n,"target",n.target)
-  gms_instance_set_real(n,"attacked",n.attacked)
+  //gms_instance_set_real(n,"hp",n.hp)
+  //gms_instance_set_real(n,"target",n.target)
+  //gms_instance_set_real(n,"attacked",n.attacked)
   counter(n.x,n.y-n.sprite_height,global.dmg_basic_attack,c_red,global.normalfont)
   if global.f_lifesteal>0
   {

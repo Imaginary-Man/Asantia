@@ -152,6 +152,7 @@ script_execute(asset_get_index(string(mind)+"_b"))
           <argument>
             <kind>1</kind>
             <string>///ds map sync
+/*
 if !gms_instance_is_owner(id)
 {
  dies=ds_map_find_value(variable_map,"dies")

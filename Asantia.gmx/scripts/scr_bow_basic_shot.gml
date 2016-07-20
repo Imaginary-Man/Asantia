@@ -33,6 +33,6 @@ if step>20 and shot=false
  i.sprite_index=asset_get_index(string(sprite_get_name(sprite_index))+"_arrow")
  shot=true
  drawn=0
- gms_instance_sync_var_add("sprite_index",i.sprite_index)
- gms_instance_sync(i,is_full)
+ //gms_instance_sync_var_add("sprite_index",i.sprite_index)
+ //gms_instance_sync(i,is_full)
 }

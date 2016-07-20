@@ -3,10 +3,8 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
-  <datafiles number="1" name="datafiles"/>
-  <NewExtensions>
-    <extension index="0">extensions\GameMaker Server+(Windows)</extension>
-  </NewExtensions>
+  <datafiles number="2" name="datafiles"/>
+  <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprites name="other">
@@ -590,9 +588,9 @@
     </objects>
   </objects>
   <rooms name="rooms">
+    <room>rooms\test_room</room>
     <room>rooms\rm_init</room>
     <room>rooms\rm_login</room>
-    <room>rooms\test_room</room>
   </rooms>
   <constants number="54">
     <constant name="T_MINUTE">60</constant>

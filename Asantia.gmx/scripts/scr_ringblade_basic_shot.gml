@@ -32,7 +32,7 @@ if step>30 and shot=false
  shot=true
  drawn=0
  //
- gms_instance_sync_var_add("point",i.point)
- gms_instance_sync_var_add("sprite_index",i.sprite_index)
- gms_instance_sync(i,is_full)
+ //gms_instance_sync_var_add("point",i.point)
+ //gms_instance_sync_var_add("sprite_index",i.sprite_index)
+ //gms_instance_sync(i,is_full)
 }
