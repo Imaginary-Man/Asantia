@@ -26,7 +26,6 @@
           <argument>
             <kind>1</kind>
             <string>///connect to server
-net_init("dll_39dll.dll",true)
 
 </string>
           </argument>
