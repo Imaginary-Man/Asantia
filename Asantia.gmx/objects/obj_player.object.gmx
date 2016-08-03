@@ -470,6 +470,11 @@ hnet_message_start(9);
 hnet_write_byte16(-1);//The ID has to be here in te future, not important right now
 hnet_write_byte16(x);
 hnet_write_byte16(y);
+hnet_write_byte(global.player_angle);
+hnet_write_byte(image_xscale);
+hnet_write_byte(image_yscale);
+hnet_write_byte16(image_index);
+hnet_write_byte16(global.hp*100);
 hnet_message_send();
 </string>
           </argument>

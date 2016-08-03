@@ -46,9 +46,14 @@ hnet_profile_add(8, h_default, h_byte);
 
 //Updates x and y positions for player with id, x, y
 hnet_profile_create(9, -1);
-hnet_profile_add(9, h_default, h_byte16);
-hnet_profile_add(9, h_default, h_byte16);
-hnet_profile_add(9, h_default, h_byte16);
+hnet_profile_add(9, h_default, h_byte16);//Id
+hnet_profile_add(9, h_default, h_byte16);//X
+hnet_profile_add(9, h_default, h_byte16);//Y
+hnet_profile_add(9, h_default, h_byte);//Image_angle
+hnet_profile_add(9, h_default, h_byte);//Image_xscale
+hnet_profile_add(9, h_default, h_byte);//Image_yscale
+hnet_profile_add(9, h_default, h_byte16);//Image_index
+hnet_profile_add(9, h_default, h_byte16);//Hp
 
 var name = "test";
 

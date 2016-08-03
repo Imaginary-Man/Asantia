@@ -53,18 +53,35 @@ loginserver_socket_object = function(){
 				var id = buffer.read();
 				var new_x = buffer.read();
 				var new_y = buffer.read();
-				
+				var player_angle = buffer.read();
+				var image_xscale = buffer.read();
+				var image_yscale = buffer.read();
+				var image_index = buffer.read();
+				var hp = buffer.read();
+
 				//Updates player object positions
 				var player = object.player_object;
 				player.x = new_x;
 				player.y = new_y;
+				player.player_angle = player_angle;
+				player.image_xscale = image_xscale;
+				player.image_yscale = image_yscale;
+				player.image_index = image_index;
+				player.hp = hp;
 				
 				//Send position to other players
 				var message = new hnet.message(9);
 				message.write_byte16(player.id);
 				message.write_byte16(player.x);
 				message.write_byte16(player.y);
+				message.write_byte(player.player_angle);
+				message.write_byte(player.image_xscale);
+				message.write_byte(player.image_yscale);
+				message.write_byte16(player.image_index);
+				message.write_byte16(player.hp);
+				
 				message.send_other(object);
+				
 			break;
 		}
 	}

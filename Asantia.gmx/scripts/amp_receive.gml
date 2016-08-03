@@ -23,13 +23,24 @@ switch(receive_package_id){
             }
     break;
     case 9://Other player moves, update x & y
-        other_id = amp_read();
-        other_x = amp_read();
-        other_y = amp_read();
+        global.other_id = amp_read();
+        global.other_x = amp_read();
+        global.other_y = amp_read();
+        global.other_player_angle = amp_read();
+        global.other_image_xscale = amp_read();
+        global.other_image_yscale = amp_read();
+        global.other_image_index = amp_read();
+        global.other_hp = amp_read();
+        
             with(obj_other_player){
-                if(network_id==other_id){
-                    x = other_x;
-                    y = other_y;
+                if(network_id==global.other_id){
+                    x = global.other_x;
+                    y = global.other_y;
+                    player_angle = global.other_player_angle;
+                    image_xscale = global.other_image_xscale;
+                    image_yscale = global.other_image_yscale;
+                    image_index = global.other_image_index;
+                    hp = global.other_hp/100;
                 }
             }
     break;
