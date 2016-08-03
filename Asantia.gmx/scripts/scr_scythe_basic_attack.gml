@@ -8,6 +8,7 @@ if step=0
  shot=false
  obj_player.state=1
  state=1
+ 
  image_xscale=obj_player.image_xscale
  image_yscale=-1
  image_angle=170*obj_player.image_xscale

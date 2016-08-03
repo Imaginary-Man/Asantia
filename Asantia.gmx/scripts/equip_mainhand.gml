@@ -59,6 +59,18 @@ if i_mainhand.item=8
  mainhand_attackrange=25
 }
 
+if i_mainhand.item=grail_scythe
+{
+ with (obj_weapon_parent)
+ {
+  instance_change(obj_scythe,true)
+ }
+ mainhand_ad+=(20*(i_mainhand.rarity/2))
+ mainhand_str+=(15*(i_mainhand.rarity/2))
+ mainhand_sta+=(5*(i_mainhand.rarity/2))
+ mainhand_attackrange=25
+}
+
 if i_mainhand.item=10
 {
  with (obj_weapon_parent)

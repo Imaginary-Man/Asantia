@@ -12,6 +12,7 @@ info_ga_waterweed()
 info_sh_waterweed()
 info_sh_executioner()
 info_sw_executioner()
+info_sc_grail()
 //
 info_gem_holy()
 info_nl_lapiz()

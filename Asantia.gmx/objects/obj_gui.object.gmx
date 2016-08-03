@@ -85,7 +85,8 @@ stats_select=0
             <kind>1</kind>
             <string>///test items
 item_add(0,1,round(random_range(0,11)))
-item_add(10,2,round(random_range(0,11)))
+item_add(10,1,round(random_range(0,11)))
+item_add(10,1,round(random_range(0,11)))
 item_add(7,1,round(random_range(0,11)))
 item_add(8,1,round(random_range(0,11)))
 item_add(4,1,round(random_range(0,11)))
@@ -111,7 +112,9 @@ item_add(16,1,round(random_range(0,10)))
 item_add(17,1,round(random_range(0,10)))
 item_add(18,1,round(random_range(0,10)))
 item_add(19,1,round(random_range(0,10)))
-item_add(20,2,round(random_range(0,10)))
+item_add(20,1,round(random_range(0,10)))
+item_add(20,1,round(random_range(0,10)))
+item_add(21,1,round(random_range(0,10)))
 </string>
           </argument>
         </arguments>

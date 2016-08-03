@@ -250,9 +250,12 @@
         <sprite>sprites\item_sw_waterweed</sprite>
         <sprite>sprites\item_ga_waterweed</sprite>
         <sprite>sprites\item_sc_waterweed</sprite>
+        <sprite>sprites\item_sc_grail</sprite>
         <sprite>sprites\item_bow_waterweed</sprite>
         <sprite>sprites\item_rb_waterweed</sprite>
         <sprite>sprites\item_rb_deathleaf_1</sprite>
+        <sprite>sprites\item_sh_executioner</sprite>
+        <sprite>sprites\item_sw_executioner</sprite>
       </sprites>
       <sprites name="helm">
         <sprite>sprites\item_helm_waterweed</sprite>
@@ -446,6 +449,7 @@
             <script>scripts\info_ga_waterweed.gml</script>
             <script>scripts\info_gs_waterweed.gml</script>
             <script>scripts\info_sc_waterweed.gml</script>
+            <script>scripts\info_sc_grail.gml</script>
             <script>scripts\info_sw_waterweed.gml</script>
             <script>scripts\info_sw_executioner.gml</script>
             <scripts name="offhand">
@@ -614,13 +618,15 @@
   </objects>
   <rooms name="rooms">
     <room>rooms\desert_test</room>
+    <room>rooms\cave_test</room>
     <room>rooms\forest_test</room>
     <room>rooms\rm_init</room>
     <room>rooms\rm_login</room>
   </rooms>
-  <constants number="63">
+  <constants number="64">
     <constant name="T_MINUTE">60</constant>
     <constant name="T_HOUR">3600</constant>
+    <constant name="grail_scythe">21</constant>
     <constant name="executioner_shortsword">20</constant>
     <constant name="executioner_shield">19</constant>
     <constant name="oak_log">9</constant>

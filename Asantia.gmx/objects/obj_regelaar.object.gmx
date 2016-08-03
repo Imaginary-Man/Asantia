@@ -41,7 +41,7 @@ global.minutes=0
 global.hours=0
 global.time=0
 global.alpha=0
-global.time=9*T_HOUR
+global.time=22*T_HOUR
 
 
 //alpha

@@ -51,8 +51,7 @@ state=0
           <argument>
             <kind>1</kind>
             <string>///states
-state=obj_weapon_parent.state
-
+state=weaponI.state
 //real states
 switch (state)
 {
@@ -66,6 +65,7 @@ switch (state)
   image_angle=-(30*image_xscale)+(global.player_angle/2)
   break;
  }  
+
  case 3://sheated
  {
   depth=obj_player.depth+4

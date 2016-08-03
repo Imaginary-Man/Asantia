@@ -26,7 +26,7 @@
 */
 
 
-///item id left:21
+///item id left:22
 
 /////////////////////////////////////////////////////////////////////////////////////
 /////////WEAPONS/////////////////////////////////////////////////////////////////////
@@ -65,6 +65,12 @@ global.item[8,3]=item_sc_waterweed
 global.item[8,4]=sc_waterweed
 global.item[8,6]="bothhand"
 
+global.item[21,0]="Grail Scythe"
+global.item[21,2]=1
+global.item[21,3]=item_sc_grail
+global.item[21,4]=sc_grail
+global.item[21,6]="bothhand"
+
 ////////////////////////////////////////
 /////////SHORTSWORDS////////////////////
 ///////////////////////////////////////
@@ -78,7 +84,7 @@ global.item[10,6]="mainhand"
 
 global.item[20,0]="Executioner Shortsword [T]"
 global.item[20,2]=1
-global.item[20,3]=item_noimg
+global.item[20,3]=item_sw_executioner
 global.item[20,4]=sw_executioner
 global.item[20,6]="mainhand"
 
@@ -95,7 +101,7 @@ global.item[11,6]="offhand"
 
 global.item[19,0]="Executioner Shield"
 global.item[19,2]=1
-global.item[19,3]=item_noimg
+global.item[19,3]=item_sh_executioner
 global.item[19,4]=sh_executioner
 global.item[19,6]="offhand"
 
