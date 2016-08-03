@@ -71,4 +71,16 @@ if i_mainhand.item=10
  mainhand_attackrange=15
 }
 
+if i_mainhand.item=executioner_shortsword
+{
+ with (obj_weapon_parent)
+ {
+  instance_change(obj_shortsword,true)
+ }
+ mainhand_ad+=(20*(i_mainhand.rarity/2))
+ mainhand_str+=(15*(i_mainhand.rarity/2))
+ mainhand_sta+=(5*(i_mainhand.rarity/2))
+ mainhand_attackrange=15
+}
+
 ///

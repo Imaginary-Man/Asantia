@@ -135,22 +135,23 @@ if keyboard_check_pressed(global.cam_lock_key) {global.cam_lock=!global.cam_lock
 view_wview=dw/global.zoomfactor
 view_hview=dh/global.zoomfactor
 //zoom with keys
-if keyboard_check_pressed(global.cam_zoomout) or gamepad_button_check_pressed(0,gp_padd)
+/*
+if keyboard_check_pressed(vk_pageup) or gamepad_button_check_pressed(0,gp_padd)
 {
  if global.zoomfactor&gt;2 {global.zoomfactor--}
 }
-if keyboard_check_pressed(global.cam_zoomin) or gamepad_button_check_pressed(0,gp_padu)
+if keyboard_check_pressed(vk_pagedown) or gamepad_button_check_pressed(0,gp_padu)
 {
  if global.zoomfactor&lt;10 {global.zoomfactor++}
 }
-//zoom with mouse
+*/
 if mouse_wheel_down()
 {
- if global.zoomfactor&gt;2 {global.zoomfactor-=.5}
+ if global.zoomfactor&gt;2 {global.zoomfactor-=0.1}
 }
 if mouse_wheel_up()
 {
- if global.zoomfactor&lt;10 {global.zoomfactor+=.5}
+ if global.zoomfactor&lt;10 {global.zoomfactor+=0.1}
 }
 </string>
           </argument>

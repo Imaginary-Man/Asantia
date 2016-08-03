@@ -107,12 +107,11 @@ switch (state)
 {
  case 0://normal
  {
-  image_angle=0
   depth=obj_player.depth-2
   image_yscale=1
   image_xscale=obj_player.image_xscale*-1
   y=obj_player.y+(1+((obj_helmet.movewith*-1)/2))
-  x=obj_player.x-11*image_xscale
+  x=obj_player.x+11*image_xscale
   image_angle=-(30*image_xscale)+(global.player_angle/2)
   if alarm[11]=-1{alarm[11]=500}
   if obj_player.gather=true {state=3}
@@ -124,7 +123,7 @@ switch (state)
   {
    alarm[11]=-1
    depth=obj_player.depth-2
-   scr_greatsword_basic_attack()
+   scr_shortsword_basic_attack()
    steps()
   }
   if obj_player.attacking=false
@@ -141,7 +140,7 @@ switch (state)
   alarm[11]=-1
   depth=obj_player.depth-2
   y=obj_player.y-11 
-  x=obj_player.x-(8*obj_player.image_xscale)
+  x=obj_player.x+(8*obj_player.image_xscale)
   image_angle=150*obj_player.image_xscale
   image_yscale=1 
   break;
@@ -159,30 +158,6 @@ switch (state)
  }
 }
                           
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="3" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///basic_attack
-
 </string>
           </argument>
         </arguments>

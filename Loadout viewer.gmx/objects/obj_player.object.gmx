@@ -139,7 +139,7 @@ if !sprite_exists(necklace) {draw_text(window_get_width(),window_get_height()-40
 
 draw_set_color(c_black)
 draw_set_halign(fa_left)
-draw_text(0,window_get_height(),"Thank you for trying out#the Asantia Gear tester.#Made by Shaddovv, Leader of Sabo Tage")
+draw_text(0,window_get_height(),"Thank you for trying out#the Asantia Gear tester.#Made by Axehero0, member of Sabo Tage")
 </string>
           </argument>
         </arguments>

@@ -659,7 +659,10 @@ draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,image_ang
             <string>///healthbar
 if attacked!=0
 {              
- if hp&gt;0 {draw_bar(x-6,y-30,12,1,hp,mhp,c_red)}
+ if global.ui_show=true
+ {
+  if hp&gt;0 {draw_bar(x-6,y-30,12,1,hp,mhp,c_red)}
+ }
 }
 </string>
           </argument>

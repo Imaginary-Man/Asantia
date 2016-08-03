@@ -127,7 +127,10 @@ sprite_index=back
           <argument>
             <kind>1</kind>
             <string>///draw backslot on player
-draw_sprite_ext(back,-1,obj_player.x,obj_player.y+movewith-jump,obj_player.image_xscale,obj_player.image_yscale,((global.player_angle)+(obj_player.wiggle*-0.5)),c_white,1)
+if global.show_back=true
+{
+ draw_sprite_ext(back,-1,obj_player.x,obj_player.y+movewith-jump,obj_player.image_xscale,obj_player.image_yscale,((global.player_angle)+(obj_player.wiggle*-0.5)),c_white,1)
+}
 </string>
           </argument>
         </arguments>

@@ -72,6 +72,9 @@ global.ui_name_show=true
 global.ui_name_show_other=true
 global.ui_show=true
 
+//ingame options
+global.show_back=true
+
 
 ///other
 menu=false
@@ -180,6 +183,17 @@ global.debug=!global.debug
           <argument>
             <kind>1</kind>
             <string>///change ui show
+if global.ui_show=true
+{
+ window_set_cursor(cr_arrow)
+}
+
+if global.ui_show=false
+{
+ window_set_cursor(cr_none)
+}
+
+
 global.ui_show=!global.ui_show
 </string>
           </argument>

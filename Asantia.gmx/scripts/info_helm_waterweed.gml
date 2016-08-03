@@ -26,4 +26,5 @@ if slotid[n].item=1
  draw_set_color(c_white)
  draw_text_transformed(slotx[n]-(r_width*global.ui_size)+30*global.ui_size,sloty[n]+35*global.ui_size,(20*(slotid[n].rarity/2)),global.ui_size/3,global.ui_size/3,0)
  draw_text_transformed(slotx[n]-(r_width*global.ui_size)+30*global.ui_size,sloty[n]+41*global.ui_size,(15*(slotid[n].rarity/2)),global.ui_size/3,global.ui_size/3,0)
- draw_text_transformed(slotx[n]-(r_width*global.ui_size)+30*global.ui_size,sloty[n]+47*global.ui_size,(25*(slotid[n].rarity/2)),global.ui_size/3,global.ui_size/3,0)}
+ draw_text_transformed(slotx[n]-(r_width*global.ui_size)+30*global.ui_size,sloty[n]+47*global.ui_size,(25*(slotid[n].rarity/2)),global.ui_size/3,global.ui_size/3,0)
+}

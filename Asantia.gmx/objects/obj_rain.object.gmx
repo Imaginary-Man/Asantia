@@ -31,12 +31,11 @@ storm        = true
 //Rain Particle
 partRain = part_type_create();
 part_type_shape(partRain,pt_shape_line);
-part_type_size(partRain,0.05,0.15,0,0);
+part_type_size(partRain,0.03,0.10,0,0);
 part_type_color2(partRain,make_color_rgb(8,138,203),make_color_rgb(135,216,255));
-part_type_alpha2(partRain,1,1);
-part_type_gravity(partRain,0.1,270);
-part_type_speed(partRain,0.1,0.5,0,0);
-part_type_direction(partRain,250,330,0,1);
+part_type_alpha2(partRain,0.5,1);
+part_type_speed(partRain,8,12,0,0);
+part_type_direction(partRain,270,270,0,0);
 part_type_orientation(partRain,270,270,0,0,0);
 part_type_life(partRain,180,180);
 
@@ -76,7 +75,9 @@ alarm[0]=100
             <string>///create lightning
 if storm=true
 {
- if obj_lightning.dalpha&gt;=50
+ ///free memory
+ part_particles_clear(partRain_sys)
+ if global.alpha&gt;0.2
  {
   instance_create(random_range(obj_player.x-100,obj_player.x+100),random_range(obj_player.y-100,obj_player.y+100),obj_lightning_strike)
  }
@@ -132,7 +133,7 @@ i.master=id
             <string>///particle
 part_emitter_region(partRain_sys,partRain_emit,-room_width/5,room_width,-20,-20,ps_shape_line,ps_distr_linear);
 //part_system_position(partRain_sys,view_xview-view_wview,view_yview-20)
-part_emitter_burst(partRain_sys,partRain_emit,partRain,15);
+part_emitter_burst(partRain_sys,partRain_emit,partRain,5);
 
 
 

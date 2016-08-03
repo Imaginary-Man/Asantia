@@ -69,30 +69,6 @@ stats_select=0
       </action>
       <action>
         <libid>1</libid>
-        <id>801</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_set_cursor</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>5</kind>
-            <sprite>-100</sprite>
-          </argument>
-          <argument>
-            <kind>4</kind>
-            <string>0</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
         <id>603</id>
         <kind>7</kind>
         <userelative>0</userelative>
@@ -109,7 +85,7 @@ stats_select=0
             <kind>1</kind>
             <string>///test items
 item_add(0,1,round(random_range(0,11)))
-item_add(10,1,round(random_range(0,11)))
+item_add(10,2,round(random_range(0,11)))
 item_add(7,1,round(random_range(0,11)))
 item_add(8,1,round(random_range(0,11)))
 item_add(4,1,round(random_range(0,11)))
@@ -126,7 +102,41 @@ item_add(5,1,round(random_range(0,11)))
 
 item_add(6,1,round(random_range(0,10)))
 item_add(6,1,round(random_range(0,10)))
+
+item_add(12,1,round(random_range(0,10)))
+item_add(13,1,round(random_range(0,10)))
+item_add(14,1,round(random_range(0,10)))
+item_add(15,1,round(random_range(0,10)))
+item_add(16,1,round(random_range(0,10)))
+item_add(17,1,round(random_range(0,10)))
+item_add(18,1,round(random_range(0,10)))
+item_add(19,1,round(random_range(0,10)))
+item_add(20,2,round(random_range(0,10)))
 </string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>801</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_set_cursor</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>5</kind>
+            <sprite>spr_none</sprite>
+          </argument>
+          <argument>
+            <kind>4</kind>
+            <string>0</string>
           </argument>
         </arguments>
       </action>
@@ -1016,7 +1026,7 @@ if global.debug=true
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///mouse and dragging
+            <string>///mouse and mouse dragging
 if drag=true
 {
  draw_sprite_ext(item_rarity,dragrarity,window_mouse_get_x()-12*global.ui_size,window_mouse_get_y()-12*global.ui_size,global.ui_size,global.ui_size,0,c_white,1)
@@ -1032,6 +1042,7 @@ if drag=true
   draw_set_color(c_black)
  }
 }
+
 
 draw_sprite_ext(spr_mouse_2,0,window_mouse_get_x(),window_mouse_get_y(),global.mouse_size,global.mouse_size,0,c_white,1)
 

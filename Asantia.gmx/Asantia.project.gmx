@@ -33,7 +33,6 @@
     </sprites>
     <sprites name="Helmet">
       <sprite>sprites\helm_example</sprite>
-      <sprite>sprites\nameless_1</sprite>
       <sprite>sprites\hair_1</sprite>
       <sprite>sprites\helm_deathleaf_2</sprite>
       <sprite>sprites\helm_deathleaf_1</sprite>
@@ -45,9 +44,9 @@
       <sprite>sprites\helm_templeguard</sprite>
       <sprite>sprites\helm_knuggle</sprite>
       <sprite>sprites\helm_forgotten</sprite>
-      <sprite>sprites\helm_knight_2</sprite>
       <sprite>sprites\helm_warlord</sprite>
       <sprite>sprites\helm_snowguard</sprite>
+      <sprite>sprites\helm_knight_2</sprite>
       <sprites name="old">
         <sprite>sprites\helm_user5_6</sprite>
         <sprite>sprites\helm_user5_5</sprite>
@@ -122,6 +121,7 @@
       </sprites>
       <sprites name="shortsword">
         <sprite>sprites\sw_waterweed</sprite>
+        <sprite>sprites\sw_executioner</sprite>
         <sprite>sprites\sw_firecage_1</sprite>
         <sprite>sprites\sw_firecage_2</sprite>
       </sprites>
@@ -242,6 +242,7 @@
     </sprites>
     <sprites name="items">
       <sprite>sprites\item_example</sprite>
+      <sprite>sprites\item_noimg</sprite>
       <sprite>sprites\item_rarity</sprite>
       <sprites name="weapons">
         <sprite>sprites\item_gs_waterweed</sprite>
@@ -255,6 +256,13 @@
       </sprites>
       <sprites name="helm">
         <sprite>sprites\item_helm_waterweed</sprite>
+        <sprite>sprites\item_helm_templeguard</sprite>
+        <sprite>sprites\item_helm_forgotten</sprite>
+        <sprite>sprites\item_helm_executioner</sprite>
+        <sprite>sprites\item_helm_nightmare</sprite>
+        <sprite>sprites\item_helm_grail</sprite>
+        <sprite>sprites\item_helm_warlord</sprite>
+        <sprite>sprites\item_helm_knuggle</sprite>
       </sprites>
       <sprites name="gem">
         <sprite>sprites\item_gem_light_1</sprite>
@@ -312,8 +320,8 @@
         <sprite>sprites\e_thunder_icon</sprite>
         <sprite>sprites\e_conduction_icon</sprite>
         <sprite>sprites\e_voltage_icon</sprite>
-        <sprite>sprites\e_hope_icon</sprite>
         <sprite>sprites\e_tidal_icon</sprite>
+        <sprite>sprites\e_hope_icon</sprite>
         <sprite>sprites\e_poison_icon</sprite>
         <sprite>sprites\e_blood_icon</sprite>
         <sprite>sprites\e_light_icon</sprite>
@@ -323,14 +331,17 @@
       <sprites name="extra">
         <sprite>sprites\e_passion_icon</sprite>
         <sprite>sprites\e_titan_icon_1</sprite>
-        <sprite>sprites\e_poison_icon_1</sprite>
+        <sprite>sprites\e_poison_icon_11</sprite>
         <sprite>sprites\e_death_icon_11</sprite>
-        <sprite>sprites\e_life_icon_1</sprite>
         <sprite>sprites\e_water_icon_1</sprite>
+        <sprite>sprites\e_life_11</sprite>
+        <sprite>sprites\e_life_icon___</sprite>
       </sprites>
     </sprites>
   </sprites>
-  <backgrounds name="background"/>
+  <backgrounds name="background">
+    <background>background\background0</background>
+  </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
     <scripts name="custom_codes">
@@ -347,12 +358,13 @@
     <scripts name="options">
       <script>scripts\key_init.gml</script>
     </scripts>
-    <scripts name="animation">
+    <scripts name="basic attack">
       <script>scripts\sheat_reset.gml</script>
       <script>scripts\steps.gml</script>
       <script>scripts\gather_steps.gml</script>
       <scripts name="melee">
         <script>scripts\scr_greatsword_basic_attack.gml</script>
+        <script>scripts\scr_shortsword_basic_attack.gml</script>
         <script>scripts\scr_greataxe_basic_attack.gml</script>
         <script>scripts\scr_scythe_basic_attack.gml</script>
       </scripts>
@@ -421,6 +433,13 @@
         </scripts>
         <scripts name="helm">
           <script>scripts\info_helm_waterweed.gml</script>
+          <script>scripts\info_helm_executioner.gml</script>
+          <script>scripts\info_helm_grail.gml</script>
+          <script>scripts\info_helm_nightmare.gml</script>
+          <script>scripts\info_helm_templeguard.gml</script>
+          <script>scripts\info_helm_knuggle.gml</script>
+          <script>scripts\info_helm_forgotten.gml</script>
+          <script>scripts\info_helm_warlord.gml</script>
         </scripts>
         <scripts name="weapons">
           <scripts name="melee">
@@ -428,7 +447,11 @@
             <script>scripts\info_gs_waterweed.gml</script>
             <script>scripts\info_sc_waterweed.gml</script>
             <script>scripts\info_sw_waterweed.gml</script>
-            <script>scripts\info_sh_waterweed.gml</script>
+            <script>scripts\info_sw_executioner.gml</script>
+            <scripts name="offhand">
+              <script>scripts\info_sh_waterweed.gml</script>
+              <script>scripts\info_sh_executioner.gml</script>
+            </scripts>
           </scripts>
           <scripts name="ranged">
             <script>scripts\info_rb_waterweed.gml</script>
@@ -516,6 +539,7 @@
       <object>objects\obj_ringblade</object>
       <objects name="offhand">
         <object>objects\obj_off_shield</object>
+        <object>objects\obj_off_shortsword</object>
       </objects>
       <objects name="projectiles">
         <object>objects\obj_arrow</object>
@@ -533,6 +557,7 @@
       <object>objects\obj_lightning</object>
       <object>objects\ITEM</object>
       <object>objects\obj_silhoute</object>
+      <object>objects\LYNX</object>
     </objects>
     <objects name="Decoration">
       <object>objects\obj_deco_Esylia_leaves</object>
@@ -574,6 +599,7 @@
     </objects>
     <objects name="weather">
       <object>objects\obj_rain</object>
+      <object>objects\obj_sandstorm</object>
       <object>objects\obj_puddle</object>
       <object>objects\obj_lightning_strike</object>
     </objects>
@@ -581,24 +607,33 @@
       <object>objects\obj_oak_tree</object>
     </objects>
     <objects name="Lynx System">
-      <object>objects\LYNX</object>
       <object>objects\MIND_P</object>
       <object>objects\ELEMENT_P</object>
       <object>objects\MIND</object>
     </objects>
   </objects>
   <rooms name="rooms">
-    <room>rooms\test_room</room>
+    <room>rooms\desert_test</room>
+    <room>rooms\forest_test</room>
     <room>rooms\rm_init</room>
     <room>rooms\rm_login</room>
   </rooms>
-  <constants number="54">
+  <constants number="63">
     <constant name="T_MINUTE">60</constant>
     <constant name="T_HOUR">3600</constant>
+    <constant name="executioner_shortsword">20</constant>
+    <constant name="executioner_shield">19</constant>
     <constant name="oak_log">9</constant>
     <constant name="lapiz_ring">6</constant>
     <constant name="lapiz_necklace">5</constant>
     <constant name="holy_gem">3</constant>
+    <constant name="warlord_helmet">18</constant>
+    <constant name="forgotten_helmet">17</constant>
+    <constant name="knuggle_helmet">16</constant>
+    <constant name="templeguard_helmet">15</constant>
+    <constant name="grail_helmet">13</constant>
+    <constant name="nightmare_helmet">14</constant>
+    <constant name="executioner_helmet">12</constant>
     <constant name="waterweed_helmet">1</constant>
     <constant name="waterweed_ringblade">4</constant>
     <constant name="waterweed_bow">2</constant>

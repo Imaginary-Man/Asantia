@@ -25,7 +25,7 @@ if drag=false
      }
     }
     
-    if slotid[i].type="mainhand"
+    if slotid[i].type="mainhand" and twohanded=false
     {
      if i_mainhand=0
      {
@@ -36,6 +36,18 @@ if drag=false
       equip_mainhand()
       obj_weapon_parent.sprite_index=i_mainhand.sprite_ingame
       break;      
+     }
+      else
+     {
+      if i_offhand=0 //equip mainhand in offhand when twohandded=false
+      {
+       if obj_player.state=1 {obj_player.state=0}
+       i_offhand=slotid[i]
+       slotid[i]=0
+       slot[i]=0
+       equip_offhand()
+       obj_offhand_parent.sprite_index=i_offhand.sprite_ingame
+      }
      }
     }
 
