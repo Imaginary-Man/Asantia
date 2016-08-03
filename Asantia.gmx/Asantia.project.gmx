@@ -485,6 +485,19 @@
         </scripts>
       </scripts>
     </scripts>
+    <scripts name="Hnet Multiplayer">
+      <script>scripts\hnet_connect.gml</script>
+      <script>scripts\hnet_message_start.gml</script>
+      <script>scripts\hnet_message_start_cmp251.gml</script>
+      <script>scripts\hnet_message_send.gml</script>
+      <script>scripts\hnet_write_byte.gml</script>
+      <script>scripts\hnet_write_byte16.gml</script>
+      <script>scripts\hnet_write_byte32.gml</script>
+      <script>scripts\hnet_write_float.gml</script>
+      <script>scripts\hnet_write_string.gml</script>
+      <script>scripts\hnet_profile_create.gml</script>
+      <script>scripts\hnet_profile_add.gml</script>
+    </scripts>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ui_stats_font</font>
