@@ -38,12 +38,12 @@ if(ds_map_find_value(async_load, "type")==network_type_data){
                             package_output = new Array;
                             this.buffer_cmp251-*/
                         }else if(ds_list_size(global.profile[type])==0){
-                            show_message("Error undefined package id: "+string(type));
+                            //show_message("Error undefined package id: "+string(type));
                             break;
                             position += 1;
                         }else{
                             package_id = type;
-                            show_message("Start package: "+string(package_id));
+                            //show_message("Start package: "+string(package_id));
                             ds_list_clear(package_output);
                             position += 1;
                     }
@@ -57,26 +57,27 @@ if(ds_map_find_value(async_load, "type")==network_type_data){
                             for(i=0; i<size; i+=1){
                                 output += chr(buffer_read(data, buffer_u8));
                             }
-                        show_message(output);
+                        //show_message(output);
                         ds_list_add(package_output, output);
                         position += size+1;
                     }else if(type2==1){//Int8
                         var data0 = buffer_read(data, buffer_u8);
                         var value = data0-power(2, 8)/2;
-                        show_message(value);
+                        //show_message(value);
                         ds_list_add(package_output, value);
                         position += 1;
                     }else if(type2==2){//Int16
                         var data0 = buffer_read(data, buffer_u8)
                         var data1 = buffer_read(data, buffer_u8)
                         var value = data0*256 + data1 - power(2, 16)/2;
-                        show_message(value);
+                        //show_message(value);
                         ds_list_add(package_output, value);
                         position += 2;
                     }
                     if(type<250){
                         if(ds_list_size(package_output)==ds_list_size(global.profile[package_id])){
-                            show_message("Output package!");
+                            script_execute(argument0 , package_id, package_output);
+                            //show_message("Output package!");
                             package_id = -1;
                         }
                     }

@@ -124,8 +124,21 @@ hnet.message = function(t_id){
 		console.log(this.list);
 		object.socket.write(new Buffer(this.list));
 	}
+	this.send_other = function(object){
+		var i;
+			for(i=0; i<hnet.client_array.length; i++){
+				var other_object = hnet.client_array[i];
+				if(other_object.id!=object.id){
+					other_object.socket.write(new Buffer(this.list));
+				}
+			}
+	}
 	this.broadcast = function(object){
-		object.broadcast.write(new Buffer(this.list));
+		var i;
+			for(i=0; i<hnet.client_array.length; i++){
+				var other_object = hnet.client_array[i];
+				other_object.socket.write(new Buffer(this.list));
+			}
 	}
 }
 hnet.convert_to_binary = function(input){
@@ -740,7 +753,7 @@ hnet.create_server = function(port, socket_object){
 		socket.on('close', function(data) {
 			hnet.client_array.splice(hnet.client_array.indexOf(socket.object), 1);
 			if(typeof socket.object.ondisconnect == "function"){
-				socket.object.ondisconnect();
+				socket.object.ondisconnect(socket.object);
 			}else{
 				console.log("Socket has no ondisconnect event");
 			}

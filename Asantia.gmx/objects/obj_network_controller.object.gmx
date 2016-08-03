@@ -27,13 +27,35 @@
             <kind>1</kind>
             <string>hnet_connect("localhost", 8033);
 
-hnet_profile_create(12, -1);
-hnet_profile_add(12, h_default, h_byte);
-hnet_profile_add(12, h_default, h_byte);
+//Sends player name to server when player makes connection
+hnet_profile_create(6, -1);
+hnet_profile_add(6, h_default, h_string);
+hnet_profile_add(6, h_default, h_byte);
 
-hnet_message_start(12);
-hnet_write_byte(5);
-hnet_write_byte(6);
+//Creates object other with id, name, x, y
+hnet_profile_create(7, -1);
+hnet_profile_add(7, h_default, h_byte16);
+hnet_profile_add(7, h_default, h_string);
+hnet_profile_add(7, h_default, h_byte16);
+hnet_profile_add(7, h_default, h_byte16);
+
+//Player logs out, destory object other
+hnet_profile_create(8, -1);
+hnet_profile_add(8, h_default, h_byte16);
+hnet_profile_add(8, h_default, h_byte);
+
+//Updates x and y positions for player with id, x, y
+hnet_profile_create(9, -1);
+hnet_profile_add(9, h_default, h_byte16);
+hnet_profile_add(9, h_default, h_byte16);
+hnet_profile_add(9, h_default, h_byte16);
+
+var name = "test";
+
+//Send name, login message
+hnet_message_start(6);
+hnet_write_string(name);
+hnet_write_byte(7);
 hnet_message_send();
 
 </string>
@@ -58,7 +80,7 @@ hnet_message_send();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>hnet_receive_message();
+            <string>hnet_receive_message(amp_receive);
 </string>
           </argument>
         </arguments>

@@ -46,9 +46,18 @@ shot=false
 
 
 //stats
+name="Undefined";
 level=1
 hp=10
 mhp=15
+
+//temp
+helm = spr_none;
+back = spr_none;
+neck = spr_none;
+
+//networking
+network_id = -1;
 </string>
           </argument>
         </arguments>
@@ -195,7 +204,7 @@ if weaponstate!=3
 //name
 if global.ui_show=true
 {
- draw_name(x,y-17,c_white,c_black,1,"name",level)
+ draw_name(x,y-17,c_white,c_black,1,name,level)
  if mhp&gt;0 and hp&gt;=0 {draw_bar(x-10,y-21,20,0.5,hp,mhp,c_lime)}
 }
 </string>

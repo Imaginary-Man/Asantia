@@ -333,6 +333,10 @@
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
+    <scripts name="Asantia Multiplayer">
+      <script>scripts\amp_receive.gml</script>
+      <script>scripts\amp_read.gml</script>
+    </scripts>
     <scripts name="custom_codes">
       <script>scripts\time_loop.gml</script>
       <script>scripts\counter.gml</script>
@@ -608,10 +612,10 @@
     <room>rooms\rm_login</room>
   </rooms>
   <constants number="58">
-    <constant name="hnet_default">0</constant>
-    <constant name="hnet_string">-1</constant>
-    <constant name="hnet_byte16">2</constant>
-    <constant name="hnet_byte">1</constant>
+    <constant name="h_default">0</constant>
+    <constant name="h_string">-1</constant>
+    <constant name="h_byte16">2</constant>
+    <constant name="h_byte">1</constant>
     <constant name="T_MINUTE">60</constant>
     <constant name="T_HOUR">3600</constant>
     <constant name="oak_log">9</constant>
