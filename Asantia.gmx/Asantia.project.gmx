@@ -497,6 +497,7 @@
       <script>scripts\hnet_write_string.gml</script>
       <script>scripts\hnet_profile_create.gml</script>
       <script>scripts\hnet_profile_add.gml</script>
+      <script>scripts\hnet_receive_message.gml</script>
     </scripts>
   </scripts>
   <fonts name="fonts">
@@ -546,6 +547,7 @@
       <object>objects\obj_lightning</object>
       <object>objects\ITEM</object>
       <object>objects\obj_silhoute</object>
+      <object>objects\obj_network_controller</object>
     </objects>
     <objects name="Decoration">
       <object>objects\obj_deco_Esylia_leaves</object>
@@ -605,7 +607,11 @@
     <room>rooms\rm_init</room>
     <room>rooms\rm_login</room>
   </rooms>
-  <constants number="54">
+  <constants number="58">
+    <constant name="hnet_default">0</constant>
+    <constant name="hnet_string">-1</constant>
+    <constant name="hnet_byte16">2</constant>
+    <constant name="hnet_byte">1</constant>
     <constant name="T_MINUTE">60</constant>
     <constant name="T_HOUR">3600</constant>
     <constant name="oak_log">9</constant>

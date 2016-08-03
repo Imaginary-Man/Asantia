@@ -257,6 +257,7 @@
     <instance objName="obj_deco_Esylia_grass" x="486" y="743" name="inst_430913BD" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="LYNX" x="-32" y="-32" name="inst_4AB378EA" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_lightning" x="0" y="-32" name="inst_F06C5070" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_network_controller" x="0" y="0" name="inst_C26B8280" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

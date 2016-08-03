@@ -1,5 +1,5 @@
 global.hnet_socket = network_create_socket(network_socket_tcp);
-    if(network_connect_raw(global.hnet_socket, "localhost", argument0)<0){
+    if(network_connect_raw(global.hnet_socket, argument0, argument1)<0){
         show_message("HNET ERROR 1: SERVER NOT AVAILABLE");
     }
 var i;
