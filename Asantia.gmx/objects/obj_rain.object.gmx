@@ -33,7 +33,7 @@ partRain = part_type_create();
 part_type_shape(partRain,pt_shape_line);
 part_type_size(partRain,0.03,0.10,0,0);
 part_type_color2(partRain,make_color_rgb(8,138,203),make_color_rgb(135,216,255));
-part_type_alpha2(partRain,0.5,1);
+part_type_alpha2(partRain,1,1);
 part_type_speed(partRain,8,12,0,0);
 part_type_direction(partRain,270,270,0,0);
 part_type_orientation(partRain,270,270,0,0,0);
@@ -133,7 +133,7 @@ i.master=id
             <string>///particle
 part_emitter_region(partRain_sys,partRain_emit,-room_width/5,room_width,-20,-20,ps_shape_line,ps_distr_linear);
 //part_system_position(partRain_sys,view_xview-view_wview,view_yview-20)
-part_emitter_burst(partRain_sys,partRain_emit,partRain,5);
+part_emitter_burst(partRain_sys,partRain_emit,partRain,10);
 
 
 

@@ -16,7 +16,7 @@ if slotid[n].item=20
  draw_text_transformed(slotx[n]-(r_width*global.ui_size)+25*global.ui_size,sloty[n]+3*global.ui_size,slotid[n].name,global.ui_size/3,global.ui_size/3,0)
  draw_rarity()
  ////6 steps
- draw_text_transformed(slotx[n]-(r_width*global.ui_size)+3*global.ui_size,sloty[n]+23*global.ui_size,"Main-hand melee",global.ui_size/3,global.ui_size/3,0)
+ draw_text_transformed(slotx[n]-(r_width*global.ui_size)+3*global.ui_size,sloty[n]+23*global.ui_size,"1-H melee",global.ui_size/3,global.ui_size/3,0)
  //
  draw_set_color(c_gray)
  draw_text_transformed(slotx[n]-(r_width*global.ui_size)+3*global.ui_size,sloty[n]+35*global.ui_size,"AD",global.ui_size/3,global.ui_size/3,0)

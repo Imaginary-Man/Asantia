@@ -617,9 +617,9 @@
     </objects>
   </objects>
   <rooms name="rooms">
+    <room>rooms\forest_test</room>
     <room>rooms\desert_test</room>
     <room>rooms\cave_test</room>
-    <room>rooms\forest_test</room>
     <room>rooms\rm_init</room>
     <room>rooms\rm_login</room>
   </rooms>
