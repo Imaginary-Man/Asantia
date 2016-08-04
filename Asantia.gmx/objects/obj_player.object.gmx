@@ -43,6 +43,10 @@ jump=0
 gather=0
 //f_mspeed=0
 
+//sprite
+sprite_normal=sprite253//spr_player
+sprite_jump=spr_player_jump
+
 </string>
           </argument>
         </arguments>
@@ -197,11 +201,11 @@ if follow=true and instance_exists(n)
 ///jump sprite
 if jump=0
 {
- sprite_index=spr_player
+ sprite_index=sprite_normal
 }
  else
 {
- sprite_index=spr_player_jump
+ sprite_index=sprite_jump
 }
 
 </string>

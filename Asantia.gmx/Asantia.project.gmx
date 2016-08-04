@@ -14,6 +14,14 @@
     </sprites>
     <sprite>sprites\spr_cam</sprite>
     <sprite>sprites\spr_player</sprite>
+    <sprites name="player concept">
+      <sprite>sprites\sprite250</sprite>
+      <sprite>sprites\sprite251</sprite>
+      <sprite>sprites\sprite252</sprite>
+      <sprite>sprites\sprite253</sprite>
+      <sprite>sprites\sprite255</sprite>
+      <sprite>sprites\sprite256</sprite>
+    </sprites>
     <sprite>sprites\spr_player_jump</sprite>
     <sprites name="firefly">
       <sprite>sprites\spr_firefly_body</sprite>
@@ -341,6 +349,9 @@
         <sprite>sprites\e_life_icon___</sprite>
       </sprites>
     </sprites>
+    <sprite>sprites\sprite249</sprite>
+    <sprite>sprites\sprite248</sprite>
+    <sprite>sprites\sprite254</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
